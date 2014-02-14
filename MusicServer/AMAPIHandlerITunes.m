@@ -183,7 +183,7 @@
     if (![albumSet containsObject:*album])
     {
         [*album setID:[NSNumber numberWithInt:(*currentID)++]];
-//        [*album setArtwork:[artwork base64String]];
+        [*album setArtwork:[artwork base64String]];
     }
     [self getPointer:album fromSet:albumSet];
 }
@@ -205,16 +205,23 @@
         [artist setName:[[mediaItem artist] name]];
         [self addArtist:&artist toSet:artistSet currentID:artistID];
 
-        if ([[artist Name] isEqualToString:[[mediaItem album] albumArtist]])
+        if ([[mediaItem album] isCompilation])
         {
-            [album setArtist:artist];
+            AMAPIITArtist *albumArtist = [[AMAPIITArtist alloc] init];
+            if ([[mediaItem album] albumArtist])
+            {
+                [albumArtist setName:[[mediaItem album] albumArtist]];
+            }
+            else
+            {
+                [albumArtist setName:@"Various Artists"];
+            }
+            [self addArtist:&albumArtist toSet:artistSet currentID:artistID];
+            [album setArtist:albumArtist];
         }
         else
         {
-            AMAPIITArtist *albumArtist = [[AMAPIITArtist alloc] init];
-            [albumArtist setName:[[mediaItem album] albumArtist]];
-            [self addArtist:&albumArtist toSet:artistSet currentID:artistID];
-            [album setArtist:albumArtist];
+            [album setArtist:artist];
         }
         
         [album setName:[[mediaItem album] title]];

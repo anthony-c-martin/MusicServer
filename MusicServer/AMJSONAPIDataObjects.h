@@ -64,7 +64,7 @@
 @property (nonatomic, retain) AMAPIITArtist *Artist;
 @property (nonatomic, retain) NSMutableSet *TrackSet;
 @property (nonatomic, retain) NSArray *AMAPIITTrackArray;
-//@property (nonatomic, retain) NSString *Artwork;
+@property (nonatomic, retain) NSString *Artwork;
 @end
 
 @interface AMAPIITArtist : AMJSONAPIData

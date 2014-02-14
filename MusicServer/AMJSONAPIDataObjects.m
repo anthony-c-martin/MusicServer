@@ -186,6 +186,7 @@
             @"ID", @"ID",
             @"Name", @"Name",
             @"Artist", @"Artist",
+            //@"Artwork", @"Artwork",
             nil];
 }
 @end

@@ -54,6 +54,7 @@
 @property (nonatomic, retain) NSString *Name;
 @property (nonatomic, retain) NSString *Location;
 @property (nonatomic, retain) NSNumber *TrackNumber;
+@property (nonatomic, retain) NSNumber *DiscNumber;
 @property (nonatomic, retain) AMAPIITArtist *Artist;
 @property (nonatomic, retain) AMAPIITAlbum *Album;
 @end

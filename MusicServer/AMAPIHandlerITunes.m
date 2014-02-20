@@ -117,10 +117,10 @@
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
             NSImage *artwork = nil;
-            if ([mediaItem hasArtworkAvailable])
-            {
-                artwork = [[mediaItem artwork] image];
-            }
+//            if ([mediaItem hasArtworkAvailable])
+//            {
+//                artwork = [[mediaItem artwork] image];
+//            }
             [self addMediaItem:mediaItem
                       trackSet:tracks
                       albumSet:albums
@@ -157,8 +157,9 @@
 +(NSArray *)trackSortDescriptors
 {
     return [NSArray arrayWithObjects:
-            [[NSSortDescriptor alloc] initWithKey:@"Artist.Name" ascending:YES],
+            [[NSSortDescriptor alloc] initWithKey:@"Album.Artist.Name" ascending:YES],
             [[NSSortDescriptor alloc] initWithKey:@"Album.Name" ascending:YES],
+            [[NSSortDescriptor alloc] initWithKey:@"DiscNumber" ascending: YES],
             [[NSSortDescriptor alloc] initWithKey:@"TrackNumber" ascending:YES],
             [[NSSortDescriptor alloc] initWithKey:@"Name" ascending:YES],
             nil];
@@ -233,6 +234,7 @@
         [track setID:[[mediaItem persistentID] stringValue]];
         [track setAlbum:album];
         [track setArtist:artist];
+        [track setDiscNumber:[NSNumber numberWithInteger:[[mediaItem album] discNumber]]];
         [self getPointer:&track fromSet:trackSet];
         if (![[artist AlbumSet] containsObject:album])
         {

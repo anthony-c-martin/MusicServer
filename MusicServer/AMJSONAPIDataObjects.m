@@ -186,7 +186,7 @@
             @"ID", @"ID",
             @"Name", @"Name",
             @"Artist", @"Artist",
-            //@"Artwork", @"Artwork",
+            @"Artwork", @"Artwork",
             nil];
 }
 @end
@@ -241,6 +241,7 @@
             @"ID", @"ID",
             @"Name", @"Name",
             @"TrackNumber", @"TrackNumber",
+            @"DiscNumber", @"DiscNumber",
             @"Artist", @"Artist",
             @"Album", @"Album",
             nil];

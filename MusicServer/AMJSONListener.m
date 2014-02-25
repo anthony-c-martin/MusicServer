@@ -8,19 +8,10 @@
 
 #import "AMJSONListener.h"
 #import "./AMJSONAPIDataObjects.h"
-#import "./HTTPServer/HttpService.h"
-#import "./HTTPServer/HTTPRequest.h"
-#import "./HTTPServer/HTTPResponse.h"
 
 #define AMSessionUsername @"antm88"
 #define AMSessionPassword @"bhu*9ol."
 #define AMAPIKey @"iv78vu87gyv879Gf8YIyrTDLUyfpocI2"
-
-@interface AMJSONListener()
-@property HttpService *service;
--(HTTPResponse *) GET:(HTTPRequest *) request;
--(HTTPResponse *) POST:(HTTPRequest *) request;
-@end
 
 @implementation AMJSONListener
 
@@ -30,9 +21,8 @@
     self = [super init];
     if (self)
     {
-        [self setService:[[HttpService alloc] init]];
-        [[self service] setResponder:self];
-        [[self service] startServiceOnPort:port];
+
+        
         [self setDelegate:delegate];
         [self setAuthDelegate:(id <AMAPIAuthenticationDataResponder>)self];
         [self setActiveSessions:[[NSMutableDictionary alloc] init]];
@@ -135,10 +125,99 @@
     }
 }
 
+/*
 -(HTTPResponse *) GET:(HTTPRequest *) request
 {
-    HTTPResponse * response = [[HTTPResponse alloc] initWithResponseCode:404];
+    NSString *queryString = [[request url] query];
+    NSArray *pairs = [queryString componentsSeparatedByString:@"&"];
+    NSMutableDictionary *kvPairs = [NSMutableDictionary dictionary];
+    for (NSString * pair in pairs)
+    {
+        NSArray * bits = [pair componentsSeparatedByString:@"="];
+        NSString * key = [[bits objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSString * value = [[bits objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [kvPairs setObject:value forKey:key];
+    }
+
+    NSString *sessionKey;
+    NSString *filePath;
+    if ([kvPairs objectForKey:@"file"] && ([kvPairs objectForKey:@"session"]))
+    {
+        filePath = [NSString stringWithFormat:@"%@%@", @"/Library/WebServer/AMMusicServer/", [kvPairs objectForKey:@"file"]];
+        sessionKey = [kvPairs objectForKey:@"session"];
+    }
+    
+    NSData *fileData = [[NSData alloc] initWithContentsOfFile:filePath];
+    
+    if (![[request headers] objectForKey:@"Range"])
+    {
+        return [[HTTPResponse alloc] initWithResponseCode:404];
+    }
+    
+    NSString *range = [[request headers] objectForKey:@"Range"];
+    NSString *bytes = [range substringToIndex:6];
+    if (![bytes isEqualToString:@"bytes="])
+    {
+        return [[HTTPResponse alloc] initWithResponseCode:404];
+    }
+    
+    range = [range substringFromIndex:6];
+    NSArray *components = [range componentsSeparatedByString:@"-"];
+    if (![components objectAtIndex:0] && [components objectAtIndex:1])
+    {
+        return [[HTTPResponse alloc] initWithResponseCode:404];
+    }
+    NSInteger startBytes = [[components objectAtIndex:0] integerValue];
+    NSInteger endBytes = [[components objectAtIndex:1] integerValue];
+    
+    if ([[components objectAtIndex:1] isEqualToString:@""] || endBytes >= [fileData length])
+    {
+        endBytes = [fileData length] - 1;
+    }
+    
+    HTTPResponse * response = [[HTTPResponse alloc] initWithResponseCode:206];
+    [response setHeaderField:@"Content-Range" toValue:[NSString stringWithFormat:@"bytes %ld-%ld/%ld", startBytes, endBytes, [fileData length]]];
+    [response setHeaderField:@"Content-Length" toValue:[NSString stringWithFormat:@"%ld", (endBytes - startBytes) + 1]];
+    [response setBodyData:[fileData subdataWithRange:NSMakeRange(startBytes, endBytes + 1)]];
+    
     return response;
+}
+*/
+
+/*
+-(HTTPResponse *) POST:(HTTPRequest *) request
+{
+    AMJSONAPIData *responseData = [AMJSONAPIData alloc];
+    NSNumber *responseCode = [NSNumber alloc];
+    BOOL success = [self handleRequest:[request body]
+                              response:&responseData
+                          responseCode:&responseCode];
+    
+    HTTPResponse *httpResponse = [[HTTPResponse alloc] initWithResponseCode:[responseCode intValue]];
+    if (success)
+    {
+        [httpResponse setBodyData:[responseData dataFromObject]];
+    }
+    return httpResponse;
+}
+*/
+ 
+-(BOOL) handleRequest:(NSData *)data
+         responseData:(NSData **)responseData
+         responseCode:(NSNumber **)responseCode
+{
+    AMJSONAPIData *response = [AMJSONAPIData alloc];
+    
+    BOOL success = [self handleRequest:data
+                              response:&response
+                          responseCode:responseCode];
+    
+    if (success)
+    {
+        *responseData = [response dataFromObject];
+        return YES;
+    }
+    return NO;
 }
 
 -(BOOL) handleRequest:(NSData *)data
@@ -365,25 +444,9 @@
     return success;
 }
 
--(HTTPResponse *) POST:(HTTPRequest *) request
-{
-    AMJSONAPIData *responseData = [AMJSONAPIData alloc];
-    NSNumber *responseCode = [NSNumber alloc];
-    BOOL success = [self handleRequest:[request body]
-                              response:&responseData
-                          responseCode:&responseCode];
-    
-    HTTPResponse *httpResponse = [[HTTPResponse alloc] initWithResponseCode:[responseCode intValue]];
-    if (success)
-    {
-        [httpResponse setBodyData:[responseData dataFromObject]];
-    }
-    return httpResponse;
-}
-
 -(void) dealloc
 {
-    [[self service] stopService];
+    //[[self service] stopService];
 }
 
 @end

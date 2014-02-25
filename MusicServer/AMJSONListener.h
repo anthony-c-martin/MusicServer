@@ -21,6 +21,13 @@
 -(id) initOnPort:(NSUInteger)port
     withDelegate:(id<AMAPIDataResponder>)delegate;
 
+-(BOOL) handleRequest:(NSData *)data
+         responseData:(NSData **)responseData
+         responseCode:(NSNumber **)responseCode;
+
+-(BOOL) validateSession:(NSString *)Session
+                 APIKey:(NSString *)APIKey;
+
 -(void) dealloc;
 
 @end

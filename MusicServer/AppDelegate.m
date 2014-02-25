@@ -7,32 +7,26 @@
 //
 
 #import "AppDelegate.h"
-#import "./AMJSONListener.h"
-#import "./AMAPIHandlerITunes.h"
-#import "./AMAudioConverter.h"
+#import "AMHTTPConnection.h"
+#import "AMJSONListener.h"
+#import "AMAPIHandlerITunes.h"
+#import "AMAudioConverter.h"
+#import "AMGlobalObjects.h"
+#import <CocoaHTTPServer/HTTPServer.h>
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    /*
-    AMAPIHandlerITunes *handler = [[AMAPIHandlerITunes alloc] init];
-    AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] init];
-    [request setID:[NSNumber numberWithUnsignedLong:-6733784602019770963]];
-    AMAPIITTrack *test;
-    [handler getTrackByID:[request ID] Response:&test];
-
-    AMAPIDataStringRequest *stringRequest = [[AMAPIDataStringRequest alloc] init];
-    [stringRequest setString:@"Test"];
-    NSArray *output;
-    [handler getTracksBySearchString:[stringRequest String]
-                            Response:&output
-                               Start:[NSNumber numberWithInt:0]
-                               Limit:[NSNumber numberWithInt:0]];
-    */
+    [self setJSONListener:[[AMJSONListener alloc] initOnPort:12345 withDelegate:[[AMAPIHandlerITunes alloc] init]]];
+    [AMGlobalObjects setJSONListener:[self JSONListener]];
     
-    [self setHandler:[[AMAPIHandlerITunes alloc] init]];
-    [self setListener:[[AMJSONListener alloc] initOnPort:12345 withDelegate:[self Handler]]];
+    [self setServer:[[HTTPServer alloc] init]];
+    [[self Server] setType:@"_http._tcp"];
+    [[self Server] setPort:12345];
+    [[self Server] setConnectionClass:[AMHTTPConnection class]];
+    [[self Server] setDocumentRoot:@"/Users/antm88/Projects/PHP/MusicServer/webroot/"];
+    [[self Server] start:nil];
 }
 
 @end

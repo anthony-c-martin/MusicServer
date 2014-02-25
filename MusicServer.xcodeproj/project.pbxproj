@@ -12,16 +12,14 @@
 		0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */; };
 		0005BAA01821A59A00C17FA9 /* AMJSONAPIDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */; };
 		00245CC118209E2900506730 /* AMJSONListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CC018209E2900506730 /* AMJSONListener.m */; };
-		00245D061820A15C00506730 /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CFD1820A15C00506730 /* HTTPMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		00245D071820A15C00506730 /* HTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CFF1820A15C00506730 /* HTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		00245D081820A15C00506730 /* HTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245D011820A15C00506730 /* HTTPResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		00245D091820A15C00506730 /* HttpService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245D031820A15C00506730 /* HttpService.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		00245D0A1820A15C00506730 /* TCPSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245D051820A15C00506730 /* TCPSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		00445B561826F98000174020 /* AMAudioConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00445B551826F98000174020 /* AMAudioConverter.mm */; };
 		00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00445B571826F99C00174020 /* AudioToolbox.framework */; };
 		00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00445B5E1826FE0D00174020 /* CAStreamBasicDescription.cpp */; };
 		00445B641826FE0D00174020 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00445B601826FE0D00174020 /* CAXException.cpp */; };
 		00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00445B6C1827065500174020 /* ExtAudioFileConvert.cpp */; };
+		0050562418BBFBBD0011E0B1 /* AMHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */; };
+		0050562718BC03360011E0B1 /* AMGlobalObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050562618BC03360011E0B1 /* AMGlobalObjects.m */; };
+		0050562818BC0B040011E0B1 /* CocoaHTTPServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */; };
 		0050CC7F18208ADA006D6247 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050CC7E18208ADA006D6247 /* Cocoa.framework */; };
 		0050CC8918208ADA006D6247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0050CC8718208ADA006D6247 /* InfoPlist.strings */; };
 		0050CC8B18208ADA006D6247 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050CC8A18208ADA006D6247 /* main.m */; };
@@ -38,6 +36,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0050561818BBF9BF0011E0B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 270B11901628E5A8005A82FA;
+			remoteInfo = CocoaHTTPServerStaticIOS;
+		};
+		0050561A18BBF9BF0011E0B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 270B11B21628E676005A82FA;
+			remoteInfo = CocoaHTTPServerOSX;
+		};
+		0050561C18BBF9BF0011E0B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5FE353F163AF4240090BB94;
+			remoteInfo = CocoaHTTPServerIOSTests;
+		};
+		0050561E18BBF9BF0011E0B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D5FE3557163AF4370090BB94;
+			remoteInfo = CocoaHTTPServerOSXTests;
+		};
+		0050562018BBF9FC0011E0B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 270B11B11628E676005A82FA;
+			remoteInfo = CocoaHTTPServerOSX;
+		};
 		0050CCA018208ADA006D6247 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0050CC7318208ADA006D6247 /* Project object */;
@@ -58,16 +91,6 @@
 		0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONAPIDataObjects.m; sourceTree = "<group>"; };
 		00245CBF18209E2900506730 /* AMJSONListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONListener.h; sourceTree = "<group>"; };
 		00245CC018209E2900506730 /* AMJSONListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONListener.m; sourceTree = "<group>"; };
-		00245CFC1820A15C00506730 /* HTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPMessage.h; sourceTree = "<group>"; };
-		00245CFD1820A15C00506730 /* HTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPMessage.m; sourceTree = "<group>"; };
-		00245CFE1820A15C00506730 /* HTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPRequest.h; sourceTree = "<group>"; };
-		00245CFF1820A15C00506730 /* HTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPRequest.m; sourceTree = "<group>"; };
-		00245D001820A15C00506730 /* HTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponse.h; sourceTree = "<group>"; };
-		00245D011820A15C00506730 /* HTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponse.m; sourceTree = "<group>"; };
-		00245D021820A15C00506730 /* HttpService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpService.h; sourceTree = "<group>"; };
-		00245D031820A15C00506730 /* HttpService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpService.m; sourceTree = "<group>"; };
-		00245D041820A15C00506730 /* TCPSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCPSocket.h; sourceTree = "<group>"; };
-		00245D051820A15C00506730 /* TCPSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCPSocket.m; sourceTree = "<group>"; };
 		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioConverter.h; sourceTree = "<group>"; };
 		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMAudioConverter.mm; sourceTree = "<group>"; };
 		00445B571826F99C00174020 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -79,6 +102,11 @@
 		00445B611826FE0D00174020 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
 		00445B66182701E600174020 /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugPrintf.h; sourceTree = "<group>"; };
 		00445B6C1827065500174020 /* ExtAudioFileConvert.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExtAudioFileConvert.cpp; sourceTree = "<group>"; };
+		0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaHTTPServer.xcodeproj; path = MusicServer/Frameworks/CocoaHTTPServerFramework/CocoaHTTPServer.xcodeproj; sourceTree = "<group>"; };
+		0050562218BBFBBD0011E0B1 /* AMHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPConnection.h; sourceTree = "<group>"; };
+		0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPConnection.m; sourceTree = "<group>"; };
+		0050562518BC03360011E0B1 /* AMGlobalObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGlobalObjects.h; sourceTree = "<group>"; };
+		0050562618BC03360011E0B1 /* AMGlobalObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGlobalObjects.m; sourceTree = "<group>"; };
 		0050CC7B18208ADA006D6247 /* MusicServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0050CC7E18208ADA006D6247 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0050CC8118208ADA006D6247 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -111,6 +139,7 @@
 				00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */,
 				00DAE0E7182545D5007B6ABC /* iTunesLibrary.framework in Frameworks */,
 				0050CC7F18208ADA006D6247 /* Cocoa.framework in Frameworks */,
+				0050562818BC0B040011E0B1 /* CocoaHTTPServer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +166,6 @@
 			path = IAModelBase;
 			sourceTree = "<group>";
 		};
-		00245CFB1820A15C00506730 /* HTTPServer */ = {
-			isa = PBXGroup;
-			children = (
-				00245CFC1820A15C00506730 /* HTTPMessage.h */,
-				00245CFD1820A15C00506730 /* HTTPMessage.m */,
-				00245CFE1820A15C00506730 /* HTTPRequest.h */,
-				00245CFF1820A15C00506730 /* HTTPRequest.m */,
-				00245D001820A15C00506730 /* HTTPResponse.h */,
-				00245D011820A15C00506730 /* HTTPResponse.m */,
-				00245D021820A15C00506730 /* HttpService.h */,
-				00245D031820A15C00506730 /* HttpService.m */,
-				00245D041820A15C00506730 /* TCPSocket.h */,
-				00245D051820A15C00506730 /* TCPSocket.m */,
-			);
-			path = HTTPServer;
-			sourceTree = "<group>";
-		};
 		00445B5B1826FE0D00174020 /* AudioConversion */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +179,17 @@
 				00445B611826FE0D00174020 /* CAXException.h */,
 			);
 			path = AudioConversion;
+			sourceTree = "<group>";
+		};
+		0050560E18BBF9BE0011E0B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0050561918BBF9BF0011E0B1 /* libCocoaHTTPServer.a */,
+				0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */,
+				0050561D18BBF9BF0011E0B1 /* CocoaHTTPServerIOSTests.octest */,
+				0050561F18BBF9BF0011E0B1 /* CocoaHTTPServerOSXTests.octest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		0050CC7218208ADA006D6247 = {
@@ -191,6 +214,7 @@
 		0050CC7D18208ADA006D6247 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */,
 				00445B571826F99C00174020 /* AudioToolbox.framework */,
 				00DAE0E6182545D5007B6ABC /* iTunesLibrary.framework */,
 				0050CC7E18208ADA006D6247 /* Cocoa.framework */,
@@ -217,6 +241,10 @@
 				00DAE0E218254215007B6ABC /* ITunesHandler */,
 				00445B541826F98000174020 /* AMAudioConverter.h */,
 				00445B551826F98000174020 /* AMAudioConverter.mm */,
+				0050562218BBFBBD0011E0B1 /* AMHTTPConnection.h */,
+				0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */,
+				0050562518BC03360011E0B1 /* AMGlobalObjects.h */,
+				0050562618BC03360011E0B1 /* AMGlobalObjects.m */,
 				00245CBF18209E2900506730 /* AMJSONListener.h */,
 				00245CC018209E2900506730 /* AMJSONListener.m */,
 				0005BA94182196B700C17FA9 /* AMJSONAPIData.h */,
@@ -226,7 +254,6 @@
 				0050CC9018208ADA006D6247 /* AppDelegate.h */,
 				0050CC9118208ADA006D6247 /* AppDelegate.m */,
 				0005BA97182196CC00C17FA9 /* IAModelBase */,
-				00245CFB1820A15C00506730 /* HTTPServer */,
 				0050CC8518208ADA006D6247 /* Supporting Files */,
 				0050CC9618208ADA006D6247 /* Images.xcassets */,
 				0050CC9318208ADA006D6247 /* MainMenu.xib */,
@@ -287,6 +314,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				0050562118BBF9FC0011E0B1 /* PBXTargetDependency */,
 			);
 			name = MusicServer;
 			productName = MusicServer;
@@ -336,6 +364,12 @@
 			mainGroup = 0050CC7218208ADA006D6247;
 			productRefGroup = 0050CC7C18208ADA006D6247 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0050560E18BBF9BE0011E0B1 /* Products */;
+					ProjectRef = 0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				0050CC7A18208ADA006D6247 /* MusicServer */,
@@ -343,6 +377,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0050561918BBF9BF0011E0B1 /* libCocoaHTTPServer.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaHTTPServer.a;
+			remoteRef = 0050561818BBF9BF0011E0B1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CocoaHTTPServer.framework;
+			remoteRef = 0050561A18BBF9BF0011E0B1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0050561D18BBF9BF0011E0B1 /* CocoaHTTPServerIOSTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CocoaHTTPServerIOSTests.octest;
+			remoteRef = 0050561C18BBF9BF0011E0B1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0050561F18BBF9BF0011E0B1 /* CocoaHTTPServerOSXTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CocoaHTTPServerOSXTests.octest;
+			remoteRef = 0050561E18BBF9BF0011E0B1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0050CC7918208ADA006D6247 /* Resources */ = {
@@ -371,11 +436,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00245D061820A15C00506730 /* HTTPMessage.m in Sources */,
-				00245D071820A15C00506730 /* HTTPRequest.m in Sources */,
-				00245D081820A15C00506730 /* HTTPResponse.m in Sources */,
-				00245D091820A15C00506730 /* HttpService.m in Sources */,
-				00245D0A1820A15C00506730 /* TCPSocket.m in Sources */,
 				0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */,
 				0005BA9C182196CC00C17FA9 /* IAModelBase.m in Sources */,
 				0050CC9218208ADA006D6247 /* AppDelegate.m in Sources */,
@@ -384,6 +444,8 @@
 				00245CC118209E2900506730 /* AMJSONListener.m in Sources */,
 				0050CC8B18208ADA006D6247 /* main.m in Sources */,
 				00DAE0E5182542EC007B6ABC /* AMAPIHandlerITunes.m in Sources */,
+				0050562418BBFBBD0011E0B1 /* AMHTTPConnection.m in Sources */,
+				0050562718BC03360011E0B1 /* AMGlobalObjects.m in Sources */,
 				00445B561826F98000174020 /* AMAudioConverter.mm in Sources */,
 				00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */,
 				00445B641826FE0D00174020 /* CAXException.cpp in Sources */,
@@ -402,6 +464,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0050562118BBF9FC0011E0B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CocoaHTTPServerOSX;
+			targetProxy = 0050562018BBF9FC0011E0B1 /* PBXContainerItemProxy */;
+		};
 		0050CCA118208ADA006D6247 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0050CC7A18208ADA006D6247 /* MusicServer */;

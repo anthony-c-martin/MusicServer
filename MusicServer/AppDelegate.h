@@ -7,13 +7,14 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <CocoaHTTPServer/HTTPServer.h>
+
 @class AMJSONListener;
-@protocol AMAPIDataResponder;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
-@property (nonatomic, retain) AMJSONListener *Listener;
-@property (nonatomic, retain) NSObject<AMAPIDataResponder> *Handler;
+@property HTTPServer *Server;
+@property (nonatomic, retain) AMJSONListener *JSONListener;
 
 @end

@@ -8,8 +8,10 @@
 
 #import "AMGlobalObjects.h"
 #import "AMJSONListener.h"
+#import "AMMusicServerPersistentData.h"
 
 static AMJSONListener *_JSONListener = nil;
+static AMMusicServerPersistentData *_PersistentData = nil;
 
 @implementation AMGlobalObjects
 
@@ -21,6 +23,15 @@ static AMJSONListener *_JSONListener = nil;
 +(void)setJSONListener:(AMJSONListener *)JSONListener
 {
     _JSONListener = JSONListener;
+}
+
++(AMMusicServerPersistentData *)PersistentData
+{
+    if (_PersistentData == nil)
+    {
+        _PersistentData = [[AMMusicServerPersistentData alloc] init];
+    }
+    return _PersistentData;
 }
 
 @end

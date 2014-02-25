@@ -14,6 +14,8 @@
 #import <iTunesLibrary/ITLibArtwork.h>
 #import "./AMJSONAPIDataObjects.h"
 #import "./AMAudioConverter.h"
+#import "AMGlobalObjects.h"
+#import "AMMusicServerPersistentData.h"
 
 @interface NSImage (scalingAdditions)
 -(NSString *) base64String;
@@ -93,6 +95,10 @@
     self = [super init];
     if (self)
     {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+        NSString *applicationSupportDirectory = [paths firstObject];
+        NSURL *cacheFolder = [[NSURL fileURLWithPath:applicationSupportDirectory] URLByAppendingPathComponent:@"AMMusicServer"];
+        [[NSFileManager defaultManager] createDirectoryAtPath:[cacheFolder path] withIntermediateDirectories:NO attributes:nil error:nil];
         [self setTracks:[[NSSet alloc] init]];
         [self setArtists:[[NSSet alloc] init]];
         [self setAlbums:[[NSSet alloc] init]];
@@ -127,7 +133,7 @@
                        albumID:&albumID
                      artistSet:artists
                       artistID:&artistID
-                       artwork:artwork];
+                       artwork:artwork]; 
         }
         
         [self setTracks:(NSSet *)tracks];
@@ -597,9 +603,12 @@
     {
         if ([track Location])
         {
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+            NSString *applicationSupportDirectory = [paths firstObject];
             NSString *fileName = [NSString stringWithFormat:@"%@", [track ID]];
             [*response setFileName:fileName];
-            NSURL *output = [[NSURL URLWithString:@"/Library/WebServer/AMMusicServer/"] URLByAppendingPathComponent:fileName];
+            NSURL *output = [[[NSURL fileURLWithPath:applicationSupportDirectory] URLByAppendingPathComponent:@"AMMusicServer"] URLByAppendingPathComponent:fileName];
+            
             if (![[NSFileManager defaultManager] fileExistsAtPath:[output path]])
             {
                 result = [AMAudioConverter ConvertToM4A:[NSURL URLWithString:[track Location]] output:output];
@@ -607,6 +616,15 @@
             else
             {
                 result = YES;
+            }
+            
+            if (result)
+            {
+                [[AMGlobalObjects PersistentData] addCachedTrack:fileName AtLocation:output];
+            }
+            else
+            {
+                [[NSFileManager defaultManager] removeItemAtPath:[output path] error:nil];
             }
         }
     }

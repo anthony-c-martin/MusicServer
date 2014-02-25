@@ -9,6 +9,7 @@
 #import "AMHTTPConnection.h"
 #import "AMGlobalObjects.h"
 #import "AMJSONListener.h"
+#import "AMMusicServerPersistentData.h"
 #import <CocoaHTTPServer/HTTPMessage.h>
 #import <CocoaHTTPServer/HTTPResponse.h>
 #import <CocoaHTTPServer/HTTPDataResponse.h>
@@ -135,8 +136,12 @@
             
             if (authorised)
             {
-                NSString *filePath = [NSString stringWithFormat:@"%@%@", @"/Library/WebServer/AMMusicServer/", [kvPairs objectForKey:@"FileName"]];
-                return [[HTTPAsyncFileResponse alloc] initWithFilePath:filePath forConnection:self];
+                NSURL *fileURL = [[AMGlobalObjects PersistentData] getCachedTrackLocation:[kvPairs objectForKey:@"FileName"]];
+                if (fileURL != nil)
+                {
+                    NSString *filePath = [fileURL path];
+                    return [[HTTPAsyncFileResponse alloc] initWithFilePath:filePath forConnection:self];
+                }
             }
             return [super httpResponseForMethod:method URI:path];
         }

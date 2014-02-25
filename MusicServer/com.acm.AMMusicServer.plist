@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Username</key>
+	<string>username</string>
+	<key>Password</key>
+	<string>password</string>
+	<key>APIKey</key>
+	<string>iv78vu87gyv879Gf8YIyrTDLUyfpocI2</string>
+	<key>MaxSessions</key>
+	<integer>1</integer>
+	<key>MaxCachedTracks</key>
+	<integer>100</integer>
+	<key>CachedTracks</key>
+	<array/>
+</dict>
+</plist>

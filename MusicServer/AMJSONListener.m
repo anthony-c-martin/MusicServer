@@ -8,10 +8,8 @@
 
 #import "AMJSONListener.h"
 #import "./AMJSONAPIDataObjects.h"
-
-#define AMSessionUsername @"antm88"
-#define AMSessionPassword @"bhu*9ol."
-#define AMAPIKey @"iv78vu87gyv879Gf8YIyrTDLUyfpocI2"
+#import "AMGlobalObjects.h"
+#import "AMMusicServerPersistentData.h"
 
 @implementation AMJSONListener
 
@@ -55,8 +53,8 @@
         
         NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@:%@",
                                                      [request Token],
-                                                     AMSessionUsername,
-                                                     AMSessionPassword,
+                                                     [[AMGlobalObjects PersistentData] username],
+                                                     [[AMGlobalObjects PersistentData] password],
                                                      [request APIKey],
                                                      [request Token]]];
         
@@ -124,83 +122,6 @@
         }
     }
 }
-
-/*
--(HTTPResponse *) GET:(HTTPRequest *) request
-{
-    NSString *queryString = [[request url] query];
-    NSArray *pairs = [queryString componentsSeparatedByString:@"&"];
-    NSMutableDictionary *kvPairs = [NSMutableDictionary dictionary];
-    for (NSString * pair in pairs)
-    {
-        NSArray * bits = [pair componentsSeparatedByString:@"="];
-        NSString * key = [[bits objectAtIndex:0] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSString * value = [[bits objectAtIndex:1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [kvPairs setObject:value forKey:key];
-    }
-
-    NSString *sessionKey;
-    NSString *filePath;
-    if ([kvPairs objectForKey:@"file"] && ([kvPairs objectForKey:@"session"]))
-    {
-        filePath = [NSString stringWithFormat:@"%@%@", @"/Library/WebServer/AMMusicServer/", [kvPairs objectForKey:@"file"]];
-        sessionKey = [kvPairs objectForKey:@"session"];
-    }
-    
-    NSData *fileData = [[NSData alloc] initWithContentsOfFile:filePath];
-    
-    if (![[request headers] objectForKey:@"Range"])
-    {
-        return [[HTTPResponse alloc] initWithResponseCode:404];
-    }
-    
-    NSString *range = [[request headers] objectForKey:@"Range"];
-    NSString *bytes = [range substringToIndex:6];
-    if (![bytes isEqualToString:@"bytes="])
-    {
-        return [[HTTPResponse alloc] initWithResponseCode:404];
-    }
-    
-    range = [range substringFromIndex:6];
-    NSArray *components = [range componentsSeparatedByString:@"-"];
-    if (![components objectAtIndex:0] && [components objectAtIndex:1])
-    {
-        return [[HTTPResponse alloc] initWithResponseCode:404];
-    }
-    NSInteger startBytes = [[components objectAtIndex:0] integerValue];
-    NSInteger endBytes = [[components objectAtIndex:1] integerValue];
-    
-    if ([[components objectAtIndex:1] isEqualToString:@""] || endBytes >= [fileData length])
-    {
-        endBytes = [fileData length] - 1;
-    }
-    
-    HTTPResponse * response = [[HTTPResponse alloc] initWithResponseCode:206];
-    [response setHeaderField:@"Content-Range" toValue:[NSString stringWithFormat:@"bytes %ld-%ld/%ld", startBytes, endBytes, [fileData length]]];
-    [response setHeaderField:@"Content-Length" toValue:[NSString stringWithFormat:@"%ld", (endBytes - startBytes) + 1]];
-    [response setBodyData:[fileData subdataWithRange:NSMakeRange(startBytes, endBytes + 1)]];
-    
-    return response;
-}
-*/
-
-/*
--(HTTPResponse *) POST:(HTTPRequest *) request
-{
-    AMJSONAPIData *responseData = [AMJSONAPIData alloc];
-    NSNumber *responseCode = [NSNumber alloc];
-    BOOL success = [self handleRequest:[request body]
-                              response:&responseData
-                          responseCode:&responseCode];
-    
-    HTTPResponse *httpResponse = [[HTTPResponse alloc] initWithResponseCode:[responseCode intValue]];
-    if (success)
-    {
-        [httpResponse setBodyData:[responseData dataFromObject]];
-    }
-    return httpResponse;
-}
-*/
  
 -(BOOL) handleRequest:(NSData *)data
          responseData:(NSData **)responseData

@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class AMJSONListener;
+@class AMMusicServerPersistentData;
 
 @interface AMGlobalObjects : NSObject
 
 +(AMJSONListener *)JSONListener;
 +(void)setJSONListener:(AMJSONListener *)JSONListener;
++(AMMusicServerPersistentData *)PersistentData;
 
 @end

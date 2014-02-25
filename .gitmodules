@@ -1,3 +1,6 @@
 [submodule "MusicServer/Frameworks/CocoaHTTPServerFramework"]
 	path = MusicServer/Frameworks/CocoaHTTPServerFramework
 	url = git://github.com/mralexgray/CocoaHTTPServerFramework.git
+[submodule "MusicServer/GUI"]
+	path = MusicServer/GUI
+	url = git://github.com/antm611/MusicServerGUI.git

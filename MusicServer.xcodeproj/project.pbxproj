@@ -12,6 +12,7 @@
 		0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */; };
 		0005BAA01821A59A00C17FA9 /* AMJSONAPIDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */; };
 		00245CC118209E2900506730 /* AMJSONListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CC018209E2900506730 /* AMJSONListener.m */; };
+		0039A33918BC27C700F4B060 /* webroot in Resources */ = {isa = PBXBuildFile; fileRef = 0039A33818BC27B800F4B060 /* webroot */; };
 		00445B561826F98000174020 /* AMAudioConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00445B551826F98000174020 /* AMAudioConverter.mm */; };
 		00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00445B571826F99C00174020 /* AudioToolbox.framework */; };
 		00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00445B5E1826FE0D00174020 /* CAStreamBasicDescription.cpp */; };
@@ -91,6 +92,7 @@
 		0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONAPIDataObjects.m; sourceTree = "<group>"; };
 		00245CBF18209E2900506730 /* AMJSONListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONListener.h; sourceTree = "<group>"; };
 		00245CC018209E2900506730 /* AMJSONListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONListener.m; sourceTree = "<group>"; };
+		0039A33818BC27B800F4B060 /* webroot */ = {isa = PBXFileReference; lastKnownFileType = folder; name = webroot; path = MusicServer/GUI/webroot; sourceTree = "<group>"; };
 		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioConverter.h; sourceTree = "<group>"; };
 		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMAudioConverter.mm; sourceTree = "<group>"; };
 		00445B571826F99C00174020 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -195,6 +197,7 @@
 		0050CC7218208ADA006D6247 = {
 			isa = PBXGroup;
 			children = (
+				0039A33818BC27B800F4B060 /* webroot */,
 				0050CC8418208ADA006D6247 /* MusicServer */,
 				0050CCA218208ADA006D6247 /* MusicServerTests */,
 				0050CC7D18208ADA006D6247 /* Frameworks */,
@@ -414,6 +417,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0039A33918BC27C700F4B060 /* webroot in Resources */,
 				0050CC8918208ADA006D6247 /* InfoPlist.strings in Resources */,
 				0050CC9718208ADA006D6247 /* Images.xcassets in Resources */,
 				0050CC8F18208ADA006D6247 /* Credits.rtf in Resources */,

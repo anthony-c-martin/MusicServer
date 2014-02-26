@@ -13,6 +13,7 @@
 #define AMDefaultAPIKey @"iv78vu87gyv879Gf8YIyrTDLUyfpocI2"
 #define AMDefaultMaxSessions 5
 #define AMDefaultMaxCachedTracks 100
+#define AMDefaultUseAlbumArt 0
 
 @interface AMMusicServerPersistentData()
 
@@ -28,6 +29,7 @@
 @synthesize maxSessions;
 @synthesize maxCachedTracks;
 @synthesize cachedTracks;
+@synthesize useAlbumArt;
 
 -(id)init
 {
@@ -134,6 +136,25 @@
     return maxCachedTracks;
 }
 
+-(void)setUseAlbumArt:(NSNumber *)value
+{
+    useAlbumArt = value;
+    [self setNumber:useAlbumArt WithKey:@"UseAlbumArt"];
+}
+
+-(NSNumber *)useAlbumArt
+{
+    if (!useAlbumArt)
+    {
+        useAlbumArt = [self getNumberWithKey:@"UseAlbumArt"];
+        if (!useAlbumArt)
+        {
+            [self setUseAlbumArt:[NSNumber numberWithInt:AMDefaultUseAlbumArt]];
+        }
+    }
+    return useAlbumArt;
+}
+
 -(void)saveCachedTracks
 {
     [self setArray:cachedTracks WithKey:@"CachedTracks"];
@@ -158,13 +179,9 @@
     return cachedTracks;
 }
 
--(void)addCachedTrack:(NSString *)name AtLocation:(NSURL *)location
+-(void)addCachedTrack:(NSString *)name
 {
-    NSDictionary *cachedTrack = [self getCachedTrack:name];
-    if (cachedTrack != nil)
-    {
-        [self removeCachedTrack:cachedTrack saveData:NO deleteFile:NO];
-    }
+    [self removeCachedTrack:name saveData:NO deleteFile:NO];
     
     while ([[self maxCachedTracks] isLessThanOrEqualTo:[NSNumber numberWithInteger:[[self cachedTracks] count]]]
            && [[self cachedTracks] count] > 0)
@@ -172,52 +189,54 @@
         [self removeCachedTrack:[[self cachedTracks] lastObject] saveData:NO deleteFile:YES];
     }
     
-    [[self cachedTracks] insertObject:[NSDictionary dictionaryWithObjectsAndKeys:name, @"Name", [location path], @"Location", nil] atIndex:0];
+    [[self cachedTracks] insertObject:name atIndex:0];
     [self saveCachedTracks];
 }
 
--(void)removeCachedTrack:(NSDictionary *)cachedTrack saveData:(BOOL)save deleteFile:(BOOL)delete
+-(void)removeCachedTrack:(NSString *)name saveData:(BOOL)save deleteFile:(BOOL)delete
 {
-    [[self cachedTracks] removeObject:cachedTrack];
-    
-    if (delete)
+    if ([[self cachedTracks] containsObject:name])
     {
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        NSString *path = [[cachedTrack valueForKey:@"Location"] path];
-        if ([fileManager fileExistsAtPath:path] && [fileManager isDeletableFileAtPath:path])
+        if (delete)
         {
-            [fileManager removeItemAtPath:path error:nil];
+            NSString *path = [[self getCachedTrackLocation:name] path];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            if ([fileManager fileExistsAtPath:path] && [fileManager isDeletableFileAtPath:path])
+            {
+                [fileManager removeItemAtPath:path error:nil];
+            }
+        }
+        
+        [[self cachedTracks] removeObject:name];
+        
+        if (save)
+        {
+            [self saveCachedTracks];
         }
     }
-    
-    if (save)
-    {
-        [self saveCachedTracks];
-    }
+}
+
+-(void)removeCachedTrack:(NSString *)name
+{
+    [self removeCachedTrack:name saveData:YES deleteFile:YES];
 }
 
 -(NSURL *)getCachedTrackLocation:(NSString *)name
 {
-    NSDictionary *cachedTrack = [self getCachedTrack:name];
-    if (cachedTrack != nil)
+    if ([[self cachedTracks] containsObject:name])
     {
-        return [NSURL fileURLWithPath:[cachedTrack valueForKey:@"Location"]];
+        return [self getLocationForTrack:name];
     }
-    
     return nil;
 }
 
--(NSDictionary *)getCachedTrack:(NSString *)name
+-(NSURL *)getLocationForTrack:(NSString *)name
 {
-    for (NSDictionary *cachedTrack in [self cachedTracks])
-    {
-        if ([[cachedTrack objectForKey:@"Name"] isEqualToString:name])
-        {
-            return cachedTrack;
-        }
-    }
-    
-    return nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+    NSString *applicationSupportDirectory = [paths firstObject];
+    NSURL *fileURL = [[[NSURL fileURLWithPath:applicationSupportDirectory] URLByAppendingPathComponent:@"AMMusicServer"] URLByAppendingPathComponent:name];
+    return fileURL;
 }
 
 @end

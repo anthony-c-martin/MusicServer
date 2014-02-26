@@ -19,8 +19,6 @@
     self = [super init];
     if (self)
     {
-
-        
         [self setDelegate:delegate];
         [self setAuthDelegate:(id <AMAPIAuthenticationDataResponder>)self];
         [self setActiveSessions:[[NSMutableDictionary alloc] init]];

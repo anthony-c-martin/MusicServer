@@ -186,8 +186,8 @@
 		00245CBF18209E2900506730 /* AMJSONListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONListener.h; sourceTree = "<group>"; };
 		00245CC018209E2900506730 /* AMJSONListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONListener.m; sourceTree = "<group>"; };
 		0039A33818BC27B800F4B060 /* webroot */ = {isa = PBXFileReference; lastKnownFileType = folder; name = webroot; path = MusicServer/GUI/webroot; sourceTree = "<group>"; };
-		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioConverter.h; sourceTree = "<group>"; };
-		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMAudioConverter.mm; sourceTree = "<group>"; };
+		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAudioConverter.h; path = ../AMAudioConverter.h; sourceTree = "<group>"; };
+		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AMAudioConverter.mm; path = ../AMAudioConverter.mm; sourceTree = "<group>"; };
 		00445B571826F99C00174020 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		00445B5C1826FE0D00174020 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
 		00445B5D1826FE0D00174020 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
@@ -273,6 +273,8 @@
 		00445B5B1826FE0D00174020 /* AudioConversion */ = {
 			isa = PBXGroup;
 			children = (
+				00445B541826F98000174020 /* AMAudioConverter.h */,
+				00445B551826F98000174020 /* AMAudioConverter.mm */,
 				00445B6C1827065500174020 /* ExtAudioFileConvert.cpp */,
 				00445B66182701E600174020 /* CADebugPrintf.h */,
 				00445B5C1826FE0D00174020 /* CADebugMacros.h */,
@@ -345,9 +347,9 @@
 			isa = PBXGroup;
 			children = (
 				00445B5B1826FE0D00174020 /* AudioConversion */,
+				0005BA97182196CC00C17FA9 /* IAModelBase */,
+				00FBC6EA18BE871A0023E4C5 /* PersistentData */,
 				00DAE0E218254215007B6ABC /* ITunesHandler */,
-				00445B541826F98000174020 /* AMAudioConverter.h */,
-				00445B551826F98000174020 /* AMAudioConverter.mm */,
 				0050562218BBFBBD0011E0B1 /* AMHTTPConnection.h */,
 				0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */,
 				0050562518BC03360011E0B1 /* AMGlobalObjects.h */,
@@ -358,13 +360,8 @@
 				0005BA95182196B700C17FA9 /* AMJSONAPIData.m */,
 				0005BA9E1821A59A00C17FA9 /* AMJSONAPIDataObjects.h */,
 				0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */,
-				00E192F418BD3B6A00B5A8D5 /* AMMusicServerPersistentData.h */,
-				00E192F518BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m */,
-				00E192E318BD2B1500B5A8D5 /* AMPersistentData.h */,
-				00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */,
 				0050CC9018208ADA006D6247 /* AppDelegate.h */,
 				0050CC9118208ADA006D6247 /* AppDelegate.m */,
-				0005BA97182196CC00C17FA9 /* IAModelBase */,
 				0050CC8518208ADA006D6247 /* Supporting Files */,
 				0050CC9618208ADA006D6247 /* Images.xcassets */,
 				0050CC9318208ADA006D6247 /* MainMenu.xib */,
@@ -432,6 +429,17 @@
 				00F6DA1118BC36A40036F43F /* CocoaLumberjackOSXTests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		00FBC6EA18BE871A0023E4C5 /* PersistentData */ = {
+			isa = PBXGroup;
+			children = (
+				00E192F418BD3B6A00B5A8D5 /* AMMusicServerPersistentData.h */,
+				00E192F518BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m */,
+				00E192E318BD2B1500B5A8D5 /* AMPersistentData.h */,
+				00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */,
+			);
+			name = PersistentData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

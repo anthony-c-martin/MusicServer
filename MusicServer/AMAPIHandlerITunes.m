@@ -123,10 +123,11 @@
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
             NSImage *artwork = nil;
-//            if ([mediaItem hasArtworkAvailable])
-//            {
-//                artwork = [[mediaItem artwork] image];
-//            }
+            if ([[[AMGlobalObjects PersistentData] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
+            {
+                artwork = [[mediaItem artwork] image];
+            }
+
             [self addMediaItem:mediaItem
                       trackSet:tracks
                       albumSet:albums
@@ -601,30 +602,24 @@
     *response = [[AMAPIConvertTrackResponse alloc] init];
     if ([self getTrackByID:request Response:&track])
     {
-        if ([track Location])
+        NSString *fileName = [NSString stringWithFormat:@"%@", [track ID]];
+        if ([[AMGlobalObjects PersistentData] getCachedTrackLocation:fileName])
         {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-            NSString *applicationSupportDirectory = [paths firstObject];
-            NSString *fileName = [NSString stringWithFormat:@"%@", [track ID]];
             [*response setFileName:fileName];
-            NSURL *output = [[[NSURL fileURLWithPath:applicationSupportDirectory] URLByAppendingPathComponent:@"AMMusicServer"] URLByAppendingPathComponent:fileName];
-            
-            if (![[NSFileManager defaultManager] fileExistsAtPath:[output path]])
+            result = YES;
+        }
+        else
+        {
+            NSURL *output = [[AMGlobalObjects PersistentData] getLocationForTrack:fileName];
+            if ([AMAudioConverter ConvertToM4A:[NSURL URLWithString:[track Location]] output:output])
             {
-                result = [AMAudioConverter ConvertToM4A:[NSURL URLWithString:[track Location]] output:output];
-            }
-            else
-            {
+                [[AMGlobalObjects PersistentData] addCachedTrack:fileName];
+                [*response setFileName:fileName];
                 result = YES;
             }
-            
-            if (result)
-            {
-                [[AMGlobalObjects PersistentData] addCachedTrack:fileName AtLocation:output];
-            }
             else
             {
-                [[NSFileManager defaultManager] removeItemAtPath:[output path] error:nil];
+                [[AMGlobalObjects PersistentData] removeCachedTrack:fileName];
             }
         }
     }

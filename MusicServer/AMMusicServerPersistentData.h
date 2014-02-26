@@ -15,8 +15,11 @@
 @property (nonatomic, retain) NSString *apiKey;
 @property (nonatomic, retain) NSNumber *maxSessions;
 @property (nonatomic, retain) NSNumber *maxCachedTracks;
+@property (nonatomic, retain) NSNumber *useAlbumArt;
 
--(void)addCachedTrack:(NSString *)name AtLocation:(NSURL *)location;
+-(void)addCachedTrack:(NSString *)name;
+-(void)removeCachedTrack:(NSString *)name;
 -(NSURL *)getCachedTrackLocation:(NSString *)name;
+-(NSURL *)getLocationForTrack:(NSString *)name;
 
 @end

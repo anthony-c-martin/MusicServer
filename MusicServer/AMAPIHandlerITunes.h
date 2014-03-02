@@ -17,5 +17,6 @@
 
 -(id) init;
 -(BOOL) loadLibrary;
++(AMAPIHandlerITunes *)sharedInstance;
 
 @end

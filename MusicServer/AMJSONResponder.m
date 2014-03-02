@@ -1,20 +1,18 @@
 //
-//  AMJSONListener.m
+//  AMJSONResponder.m
 //  MusicServer
 //
 //  Created by Anthony Martin on 30/10/2013.
 //  Copyright (c) 2013 Anthony Martin. All rights reserved.
 //
 
-#import "AMJSONListener.h"
-#import "./AMJSONAPIDataObjects.h"
-#import "AMGlobalObjects.h"
+#import "AMJSONResponder.h"
+#import "AMJSONAPIDataObjects.h"
 #import "AMMusicServerPersistentData.h"
 
-@implementation AMJSONListener
+@implementation AMJSONResponder
 
--(id) initOnPort:(NSUInteger)port
-    withDelegate:(id<AMAPIDataResponder>)delegate
+-(id) initWithDelegate:(id<AMAPIDataResponder>)delegate
 {
     self = [super init];
     if (self)
@@ -51,8 +49,8 @@
         
         NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@:%@",
                                                      [request Token],
-                                                     [[AMGlobalObjects PersistentData] username],
-                                                     [[AMGlobalObjects PersistentData] password],
+                                                     [[AMMusicServerPersistentData sharedInstance] username],
+                                                     [[AMMusicServerPersistentData sharedInstance] password],
                                                      [request APIKey],
                                                      [request Token]]];
         

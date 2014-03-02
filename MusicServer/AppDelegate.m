@@ -8,18 +8,16 @@
 
 #import "AppDelegate.h"
 #import "AMHTTPConnection.h"
-#import "AMJSONListener.h"
+#import "AMJSONResponder.h"
 #import "AMAPIHandlerITunes.h"
 #import "AMAudioConverter.h"
-#import "AMGlobalObjects.h"
 #import <CocoaHTTPServer/HTTPServer.h>
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self setJSONListener:[[AMJSONListener alloc] initOnPort:12345 withDelegate:[[AMAPIHandlerITunes alloc] init]]];
-    [AMGlobalObjects setJSONListener:[self JSONListener]];
+    [[AMAPIHandlerITunes sharedInstance] loadLibrary];
     
     [self setServer:[[HTTPServer alloc] init]];
     [[self Server] setType:@"_http._tcp"];

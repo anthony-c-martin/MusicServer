@@ -7,8 +7,7 @@
 //
 
 #import "AMHTTPConnection.h"
-#import "AMGlobalObjects.h"
-#import "AMJSONListener.h"
+#import "AMJSONITunesResponder.h"
 #import "AMMusicServerPersistentData.h"
 #import "AMHTTPAsyncJSONResponse.h"
 #import <CocoaHTTPServer/HTTPMessage.h>
@@ -96,7 +95,7 @@
 	if ([method isEqualToString:@"POST"] && [path isEqualToString:@"/api"])
 	{
         return [[AMHTTPAsyncJSONResponse alloc] initWithRequest:[request body]
-                                                   JSONListener:[AMGlobalObjects JSONListener]
+                                                   JSONResponder:[AMJSONITunesResponder sharedInstance]
                                                      Connection:self];
 	}
     
@@ -119,12 +118,12 @@
             BOOL authorised = NO;
             if ([kvPairs objectForKey:@"FileName"] && [kvPairs objectForKey:@"Session"] && [kvPairs objectForKey:@"APIKey"])
             {
-                authorised = [[AMGlobalObjects JSONListener] validateSession:[kvPairs objectForKey:@"Session"] APIKey:[kvPairs objectForKey:@"APIKey"]];
+                authorised = [[AMJSONITunesResponder sharedInstance] validateSession:[kvPairs objectForKey:@"Session"] APIKey:[kvPairs objectForKey:@"APIKey"]];
             }
             
             if (authorised)
             {
-                NSURL *fileURL = [[AMGlobalObjects PersistentData] getCachedTrackLocation:[kvPairs objectForKey:@"FileName"]];
+                NSURL *fileURL = [[AMMusicServerPersistentData sharedInstance] getCachedTrackLocation:[kvPairs objectForKey:@"FileName"]];
                 if (fileURL != nil)
                 {
                     NSString *filePath = [fileURL path];
@@ -148,5 +147,25 @@
 {
 	[request appendData:postDataChunk];
 }
+
+/* HTTPS
+-(BOOL)isSecureServer
+{
+    return YES;
+}
+
+-(NSArray *)sslIdentityAndCertificates
+{
+    NSString *certificatePath = [[NSBundle mainBundle] pathForResource:@"com.acm.AMMusicServer" ofType:@"cer"];
+    NSData *certData = [[NSData alloc] initWithContentsOfFile:certificatePath];
+    CFDataRef certDataRef = (__bridge CFDataRef)certData;
+    SecCertificateRef cert = SecCertificateCreateWithData(NULL, certDataRef);
+    
+    SecIdentityRef identityRef;
+    SecIdentityCreateWithCertificate(NULL, cert, &identityRef);
+    
+    return [[NSArray alloc] initWithObjects:(__bridge id)identityRef, (__bridge id)cert, nil];
+}
+*/
 
 @end

@@ -31,6 +31,16 @@
 @synthesize cachedTracks;
 @synthesize useAlbumArt;
 
++(AMMusicServerPersistentData *)sharedInstance
+{
+    static AMMusicServerPersistentData *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[AMMusicServerPersistentData alloc] init];
+    });
+    return sharedInstance;
+}
+
 -(id)init
 {
     self = [super initWithPlist:@"com.acm.AMMusicServer"];

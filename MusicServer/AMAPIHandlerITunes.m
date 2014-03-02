@@ -14,7 +14,6 @@
 #import <iTunesLibrary/ITLibArtwork.h>
 #import "./AMJSONAPIDataObjects.h"
 #import "./AMAudioConverter.h"
-#import "AMGlobalObjects.h"
 #import "AMMusicServerPersistentData.h"
 
 @interface NSImage (scalingAdditions)
@@ -90,6 +89,16 @@
 
 @implementation AMAPIHandlerITunes
 
++(AMAPIHandlerITunes *)sharedInstance
+{
+    static AMAPIHandlerITunes *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[AMAPIHandlerITunes alloc] init];
+    });
+    return sharedInstance;
+}
+
 -(id) init
 {
     self = [super init];
@@ -102,7 +111,6 @@
         [self setTracks:[[NSSet alloc] init]];
         [self setArtists:[[NSSet alloc] init]];
         [self setAlbums:[[NSSet alloc] init]];
-        [self loadLibrary];
     }
     return self;
 }
@@ -123,7 +131,7 @@
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
             NSImage *artwork = nil;
-            if ([[[AMGlobalObjects PersistentData] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
+            if ([[[AMMusicServerPersistentData sharedInstance] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
             {
                 artwork = [[mediaItem artwork] image];
             }
@@ -606,23 +614,23 @@
         //Prevent multiple conversions from taking place at the same time.
         @synchronized(self)
         {
-            if ([[AMGlobalObjects PersistentData] getCachedTrackLocation:fileName])
+            if ([[AMMusicServerPersistentData sharedInstance] getCachedTrackLocation:fileName])
             {
                 [*response setFileName:fileName];
                 result = YES;
             }
             else
             {
-                NSURL *output = [[AMGlobalObjects PersistentData] getLocationForTrack:fileName];
+                NSURL *output = [[AMMusicServerPersistentData sharedInstance] getLocationForTrack:fileName];
                 if ([AMAudioConverter ConvertToM4A:[NSURL URLWithString:[track Location]] output:output])
                 {
-                    [[AMGlobalObjects PersistentData] addCachedTrack:fileName];
+                    [[AMMusicServerPersistentData sharedInstance] addCachedTrack:fileName];
                     [*response setFileName:fileName];
                     result = YES;
                 }
                 else
                 {
-                    [[AMGlobalObjects PersistentData] removeCachedTrack:fileName];
+                    [[AMMusicServerPersistentData sharedInstance] removeCachedTrack:fileName];
                 }
             }
         }

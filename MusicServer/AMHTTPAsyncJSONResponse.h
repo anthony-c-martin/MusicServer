@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <CocoaHTTPServer/HTTPResponse.h>
 
-@class AMJSONListener;
+@class AMJSONResponder;
 @class HTTPConnection;
 
 @interface AMHTTPAsyncJSONResponse : NSObject <HTTPResponse>
@@ -24,7 +24,7 @@
 }
 
 -(id)initWithRequest:(NSData *)request
-        JSONListener:(AMJSONListener *)listener
+       JSONResponder:(AMJSONResponder *)responder
           Connection:(HTTPConnection *)parent;
 
 @end

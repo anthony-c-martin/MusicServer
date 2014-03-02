@@ -11,7 +11,7 @@
 		0005BA9C182196CC00C17FA9 /* IAModelBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA99182196CC00C17FA9 /* IAModelBase.m */; };
 		0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */; };
 		0005BAA01821A59A00C17FA9 /* AMJSONAPIDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */; };
-		00245CC118209E2900506730 /* AMJSONListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CC018209E2900506730 /* AMJSONListener.m */; };
+		00245CC118209E2900506730 /* AMJSONResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CC018209E2900506730 /* AMJSONResponder.m */; };
 		0039A33918BC27C700F4B060 /* webroot in Resources */ = {isa = PBXBuildFile; fileRef = 0039A33818BC27B800F4B060 /* webroot */; };
 		00445B561826F98000174020 /* AMAudioConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00445B551826F98000174020 /* AMAudioConverter.mm */; };
 		00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00445B571826F99C00174020 /* AudioToolbox.framework */; };
@@ -19,7 +19,6 @@
 		00445B641826FE0D00174020 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00445B601826FE0D00174020 /* CAXException.cpp */; };
 		00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00445B6C1827065500174020 /* ExtAudioFileConvert.cpp */; };
 		0050562418BBFBBD0011E0B1 /* AMHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */; };
-		0050562718BC03360011E0B1 /* AMGlobalObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050562618BC03360011E0B1 /* AMGlobalObjects.m */; };
 		0050562818BC0B040011E0B1 /* CocoaHTTPServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */; };
 		0050CC7F18208ADA006D6247 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050CC7E18208ADA006D6247 /* Cocoa.framework */; };
 		0050CC8918208ADA006D6247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0050CC8718208ADA006D6247 /* InfoPlist.strings */; };
@@ -32,7 +31,9 @@
 		0050CC9F18208ADA006D6247 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050CC7E18208ADA006D6247 /* Cocoa.framework */; };
 		0050CCA718208ADA006D6247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0050CCA518208ADA006D6247 /* InfoPlist.strings */; };
 		0050CCA918208ADA006D6247 /* MusicServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050CCA818208ADA006D6247 /* MusicServerTests.m */; };
-		00CBBCDE18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBCDD18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m */; };
+		00CBBCEE18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */; };
+		00CBBCF318C33C440063DBF6 /* AMJSONITunesResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBCF218C33C440063DBF6 /* AMJSONITunesResponder.m */; };
+		00CBBCF518C35F990063DBF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CBBCF418C35F990063DBF6 /* Security.framework */; };
 		00DAE0E5182542EC007B6ABC /* AMAPIHandlerITunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DAE0E4182542EC007B6ABC /* AMAPIHandlerITunes.m */; };
 		00DAE0E7182545D5007B6ABC /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DAE0E6182545D5007B6ABC /* iTunesLibrary.framework */; };
 		00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */; };
@@ -184,11 +185,11 @@
 		0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAModelCollectionBase.m; sourceTree = "<group>"; };
 		0005BA9E1821A59A00C17FA9 /* AMJSONAPIDataObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONAPIDataObjects.h; sourceTree = "<group>"; };
 		0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONAPIDataObjects.m; sourceTree = "<group>"; };
-		00245CBF18209E2900506730 /* AMJSONListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONListener.h; sourceTree = "<group>"; };
-		00245CC018209E2900506730 /* AMJSONListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONListener.m; sourceTree = "<group>"; };
+		00245CBF18209E2900506730 /* AMJSONResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONResponder.h; sourceTree = "<group>"; };
+		00245CC018209E2900506730 /* AMJSONResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONResponder.m; sourceTree = "<group>"; };
 		0039A33818BC27B800F4B060 /* webroot */ = {isa = PBXFileReference; lastKnownFileType = folder; name = webroot; path = MusicServer/GUI/webroot; sourceTree = "<group>"; };
-		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMAudioConverter.h; path = ../AMAudioConverter.h; sourceTree = "<group>"; };
-		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AMAudioConverter.mm; path = ../AMAudioConverter.mm; sourceTree = "<group>"; };
+		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioConverter.h; sourceTree = "<group>"; };
+		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMAudioConverter.mm; sourceTree = "<group>"; };
 		00445B571826F99C00174020 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		00445B5C1826FE0D00174020 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
 		00445B5D1826FE0D00174020 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
@@ -201,8 +202,6 @@
 		0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaHTTPServer.xcodeproj; path = MusicServer/Frameworks/CocoaHTTPServerFramework/CocoaHTTPServer.xcodeproj; sourceTree = "<group>"; };
 		0050562218BBFBBD0011E0B1 /* AMHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPConnection.h; sourceTree = "<group>"; };
 		0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPConnection.m; sourceTree = "<group>"; };
-		0050562518BC03360011E0B1 /* AMGlobalObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGlobalObjects.h; sourceTree = "<group>"; };
-		0050562618BC03360011E0B1 /* AMGlobalObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGlobalObjects.m; sourceTree = "<group>"; };
 		0050CC7B18208ADA006D6247 /* MusicServer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicServer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0050CC7E18208ADA006D6247 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0050CC8118208ADA006D6247 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -222,8 +221,11 @@
 		0050CCA418208ADA006D6247 /* MusicServerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicServerTests-Info.plist"; sourceTree = "<group>"; };
 		0050CCA618208ADA006D6247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0050CCA818208ADA006D6247 /* MusicServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicServerTests.m; sourceTree = "<group>"; };
-		00CBBCDC18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMHTTPAsyncJSONResponse.h; path = ../AMHTTPAsyncJSONResponse.h; sourceTree = "<group>"; };
-		00CBBCDD18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMHTTPAsyncJSONResponse.m; path = ../AMHTTPAsyncJSONResponse.m; sourceTree = "<group>"; };
+		00CBBCEC18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPAsyncJSONResponse.h; sourceTree = "<group>"; };
+		00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPAsyncJSONResponse.m; sourceTree = "<group>"; };
+		00CBBCF118C33C440063DBF6 /* AMJSONITunesResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONITunesResponder.h; sourceTree = "<group>"; };
+		00CBBCF218C33C440063DBF6 /* AMJSONITunesResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONITunesResponder.m; sourceTree = "<group>"; };
+		00CBBCF418C35F990063DBF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		00DAE0E3182542EC007B6ABC /* AMAPIHandlerITunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAPIHandlerITunes.h; sourceTree = "<group>"; };
 		00DAE0E4182542EC007B6ABC /* AMAPIHandlerITunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAPIHandlerITunes.m; sourceTree = "<group>"; };
 		00DAE0E6182545D5007B6ABC /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = ../../../../../Library/Frameworks/iTunesLibrary.framework; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00CBBCF518C35F990063DBF6 /* Security.framework in Frameworks */,
 				00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */,
 				00DAE0E7182545D5007B6ABC /* iTunesLibrary.framework in Frameworks */,
 				0050CC7F18208ADA006D6247 /* Cocoa.framework in Frameworks */,
@@ -270,14 +273,13 @@
 				0005BA9A182196CC00C17FA9 /* IAModelCollectionBase.h */,
 				0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */,
 			);
-			path = IAModelBase;
+			name = IAModelBase;
+			path = MusicServer/IAModelBase;
 			sourceTree = "<group>";
 		};
 		00445B5B1826FE0D00174020 /* AudioConversion */ = {
 			isa = PBXGroup;
 			children = (
-				00445B541826F98000174020 /* AMAudioConverter.h */,
-				00445B551826F98000174020 /* AMAudioConverter.mm */,
 				00445B6C1827065500174020 /* ExtAudioFileConvert.cpp */,
 				00445B66182701E600174020 /* CADebugPrintf.h */,
 				00445B5C1826FE0D00174020 /* CADebugMacros.h */,
@@ -287,7 +289,8 @@
 				00445B601826FE0D00174020 /* CAXException.cpp */,
 				00445B611826FE0D00174020 /* CAXException.h */,
 			);
-			path = AudioConversion;
+			name = AudioConversion;
+			path = MusicServer/AudioConversion;
 			sourceTree = "<group>";
 		};
 		0050560E18BBF9BE0011E0B1 /* Products */ = {
@@ -324,6 +327,9 @@
 		0050CC7D18208ADA006D6247 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00CBBCF418C35F990063DBF6 /* Security.framework */,
+				00445B5B1826FE0D00174020 /* AudioConversion */,
+				0005BA97182196CC00C17FA9 /* IAModelBase */,
 				00F6DA0218BC36A40036F43F /* CocoaLumberjack.xcodeproj */,
 				00F6D9F218BC36920036F43F /* CocoaAsyncSocket.xcodeproj */,
 				0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */,
@@ -349,22 +355,10 @@
 		0050CC8418208ADA006D6247 /* MusicServer */ = {
 			isa = PBXGroup;
 			children = (
-				00445B5B1826FE0D00174020 /* AudioConversion */,
-				0005BA97182196CC00C17FA9 /* IAModelBase */,
+				00CBBCF018C33C0F0063DBF6 /* JSON */,
+				00CBBCEF18C337A60063DBF6 /* HTTP */,
 				00FBC6EA18BE871A0023E4C5 /* PersistentData */,
 				00DAE0E218254215007B6ABC /* ITunesHandler */,
-				0050562218BBFBBD0011E0B1 /* AMHTTPConnection.h */,
-				0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */,
-				00CBBCDC18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.h */,
-				00CBBCDD18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m */,
-				0050562518BC03360011E0B1 /* AMGlobalObjects.h */,
-				0050562618BC03360011E0B1 /* AMGlobalObjects.m */,
-				00245CBF18209E2900506730 /* AMJSONListener.h */,
-				00245CC018209E2900506730 /* AMJSONListener.m */,
-				0005BA94182196B700C17FA9 /* AMJSONAPIData.h */,
-				0005BA95182196B700C17FA9 /* AMJSONAPIData.m */,
-				0005BA9E1821A59A00C17FA9 /* AMJSONAPIDataObjects.h */,
-				0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */,
 				0050CC9018208ADA006D6247 /* AppDelegate.h */,
 				0050CC9118208ADA006D6247 /* AppDelegate.m */,
 				0050CC8518208ADA006D6247 /* Supporting Files */,
@@ -405,9 +399,37 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		00CBBCEF18C337A60063DBF6 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				00CBBCEC18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.h */,
+				00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */,
+				0050562218BBFBBD0011E0B1 /* AMHTTPConnection.h */,
+				0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */,
+			);
+			name = HTTP;
+			sourceTree = "<group>";
+		};
+		00CBBCF018C33C0F0063DBF6 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				00CBBCF118C33C440063DBF6 /* AMJSONITunesResponder.h */,
+				00CBBCF218C33C440063DBF6 /* AMJSONITunesResponder.m */,
+				00245CBF18209E2900506730 /* AMJSONResponder.h */,
+				00245CC018209E2900506730 /* AMJSONResponder.m */,
+				0005BA94182196B700C17FA9 /* AMJSONAPIData.h */,
+				0005BA95182196B700C17FA9 /* AMJSONAPIData.m */,
+				0005BA9E1821A59A00C17FA9 /* AMJSONAPIDataObjects.h */,
+				0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */,
+			);
+			name = JSON;
+			sourceTree = "<group>";
+		};
 		00DAE0E218254215007B6ABC /* ITunesHandler */ = {
 			isa = PBXGroup;
 			children = (
+				00445B541826F98000174020 /* AMAudioConverter.h */,
+				00445B551826F98000174020 /* AMAudioConverter.mm */,
 				00DAE0E3182542EC007B6ABC /* AMAPIHandlerITunes.h */,
 				00DAE0E4182542EC007B6ABC /* AMAPIHandlerITunes.m */,
 			);
@@ -657,18 +679,18 @@
 				0050CC9218208ADA006D6247 /* AppDelegate.m in Sources */,
 				0005BA96182196B700C17FA9 /* AMJSONAPIData.m in Sources */,
 				0005BAA01821A59A00C17FA9 /* AMJSONAPIDataObjects.m in Sources */,
-				00245CC118209E2900506730 /* AMJSONListener.m in Sources */,
+				00245CC118209E2900506730 /* AMJSONResponder.m in Sources */,
+				00CBBCEE18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */,
 				0050CC8B18208ADA006D6247 /* main.m in Sources */,
 				00DAE0E5182542EC007B6ABC /* AMAPIHandlerITunes.m in Sources */,
 				0050562418BBFBBD0011E0B1 /* AMHTTPConnection.m in Sources */,
 				00E192F618BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m in Sources */,
-				0050562718BC03360011E0B1 /* AMGlobalObjects.m in Sources */,
 				00445B561826F98000174020 /* AMAudioConverter.mm in Sources */,
 				00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */,
+				00CBBCF318C33C440063DBF6 /* AMJSONITunesResponder.m in Sources */,
 				00445B641826FE0D00174020 /* CAXException.cpp in Sources */,
 				00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */,
 				00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */,
-				00CBBCDE18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

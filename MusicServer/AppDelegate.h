@@ -9,12 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import <CocoaHTTPServer/HTTPServer.h>
 
-@class AMJSONListener;
-
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property HTTPServer *Server;
-@property (nonatomic, retain) AMJSONListener *JSONListener;
 
 @end

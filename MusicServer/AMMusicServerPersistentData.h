@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSNumber *maxCachedTracks;
 @property (nonatomic, retain) NSNumber *useAlbumArt;
 
++(AMMusicServerPersistentData *)sharedInstance;
 -(void)addCachedTrack:(NSString *)name;
 -(void)removeCachedTrack:(NSString *)name;
 -(NSURL *)getCachedTrackLocation:(NSString *)name;

@@ -10,6 +10,7 @@
 #import "AMGlobalObjects.h"
 #import "AMJSONListener.h"
 #import "AMMusicServerPersistentData.h"
+#import "AMHTTPAsyncJSONResponse.h"
 #import <CocoaHTTPServer/HTTPMessage.h>
 #import <CocoaHTTPServer/HTTPResponse.h>
 #import <CocoaHTTPServer/HTTPDataResponse.h>
@@ -94,22 +95,9 @@
 {
 	if ([method isEqualToString:@"POST"] && [path isEqualToString:@"/api"])
 	{
-        NSData *postData = [request body];
-        NSData *responseData = nil;
-        NSNumber *responseCode = nil;
-        
-        BOOL success = [[AMGlobalObjects JSONListener] handleRequest:postData
-                                                        responseData:&responseData
-                                                        responseCode:&responseCode];
-        
-        if (success)
-        {
-            return [[HTTPDataResponse alloc] initWithData:responseData];
-        }
-        else
-        {
-            return [[AMHTTPErrorResponse alloc] initWithCode:responseCode];
-        }
+        return [[AMHTTPAsyncJSONResponse alloc] initWithRequest:[request body]
+                                                   JSONListener:[AMGlobalObjects JSONListener]
+                                                     Connection:self];
 	}
     
     if ([method isEqualToString:@"GET"])

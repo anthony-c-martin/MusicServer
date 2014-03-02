@@ -32,6 +32,7 @@
 		0050CC9F18208ADA006D6247 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050CC7E18208ADA006D6247 /* Cocoa.framework */; };
 		0050CCA718208ADA006D6247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0050CCA518208ADA006D6247 /* InfoPlist.strings */; };
 		0050CCA918208ADA006D6247 /* MusicServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050CCA818208ADA006D6247 /* MusicServerTests.m */; };
+		00CBBCDE18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBCDD18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m */; };
 		00DAE0E5182542EC007B6ABC /* AMAPIHandlerITunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DAE0E4182542EC007B6ABC /* AMAPIHandlerITunes.m */; };
 		00DAE0E7182545D5007B6ABC /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DAE0E6182545D5007B6ABC /* iTunesLibrary.framework */; };
 		00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */; };
@@ -221,6 +222,8 @@
 		0050CCA418208ADA006D6247 /* MusicServerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicServerTests-Info.plist"; sourceTree = "<group>"; };
 		0050CCA618208ADA006D6247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0050CCA818208ADA006D6247 /* MusicServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicServerTests.m; sourceTree = "<group>"; };
+		00CBBCDC18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMHTTPAsyncJSONResponse.h; path = ../AMHTTPAsyncJSONResponse.h; sourceTree = "<group>"; };
+		00CBBCDD18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMHTTPAsyncJSONResponse.m; path = ../AMHTTPAsyncJSONResponse.m; sourceTree = "<group>"; };
 		00DAE0E3182542EC007B6ABC /* AMAPIHandlerITunes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAPIHandlerITunes.h; sourceTree = "<group>"; };
 		00DAE0E4182542EC007B6ABC /* AMAPIHandlerITunes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAPIHandlerITunes.m; sourceTree = "<group>"; };
 		00DAE0E6182545D5007B6ABC /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = ../../../../../Library/Frameworks/iTunesLibrary.framework; sourceTree = "<group>"; };
@@ -352,6 +355,8 @@
 				00DAE0E218254215007B6ABC /* ITunesHandler */,
 				0050562218BBFBBD0011E0B1 /* AMHTTPConnection.h */,
 				0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */,
+				00CBBCDC18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.h */,
+				00CBBCDD18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m */,
 				0050562518BC03360011E0B1 /* AMGlobalObjects.h */,
 				0050562618BC03360011E0B1 /* AMGlobalObjects.m */,
 				00245CBF18209E2900506730 /* AMJSONListener.h */,
@@ -663,6 +668,7 @@
 				00445B641826FE0D00174020 /* CAXException.cpp in Sources */,
 				00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */,
 				00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */,
+				00CBBCDE18C26FAA0063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

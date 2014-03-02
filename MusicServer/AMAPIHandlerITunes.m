@@ -603,23 +603,27 @@
     if ([self getTrackByID:request Response:&track])
     {
         NSString *fileName = [NSString stringWithFormat:@"%@", [track ID]];
-        if ([[AMGlobalObjects PersistentData] getCachedTrackLocation:fileName])
+        //Prevent multiple conversions from taking place at the same time.
+        @synchronized(self)
         {
-            [*response setFileName:fileName];
-            result = YES;
-        }
-        else
-        {
-            NSURL *output = [[AMGlobalObjects PersistentData] getLocationForTrack:fileName];
-            if ([AMAudioConverter ConvertToM4A:[NSURL URLWithString:[track Location]] output:output])
+            if ([[AMGlobalObjects PersistentData] getCachedTrackLocation:fileName])
             {
-                [[AMGlobalObjects PersistentData] addCachedTrack:fileName];
                 [*response setFileName:fileName];
                 result = YES;
             }
             else
             {
-                [[AMGlobalObjects PersistentData] removeCachedTrack:fileName];
+                NSURL *output = [[AMGlobalObjects PersistentData] getLocationForTrack:fileName];
+                if ([AMAudioConverter ConvertToM4A:[NSURL URLWithString:[track Location]] output:output])
+                {
+                    [[AMGlobalObjects PersistentData] addCachedTrack:fileName];
+                    [*response setFileName:fileName];
+                    result = YES;
+                }
+                else
+                {
+                    [[AMGlobalObjects PersistentData] removeCachedTrack:fileName];
+                }
             }
         }
     }

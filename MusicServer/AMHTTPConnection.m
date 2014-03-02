@@ -148,24 +148,4 @@
 	[request appendData:postDataChunk];
 }
 
-/* HTTPS
--(BOOL)isSecureServer
-{
-    return YES;
-}
-
--(NSArray *)sslIdentityAndCertificates
-{
-    NSString *certificatePath = [[NSBundle mainBundle] pathForResource:@"com.acm.AMMusicServer" ofType:@"cer"];
-    NSData *certData = [[NSData alloc] initWithContentsOfFile:certificatePath];
-    CFDataRef certDataRef = (__bridge CFDataRef)certData;
-    SecCertificateRef cert = SecCertificateCreateWithData(NULL, certDataRef);
-    
-    SecIdentityRef identityRef;
-    SecIdentityCreateWithCertificate(NULL, cert, &identityRef);
-    
-    return [[NSArray alloc] initWithObjects:(__bridge id)identityRef, (__bridge id)cert, nil];
-}
-*/
-
 @end

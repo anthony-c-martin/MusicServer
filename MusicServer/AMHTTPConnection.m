@@ -8,12 +8,13 @@
 
 #import "AMHTTPConnection.h"
 #import "AMJSONITunesResponder.h"
-#import "AMMusicServerPersistentData.h"
+#import "AMMusicServerActiveData.h"
 #import "AMHTTPAsyncJSONResponse.h"
 #import <CocoaHTTPServer/HTTPMessage.h>
 #import <CocoaHTTPServer/HTTPResponse.h>
 #import <CocoaHTTPServer/HTTPDataResponse.h>
 #import <CocoaHTTPServer/HTTPAsyncFileResponse.h>
+#import <CocoaAsyncSocket/GCDAsyncSocket.h>
 
 @interface AMHTTPErrorResponse : NSObject <HTTPResponse>
 {
@@ -92,6 +93,11 @@
 
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path
 {
+    if ([[AMMusicServerActiveData sharedInstance] ipAddressIsBlackListed:[self connectedHost]])
+    {
+        return [[AMHTTPErrorResponse alloc] initWithCode:[NSNumber numberWithInt:400]];
+    }
+    
 	if ([method isEqualToString:@"POST"] && [path isEqualToString:@"/api"])
 	{
         return [[AMHTTPAsyncJSONResponse alloc] initWithRequest:[request body]
@@ -123,7 +129,7 @@
             
             if (authorised)
             {
-                NSURL *fileURL = [[AMMusicServerPersistentData sharedInstance] getCachedTrackLocation:[kvPairs objectForKey:@"FileName"]];
+                NSURL *fileURL = [[AMMusicServerActiveData sharedInstance] getCachedTrackLocation:[kvPairs objectForKey:@"FileName"]];
                 if (fileURL != nil)
                 {
                     NSString *filePath = [fileURL path];
@@ -146,6 +152,17 @@
 - (void)processBodyData:(NSData *)postDataChunk
 {
 	[request appendData:postDataChunk];
+}
+
+-(id)initWithAsyncSocket:(GCDAsyncSocket *)newSocket configuration:(HTTPConfig *)aConfig
+{
+    self = [super initWithAsyncSocket:newSocket configuration:aConfig];
+    if (self)
+    {
+        [self setConnectedHost:[[newSocket connectedHost] copy]];
+        [[AMMusicServerActiveData sharedInstance] auditRequestFromIP:[self connectedHost]];
+    }
+    return self;
 }
 
 @end

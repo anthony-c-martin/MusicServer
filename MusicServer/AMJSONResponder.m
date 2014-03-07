@@ -8,7 +8,7 @@
 
 #import "AMJSONResponder.h"
 #import "AMJSONAPIDataObjects.h"
-#import "AMMusicServerPersistentData.h"
+#import "AMMusicServerActiveData.h"
 
 @implementation AMJSONResponder
 
@@ -49,8 +49,8 @@
         
         NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@:%@",
                                                      [request Token],
-                                                     [[AMMusicServerPersistentData sharedInstance] username],
-                                                     [[AMMusicServerPersistentData sharedInstance] password],
+                                                     [[AMMusicServerActiveData sharedInstance] username],
+                                                     [[AMMusicServerActiveData sharedInstance] password],
                                                      [request APIKey],
                                                      [request Token]]];
         
@@ -122,12 +122,14 @@
 -(BOOL) handleRequest:(NSData *)data
          responseData:(NSData **)responseData
          responseCode:(NSNumber **)responseCode
+        connectedHost:(NSString *)ipAddress
 {
     AMJSONAPIData *response = [AMJSONAPIData alloc];
     
     BOOL success = [self handleRequest:data
                               response:&response
-                          responseCode:responseCode];
+                          responseCode:responseCode
+                         connectedHost:ipAddress];
     
     if (success)
     {
@@ -140,6 +142,7 @@
 -(BOOL) handleRequest:(NSData *)data
              response:(AMJSONAPIData **)response
          responseCode:(NSNumber **)responseCode
+        connectedHost:(NSString *)ipAddress;
 {
     BOOL success = YES;
     NSError *error;
@@ -322,6 +325,7 @@
                 if (!success) {
                     *responseCode = [NSNumber numberWithInt:401];
                     *response = nil;
+                    [[AMMusicServerActiveData sharedInstance] auditFailedAuthFromIP:ipAddress];
                     return NO;
                 }
                 

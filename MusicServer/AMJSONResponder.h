@@ -22,7 +22,8 @@
 
 -(BOOL) handleRequest:(NSData *)data
          responseData:(NSData **)responseData
-         responseCode:(NSNumber **)responseCode;
+         responseCode:(NSNumber **)responseCode
+        connectedHost:(NSString *)ipAddress;
 
 -(BOOL) validateSession:(NSString *)Session
                  APIKey:(NSString *)APIKey;

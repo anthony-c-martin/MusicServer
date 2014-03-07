@@ -11,4 +11,6 @@
 
 @interface AMHTTPConnection : HTTPConnection
 
+@property (nonatomic, retain) NSString *connectedHost;
+
 @end

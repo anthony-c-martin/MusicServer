@@ -1,12 +1,12 @@
 //
-//  AMMusicServerPersistentData.m
+//  AMMusicServerActiveData.m
 //  MusicServer
 //
 //  Created by Anthony Martin on 25/02/2014.
 //  Copyright (c) 2014 Anthony Martin. All rights reserved.
 //
 
-#import "AMMusicServerPersistentData.h"
+#import "AMMusicServerActiveData.h"
 
 #define AMDefaultUsername @"username"
 #define AMDefaultPassword @"password"
@@ -15,13 +15,35 @@
 #define AMDefaultMaxCachedTracks 100
 #define AMDefaultUseAlbumArt 0
 
-@interface AMMusicServerPersistentData()
+#define REQUEST_BLACKLIST_AGE 600
+
+@interface AMMusicServerActiveData()
+{
+    @private
+    int requestsCounter;
+    int authRequestsCounter;
+    int ipBlackListCounter;
+}
 
 @property (nonatomic, retain) NSMutableArray *cachedTracks;
+@property (nonatomic, retain) NSMutableDictionary *requests;
+@property (nonatomic, retain) NSMutableDictionary *authRequests;
+@property (nonatomic, retain) NSMutableDictionary *ipBlackList;
 
 @end
 
-@implementation AMMusicServerPersistentData
+@interface AMRequestHistory : NSObject
+{
+    @public
+    int lastInterval;
+    int count;
+}
+@end
+
+@implementation AMRequestHistory
+@end
+
+@implementation AMMusicServerActiveData
 
 @synthesize username;
 @synthesize password;
@@ -30,13 +52,16 @@
 @synthesize maxCachedTracks;
 @synthesize cachedTracks;
 @synthesize useAlbumArt;
+@synthesize requests;
+@synthesize authRequests;
+@synthesize ipBlackList;
 
-+(AMMusicServerPersistentData *)sharedInstance
++(AMMusicServerActiveData *)sharedInstance
 {
-    static AMMusicServerPersistentData *sharedInstance = nil;
+    static AMMusicServerActiveData *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[AMMusicServerPersistentData alloc] init];
+        sharedInstance = [[AMMusicServerActiveData alloc] init];
     });
     return sharedInstance;
 }
@@ -46,7 +71,9 @@
     self = [super initWithPlist:@"com.acm.AMMusicServer"];
     if (self)
     {
-        
+        [self setRequests:[[NSMutableDictionary alloc] init]];
+        [self setAuthRequests:[[NSMutableDictionary alloc] init]];
+        [self setIpBlackList:[[NSMutableDictionary alloc] init]];
     }
     return self;
 }
@@ -247,6 +274,118 @@
     NSString *applicationSupportDirectory = [paths firstObject];
     NSURL *fileURL = [[[NSURL fileURLWithPath:applicationSupportDirectory] URLByAppendingPathComponent:@"AMMusicServer"] URLByAppendingPathComponent:name];
     return fileURL;
+}
+
+-(int)logRequestFromIP:(NSString *)ipAddress
+          inDictionary:(NSMutableDictionary *)dictionary
+           withCounter:(int *)counter
+                maxAge:(int)maxAge
+{
+    int rate;
+    @synchronized(dictionary)
+    {
+        AMRequestHistory *recentRequest;
+        int currentTime = (int)[[NSDate date] timeIntervalSince1970];
+        
+        if ([dictionary objectForKey:ipAddress])
+        {
+            recentRequest = [dictionary objectForKey:ipAddress];
+            if (currentTime > recentRequest->lastInterval + 60)
+            {
+                recentRequest->lastInterval = currentTime;
+                recentRequest->count = 1;
+            }
+            else
+            {
+                recentRequest->count++;
+            }
+        }
+        else
+        {
+            recentRequest = [[AMRequestHistory alloc] init];
+            recentRequest->lastInterval = currentTime;
+            recentRequest->count = 1;
+            [dictionary setValue:recentRequest forKey:ipAddress];
+        }
+        rate = recentRequest->count;
+    }
+    [self removeOldEntriesForRequestDictionary:dictionary withCounter:counter olderThan:maxAge];
+    
+    return rate;
+}
+
+-(void)removeOldEntriesForRequestDictionary:(NSMutableDictionary *)dictionary
+                         withCounter:(int *)counter
+                           olderThan:(int)interval
+{
+    int timeBeforeInterval = (int)[[NSDate date] timeIntervalSince1970] - interval;
+    if (*counter < timeBeforeInterval)
+    {
+        @synchronized(dictionary)
+        {
+            [[dictionary copy] enumerateKeysAndObjectsUsingBlock: ^(id key, AMRequestHistory *recentRequest, BOOL *stop) {
+                if (recentRequest->lastInterval < timeBeforeInterval)
+                {
+                    [dictionary removeObjectForKey:key];
+                }
+            }];
+        }
+        *counter = (int)[[NSDate date] timeIntervalSince1970];
+    }
+}
+
+-(BOOL)doesRequestDictionaryContainIP:(NSString *)ipAddress
+                         inDictionary:(NSMutableDictionary *)dictionary
+                          withCounter:(int *)counter
+                               maxAge:(int)maxAge
+{
+    @synchronized(dictionary)
+    {
+        [self removeOldEntriesForRequestDictionary:dictionary
+                                       withCounter:counter
+                                         olderThan:maxAge];
+        
+        return ([dictionary objectForKey:ipAddress] != nil);
+    }
+}
+
+-(void)auditFailedAuthFromIP:(NSString *)ipAddress
+{
+    int rate = [self logRequestFromIP:ipAddress
+                         inDictionary:[self authRequests]
+                          withCounter:&(self->authRequestsCounter)
+                               maxAge:REQUEST_BLACKLIST_AGE];
+    if (rate > 2)
+    {
+        [self logRequestFromIP:ipAddress
+                  inDictionary:[self ipBlackList]
+                   withCounter:&(self->ipBlackListCounter)
+                        maxAge:REQUEST_BLACKLIST_AGE];
+    }
+}
+
+-(void)auditRequestFromIP:(NSString *)ipAddress
+{
+    int rate = [self logRequestFromIP:ipAddress
+                         inDictionary:[self requests]
+                          withCounter:&(self->requestsCounter)
+                               maxAge:REQUEST_BLACKLIST_AGE];
+    if (rate > 60)
+    {
+        [self logRequestFromIP:ipAddress
+                  inDictionary:[self ipBlackList]
+                   withCounter:&(self->ipBlackListCounter)
+                        maxAge:REQUEST_BLACKLIST_AGE];
+    }
+}
+
+-(BOOL)ipAddressIsBlackListed:(NSString *)ipAddress
+{
+    BOOL test = [self doesRequestDictionaryContainIP:ipAddress
+                                   inDictionary:[self ipBlackList]
+                                    withCounter:&(self->ipBlackListCounter)
+                                         maxAge:REQUEST_BLACKLIST_AGE];
+    return test;
 }
 
 @end

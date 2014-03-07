@@ -8,13 +8,13 @@
 
 #import "AMHTTPAsyncJSONResponse.h"
 #import "AMJSONResponder.h"
-#import <CocoaHTTPServer/HTTPConnection.h>
+#import "AMHTTPConnection.h"
 
 @implementation AMHTTPAsyncJSONResponse
 
 -(id)initWithRequest:(NSData *)request
        JSONResponder:(AMJSONResponder *)responder
-          Connection:(HTTPConnection *)parent
+          Connection:(AMHTTPConnection *)parent
 {
     self = [super init];
     if (self)
@@ -33,7 +33,8 @@
             
             isSuccessful = [responder handleRequest:request
                                       responseData:&data
-                                      responseCode:&code];
+                                      responseCode:&code
+                                      connectedHost:[parent connectedHost]];
             
             isCompleted = YES;
             responseData = data;

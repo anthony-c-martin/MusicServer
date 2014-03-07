@@ -38,7 +38,7 @@
 		00DAE0E7182545D5007B6ABC /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00DAE0E6182545D5007B6ABC /* iTunesLibrary.framework */; };
 		00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */; };
 		00E192F318BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E192F218BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist */; };
-		00E192F618BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192F518BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m */; };
+		00E192F618BD3B6A00B5A8D5 /* AMMusicServerActiveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192F518BD3B6A00B5A8D5 /* AMMusicServerActiveData.m */; };
 		00F6DA1218BC36B90036F43F /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
 		00F6DA1318BC36BC0036F43F /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6D9FD18BC36920036F43F /* CocoaAsyncSocket.framework */; };
 		00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
@@ -232,8 +232,8 @@
 		00E192E318BD2B1500B5A8D5 /* AMPersistentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMPersistentData.h; sourceTree = "<group>"; };
 		00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMPersistentData.m; sourceTree = "<group>"; };
 		00E192F218BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.acm.AMMusicServer.plist; sourceTree = "<group>"; };
-		00E192F418BD3B6A00B5A8D5 /* AMMusicServerPersistentData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMusicServerPersistentData.h; sourceTree = "<group>"; };
-		00E192F518BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMusicServerPersistentData.m; sourceTree = "<group>"; };
+		00E192F418BD3B6A00B5A8D5 /* AMMusicServerActiveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMusicServerActiveData.h; sourceTree = "<group>"; };
+		00E192F518BD3B6A00B5A8D5 /* AMMusicServerActiveData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMusicServerActiveData.m; sourceTree = "<group>"; };
 		00F6D9F218BC36920036F43F /* CocoaAsyncSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket.xcodeproj; path = MusicServer/Frameworks/CocoaHTTPServerFramework/Frameworks/CocoaAsyncSocket/CocoaAsyncSocket.xcodeproj; sourceTree = "<group>"; };
 		00F6DA0218BC36A40036F43F /* CocoaLumberjack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaLumberjack.xcodeproj; path = MusicServer/Frameworks/CocoaHTTPServerFramework/Frameworks/CocoaAsyncSocket/Frameworks/CocoaLumberjack/CocoaLumberjack.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -461,8 +461,8 @@
 		00FBC6EA18BE871A0023E4C5 /* PersistentData */ = {
 			isa = PBXGroup;
 			children = (
-				00E192F418BD3B6A00B5A8D5 /* AMMusicServerPersistentData.h */,
-				00E192F518BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m */,
+				00E192F418BD3B6A00B5A8D5 /* AMMusicServerActiveData.h */,
+				00E192F518BD3B6A00B5A8D5 /* AMMusicServerActiveData.m */,
 				00E192E318BD2B1500B5A8D5 /* AMPersistentData.h */,
 				00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */,
 			);
@@ -684,7 +684,7 @@
 				0050CC8B18208ADA006D6247 /* main.m in Sources */,
 				00DAE0E5182542EC007B6ABC /* AMAPIHandlerITunes.m in Sources */,
 				0050562418BBFBBD0011E0B1 /* AMHTTPConnection.m in Sources */,
-				00E192F618BD3B6A00B5A8D5 /* AMMusicServerPersistentData.m in Sources */,
+				00E192F618BD3B6A00B5A8D5 /* AMMusicServerActiveData.m in Sources */,
 				00445B561826F98000174020 /* AMAudioConverter.mm in Sources */,
 				00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */,
 				00CBBCF318C33C440063DBF6 /* AMJSONITunesResponder.m in Sources */,

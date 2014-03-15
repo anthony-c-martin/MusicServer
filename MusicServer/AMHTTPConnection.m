@@ -10,64 +10,10 @@
 #import "AMJSONITunesResponder.h"
 #import "AMMusicServerActiveData.h"
 #import "AMHTTPAsyncJSONResponse.h"
+#import "AMHTTPErrorResponse.h"
 #import <CocoaHTTPServer/HTTPMessage.h>
-#import <CocoaHTTPServer/HTTPResponse.h>
-#import <CocoaHTTPServer/HTTPDataResponse.h>
 #import <CocoaHTTPServer/HTTPAsyncFileResponse.h>
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
-
-@interface AMHTTPErrorResponse : NSObject <HTTPResponse>
-{
-    NSInteger statusCode;
-}
-
--(id) initWithCode:(NSNumber *)code;
--(NSInteger) status;
-
-@end
-
-@implementation AMHTTPErrorResponse
-
--(id) initWithCode:(NSNumber *)code;
-{
-	if((self = [super init]))
-	{
-        statusCode = [code integerValue];
-	}
-	return self;
-}
-
--(NSInteger) status
-{
-    return statusCode;
-}
-
--(UInt64) contentLength
-{
-    return 0;
-}
-
--(UInt64) offset
-{
-    return 0;
-}
-
--(void) setOffset:(UInt64)offset
-{
-    
-}
-
--(NSData *) readDataOfLength:(NSUInteger)length
-{
-    return nil;
-}
-
--(BOOL) isDone
-{
-    return YES;
-}
-
-@end
 
 @implementation AMHTTPConnection
 

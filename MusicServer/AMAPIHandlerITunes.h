@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "./AMJSONAPIDataObjects.h"
+#import "AMAPIDataResponder.h"
 
 @interface AMAPIHandlerITunes : NSObject<AMAPIDataResponder>
 

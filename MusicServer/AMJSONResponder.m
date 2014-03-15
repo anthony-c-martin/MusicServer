@@ -8,7 +8,9 @@
 
 #import "AMJSONResponder.h"
 #import "AMJSONAPIDataObjects.h"
+#import "AMAPIDataResponder.h"
 #import "AMMusicServerActiveData.h"
+#import "AMAPIAuthenticationDataResponder.h"
 
 @implementation AMJSONResponder
 

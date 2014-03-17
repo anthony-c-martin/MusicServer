@@ -10,6 +10,7 @@
 #import "AMJSONAPIDataObjects.h"
 
 @protocol AMAPIDataResponder <NSObject>
+
 -(BOOL) getTrackByID:(NSString *)request
             Response:(AMAPIITTrack **)response;
 
@@ -57,4 +58,5 @@
                  Response:(NSArray **)response
                     Start:(NSNumber *)start
                     Limit:(NSNumber *)limit;
+
 @end

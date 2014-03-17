@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMJSONAPIDataObjects.h"
 
 @protocol AMAPIAuthenticationDataResponder <NSObject>
+
 -(BOOL) getSession:(AMAPIGetSessionRequest *)request
           response:(AMAPIGetSessionResponse **)response;
 
@@ -17,4 +19,5 @@
 
 -(BOOL) validateSession:(NSString *)Session
                  APIKey:(NSString *)APIKey;
+
 @end

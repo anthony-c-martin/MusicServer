@@ -6,9 +6,7 @@
 //  Copyright (c) 2014 Anthony Martin. All rights reserved.
 //
 
-#import "AMPersistentData.h"
-
-@interface AMMusicServerActiveData : AMPersistentData
+@interface AMMusicServerActiveData : NSObject
 
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *password;

@@ -13,12 +13,11 @@
 
 @interface AMJSONResponder : NSObject
 
-@property (nonatomic, retain) id<AMAPIDataResponder> Delegate;
-@property (nonatomic, retain) id<AMAPIAuthenticationDataResponder> AuthDelegate;
-@property (nonatomic, retain) NSMutableDictionary *activeTokens;
-@property (nonatomic, retain) NSMutableDictionary *activeSessions;
+@property (nonatomic, retain) id<AMAPIDataResponder> delegate;
+@property (nonatomic, retain) id<AMAPIAuthenticationDataResponder> authDelegate;
 
--(id) initWithDelegate:(id<AMAPIDataResponder>)delegate;
+-(id) initWithDelegate:(id<AMAPIDataResponder>)delegate
+          authDelegate:(id<AMAPIAuthenticationDataResponder>)authDelegate;
 
 -(BOOL) handleRequest:(NSData *)data
          responseData:(NSData **)responseData

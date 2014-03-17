@@ -8,6 +8,7 @@
 
 #import "AMJSONITunesResponder.h"
 #import "AMAPIHandlerITunes.h"
+#import "AMAuthenticationHandler.h"
 
 @interface AMJSONITunesResponder()
 
@@ -19,7 +20,8 @@
 
 -(id) init
 {
-    self = [super initWithDelegate:[AMAPIHandlerITunes sharedInstance]];
+    self = [super initWithDelegate:[AMAPIHandlerITunes sharedInstance]
+                      authDelegate:[[AMAuthenticationHandler alloc] init]];
     if (self)
     {
         

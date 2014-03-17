@@ -7,6 +7,7 @@
 //
 
 #import "AMMusicServerActiveData.h"
+#import "AMPersistentData.h"
 
 #define AMDefaultUsername @"username"
 #define AMDefaultPassword @"password"
@@ -23,12 +24,14 @@
     int requestsCounter;
     int authRequestsCounter;
     int ipBlackListCounter;
+    
 }
 
 @property (nonatomic, retain) NSMutableArray *cachedTracks;
 @property (nonatomic, retain) NSMutableDictionary *requests;
 @property (nonatomic, retain) NSMutableDictionary *authRequests;
 @property (nonatomic, retain) NSMutableDictionary *ipBlackList;
+@property (nonatomic, retain) AMPersistentData *persistentData;
 
 @end
 
@@ -68,12 +71,13 @@
 
 -(id)init
 {
-    self = [super initWithPlist:@"com.acm.AMMusicServer"];
+    self = [super init];
     if (self)
     {
         [self setRequests:[[NSMutableDictionary alloc] init]];
         [self setAuthRequests:[[NSMutableDictionary alloc] init]];
         [self setIpBlackList:[[NSMutableDictionary alloc] init]];
+        [self setPersistentData:[[AMPersistentData alloc] initWithPlist:@"com.acm.AMMusicServer"]];
     }
     return self;
 }
@@ -81,14 +85,14 @@
 -(void)setUsername:(NSString *)value
 {
     username = [NSString stringWithString:value];
-    [self setString:username WithKey:@"Username"];
+    [[self persistentData] setString:username WithKey:@"Username"];
 }
 
 -(NSString *)username
 {
     if (!username)
     {
-        username = [NSString stringWithString:[self getStringWithKey:@"Username"]];
+        username = [NSString stringWithString:[[self persistentData] getStringWithKey:@"Username"]];
         if (!username)
         {
             [self setUsername:AMDefaultUsername];
@@ -100,14 +104,14 @@
 -(void)setPassword:(NSString *)value
 {
     password = [NSString stringWithString:value];
-    [self setString:password WithKey:@"Password"];
+    [[self persistentData] setString:password WithKey:@"Password"];
 }
 
 -(NSString *)password
 {
     if (!password)
     {
-        password = [NSString stringWithString:[self getStringWithKey:@"Password"]];
+        password = [NSString stringWithString:[[self persistentData] getStringWithKey:@"Password"]];
         if (!password)
         {
             [self setPassword:AMDefaultPassword];
@@ -119,14 +123,14 @@
 -(void)setApiKey:(NSString *)value
 {
     apiKey = [NSString stringWithString:value];
-    [self setString:apiKey WithKey:@"APIKey"];
+    [[self persistentData] setString:apiKey WithKey:@"APIKey"];
 }
 
 -(NSString *)apiKey
 {
     if (!apiKey)
     {
-        apiKey = [NSString stringWithString:[self getStringWithKey:@"APIKey"]];
+        apiKey = [NSString stringWithString:[[self persistentData] getStringWithKey:@"APIKey"]];
         if (!apiKey)
         {
             [self setApiKey:AMDefaultAPIKey];
@@ -138,14 +142,14 @@
 -(void)setMaxSessions:(NSNumber *)value
 {
     maxSessions = value;
-    [self setNumber:maxSessions WithKey:@"MaxSessions"];
+    [[self persistentData] setNumber:maxSessions WithKey:@"MaxSessions"];
 }
 
 -(NSNumber *)maxSessions
 {
     if (!maxSessions)
     {
-        maxSessions = [self getNumberWithKey:@"MaxSessions"];
+        maxSessions = [[self persistentData] getNumberWithKey:@"MaxSessions"];
         if (!maxSessions)
         {
             [self setMaxSessions:[NSNumber numberWithInt:AMDefaultMaxSessions]];
@@ -157,14 +161,14 @@
 -(void)setMaxCachedTracks:(NSNumber *)value
 {
     maxCachedTracks = value;
-    [self setNumber:maxCachedTracks WithKey:@"MaxCachedTracks"];
+    [[self persistentData] setNumber:maxCachedTracks WithKey:@"MaxCachedTracks"];
 }
 
 -(NSNumber *)maxCachedTracks
 {
     if (!maxCachedTracks)
     {
-        maxCachedTracks = [self getNumberWithKey:@"MaxCachedTracks"];
+        maxCachedTracks = [[self persistentData] getNumberWithKey:@"MaxCachedTracks"];
         if (!maxCachedTracks)
         {
             [self setMaxCachedTracks:[NSNumber numberWithInt:AMDefaultMaxCachedTracks]];
@@ -176,14 +180,14 @@
 -(void)setUseAlbumArt:(NSNumber *)value
 {
     useAlbumArt = value;
-    [self setNumber:useAlbumArt WithKey:@"UseAlbumArt"];
+    [[self persistentData] setNumber:useAlbumArt WithKey:@"UseAlbumArt"];
 }
 
 -(NSNumber *)useAlbumArt
 {
     if (!useAlbumArt)
     {
-        useAlbumArt = [self getNumberWithKey:@"UseAlbumArt"];
+        useAlbumArt = [[self persistentData] getNumberWithKey:@"UseAlbumArt"];
         if (!useAlbumArt)
         {
             [self setUseAlbumArt:[NSNumber numberWithInt:AMDefaultUseAlbumArt]];
@@ -194,7 +198,7 @@
 
 -(void)saveCachedTracks
 {
-    [self setArray:cachedTracks WithKey:@"CachedTracks"];
+    [[self persistentData] setArray:cachedTracks WithKey:@"CachedTracks"];
 }
 
 -(void)setCachedTracks:(NSMutableArray *)value
@@ -207,7 +211,7 @@
 {
     if (!cachedTracks)
     {
-        cachedTracks = [NSMutableArray arrayWithArray:[self getArrayWithKey:@"CachedTracks"]];
+        cachedTracks = [NSMutableArray arrayWithArray:[[self persistentData] getArrayWithKey:@"CachedTracks"]];
         if (!cachedTracks)
         {
             [self setCachedTracks:[[NSMutableArray alloc] init]];

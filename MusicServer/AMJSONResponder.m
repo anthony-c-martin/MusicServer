@@ -7,7 +7,6 @@
 //
 
 #import "AMJSONResponder.h"
-#import "AMJSONAPIDataObjects.h"
 #import "AMAPIDataResponder.h"
 #import "AMMusicServerActiveData.h"
 #import "AMAPIAuthenticationDataResponder.h"
@@ -15,110 +14,21 @@
 @implementation AMJSONResponder
 
 -(id) initWithDelegate:(id<AMAPIDataResponder>)delegate
+          authDelegate:(id<AMAPIAuthenticationDataResponder>)authDelegate
 {
     self = [super init];
     if (self)
     {
         [self setDelegate:delegate];
-        [self setAuthDelegate:(id <AMAPIAuthenticationDataResponder>)self];
-        [self setActiveSessions:[[NSMutableDictionary alloc] init]];
-        [self setActiveTokens:[[NSMutableDictionary alloc] init]];
+        [self setAuthDelegate:authDelegate];
     }
     return self;
-}
-
--(BOOL) getSession:(AMAPIGetSessionRequest *)request
-        response:(AMAPIGetSessionResponse **)response
-{
-    @synchronized(self)
-    {
-        [self removeStaleTokens];
-        
-        *response = [[AMAPIGetSessionResponse alloc] init];
-        __block BOOL found = NO;
-        NSMutableArray *tokens = [[self activeTokens] objectForKey:[request APIKey]];
-        [tokens enumerateObjectsUsingBlock:^(NSArray *token, NSUInteger idx, BOOL *stop) {
-            if ([[request Token] isEqualTo:[token objectAtIndex:0]])
-            {
-                found = YES;
-                *stop = YES;
-            }
-        }];
-        if (!found)
-        {
-            return NO;
-        }
-        
-        NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@:%@",
-                                                     [request Token],
-                                                     [[AMMusicServerActiveData sharedInstance] username],
-                                                     [[AMMusicServerActiveData sharedInstance] password],
-                                                     [request APIKey],
-                                                     [request Token]]];
-        
-        if ([MD5 isEqualTo:[request Authentication]])
-        {
-            [*response setSession:[AMJSONAPIData randomAlphanumericString]];
-            [[self activeSessions] setObject:[request APIKey] forKey:[*response Session]];
-            return YES;
-        }
-        return NO;
-    }
 }
 
 -(BOOL) validateSession:(NSString *)Session
                  APIKey:(NSString *)APIKey
 {
-    @synchronized(self)
-    {
-        return ([[self activeSessions] objectForKey:Session]
-                && [APIKey isEqualTo:[[self activeSessions] objectForKey:Session]]);
-    }
-}
-
--(BOOL) getToken:(AMAPIGetTokenRequest *)request
-          response:(AMAPIGetTokenResponse **)response
-{
-    @synchronized(self)
-    {
-        [self removeStaleTokens];
-        
-        *response = [[AMAPIGetTokenResponse alloc] init];
-        [*response setToken:[AMJSONAPIData randomAlphanumericString]];
-        
-        if (![[self activeTokens] objectForKey:[request APIKey]])
-        {
-            [[self activeTokens] setObject:[[NSMutableArray alloc] init] forKey:[request APIKey]];
-        }
-        
-        NSMutableArray *tokenArray = [[self activeTokens] objectForKey:[request APIKey]];
-        NSDate *expiry = [[NSDate date] dateByAddingTimeInterval:3600];
-        [tokenArray addObject:[NSArray arrayWithObjects:[*response Token], expiry, nil]];
-        return YES;
-    }
-}
-
--(void) removeStaleTokens
-{
-    @synchronized(self)
-    {
-        for (id key in [self activeTokens])
-        {
-            NSMutableArray *tokens = [[self activeTokens] objectForKey:key];
-            [tokens enumerateObjectsUsingBlock:^(NSArray *token, NSUInteger idx, BOOL *stop) {
-                NSDate *expiryDate = [token objectAtIndex:1];
-                if ([expiryDate compare:[NSDate date]] == NSOrderedAscending)
-                {
-                    [tokens removeObjectAtIndex:idx];
-                }
-            }];
-            
-            if (![tokens count])
-            {
-                [[self activeTokens] removeObjectForKey:key];
-            }
-        }
-    }
+    return [[self authDelegate] validateSession:Session APIKey:APIKey];
 }
  
 -(BOOL) handleRequest:(NSData *)data
@@ -166,7 +76,7 @@
         {
             NSString *session = [dictionary objectForKey:@"Session"];
             NSString *apiKey = [dictionary objectForKey:@"APIKey"];
-            validated = ([[self AuthDelegate] validateSession:session APIKey:apiKey]);
+            validated = ([[self authDelegate] validateSession:session APIKey:apiKey]);
         }
         if (!validated)
         {
@@ -179,21 +89,21 @@
     switch (command)
     {
         case AMJSONCommandGetTrackByID:
-            if ([[self Delegate] respondsToSelector:@selector(getTrackByID:Response:)])
+            if ([[self delegate] respondsToSelector:@selector(getTrackByID:Response:)])
             {
                 AMAPIITTrack *output;
                 AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
-                success = [[self Delegate] getTrackByID:[request String]
+                success = [[self delegate] getTrackByID:[request String]
                                                Response:&output];
                 responseData = (AMJSONAPIData *)output;
             }
             break;
         case AMJSONCommandGetTracks:
-            if ([[self Delegate] respondsToSelector:@selector(getTracksResponse:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getTracksResponse:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data];
-                success = [[self Delegate] getTracksResponse:&output
+                success = [[self delegate] getTracksResponse:&output
                                                        Start:[request Start]
                                                        Limit:[request Limit]];
                 responseData = [[AMAPIITTracks alloc] init];
@@ -201,11 +111,11 @@
             }
             break;
         case AMJSONCommandGetAlbums:
-            if ([[self Delegate] respondsToSelector:@selector(getAlbumsResponse:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getAlbumsResponse:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data];
-                success = [[self Delegate] getAlbumsResponse:&output
+                success = [[self delegate] getAlbumsResponse:&output
                                                        Start:[request Start]
                                                        Limit:[request Limit]];
                 responseData = [[AMAPIITAlbums alloc] init];
@@ -213,11 +123,11 @@
             }
             break;
         case AMJSONCommandGetArtists:
-            if ([[self Delegate] respondsToSelector:@selector(getArtistsResponse:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getArtistsResponse:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data];
-                success = [[self Delegate] getArtistsResponse:&output
+                success = [[self delegate] getArtistsResponse:&output
                                                         Start:[request Start]
                                                         Limit:[request Limit]];
                 responseData = [[AMAPIITArtists alloc] init];
@@ -225,11 +135,11 @@
             }
             break;
         case AMJSONCommandSearchTracks:
-            if ([[self Delegate] respondsToSelector:@selector(getTracksBySearchString:Response:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getTracksBySearchString:Response:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
-                success = [[self Delegate] getTracksBySearchString:[request String]
+                success = [[self delegate] getTracksBySearchString:[request String]
                                                           Response:&output
                                                              Start:[request Start]
                                                              Limit:[request Limit]];
@@ -238,12 +148,12 @@
             }
             break;
         case AMJSONCommandSearchAlbums:
-            if ([[self Delegate] respondsToSelector:@selector(getAlbumsBySearchString:Response:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getAlbumsBySearchString:Response:Start:Limit:)])
             {
                 
                 NSArray *output;
                 AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
-                success = [[self Delegate] getAlbumsBySearchString:[request String]
+                success = [[self delegate] getAlbumsBySearchString:[request String]
                                                           Response:&output
                                                              Start:[request Start]
                                                              Limit:[request Limit]];
@@ -252,11 +162,11 @@
             }
             break;
         case AMJSONCommandSearchArtists:
-            if ([[self Delegate] respondsToSelector:@selector(getArtistsBySearchString:Response:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getArtistsBySearchString:Response:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
-                success = [[self Delegate] getArtistsBySearchString:[request String]
+                success = [[self delegate] getArtistsBySearchString:[request String]
                                                           Response:&output
                                                              Start:[request Start]
                                                              Limit:[request Limit]];
@@ -265,11 +175,11 @@
             }
             break;
         case AMJSONCommandGetTracksByArtist:
-            if ([[self Delegate] respondsToSelector:@selector(getTracksByArtist:Response:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getTracksByArtist:Response:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data];
-                success = [[self Delegate] getTracksByArtist:[request ID]
+                success = [[self delegate] getTracksByArtist:[request ID]
                                                     Response:&output
                                                        Start:[request Start]
                                                        Limit:[request Limit]];
@@ -278,11 +188,11 @@
             }
             break;
         case AMJSONCommandGetTracksByAlbum:
-            if ([[self Delegate] respondsToSelector:@selector(getTracksByAlbum:Response:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getTracksByAlbum:Response:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data];
-                success = [[self Delegate] getTracksByAlbum:[request ID]
+                success = [[self delegate] getTracksByAlbum:[request ID]
                                                    Response:&output
                                                       Start:[request Start]
                                                       Limit:[request Limit]];
@@ -291,11 +201,11 @@
             }
             break;
         case AMJSONCommandGetAlbumsByArtist:
-            if ([[self Delegate] respondsToSelector:@selector(getAlbumsByArtist:Response:Start:Limit:)])
+            if ([[self delegate] respondsToSelector:@selector(getAlbumsByArtist:Response:Start:Limit:)])
             {
                 NSArray *output;
                 AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data];
-                success = [[self Delegate] getAlbumsByArtist:[request ID]
+                success = [[self delegate] getAlbumsByArtist:[request ID]
                                                     Response:&output
                                                        Start:[request Start]
                                                        Limit:[request Limit]];
@@ -304,24 +214,24 @@
             }
             break;
         case AMJSONCommandGetToken:
-            if ([[self AuthDelegate] respondsToSelector:@selector(getToken:response:)])
+            if ([[self authDelegate] respondsToSelector:@selector(getToken:response:)])
             {
                 AMAPIGetTokenRequest *request = [[AMAPIGetTokenRequest alloc] initFromData:data];
                 AMAPIGetTokenResponse *output;
                 
-                success = [self getToken:request
+                success = [[self authDelegate] getToken:request
                                 response:&output];
                 
                 responseData = (AMJSONAPIData *)output;
             }
             break;
         case AMJSONCommandGetSession:
-            if ([[self AuthDelegate] respondsToSelector:@selector(getSession:response:)])
+            if ([[self authDelegate] respondsToSelector:@selector(getSession:response:)])
             {
                 AMAPIGetSessionRequest *request = [[AMAPIGetSessionRequest alloc] initFromData:data];
                 AMAPIGetSessionResponse *output;
                 
-                success = [self getSession:request
+                success = [[self authDelegate] getSession:request
                                   response:&output];
                 
                 if (!success) {
@@ -335,11 +245,11 @@
             }
             break;
         case AMJSONCommandConvertTrackByID:
-            if ([[self Delegate] respondsToSelector:@selector(convertTrackByID:Response:)])
+            if ([[self delegate] respondsToSelector:@selector(convertTrackByID:Response:)])
             {
                 AMAPIConvertTrackResponse *output;
                 AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
-                success = [[self Delegate] convertTrackByID:[request String]
+                success = [[self delegate] convertTrackByID:[request String]
                                                    Response:&output];
                 responseData = (AMJSONAPIData *)output;
             }

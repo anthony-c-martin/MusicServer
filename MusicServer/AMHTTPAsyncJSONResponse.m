@@ -21,8 +21,8 @@
     {
         connection = parent;
         requestQueue = dispatch_queue_create("AMHTTPAsyncJSONResponse", NULL);
-        isCompleted = NO;
         isSuccessful = NO;
+        isDataLoaded = NO;
         responseOffset = 0;
         responseData = [[NSData alloc] init];
         responseCode = [[NSNumber alloc] init];
@@ -36,7 +36,7 @@
                                       responseCode:&code
                                       connectedHost:[parent connectedHost]];
             
-            isCompleted = YES;
+            isDataLoaded = YES;
             responseData = data;
             responseCode = code;
             [connection responseHasAvailableData:self];
@@ -70,7 +70,7 @@
         void *bytes = (void *)([responseData bytes] + responseOffset);
         responseOffset += length;
 		
-		return [NSData dataWithBytesNoCopy:bytes length:length freeWhenDone:NO];
+        return [NSData dataWithBytesNoCopy:bytes length:length freeWhenDone:NO];
 	}
     
     return nil;
@@ -78,12 +78,12 @@
 
 -(BOOL)isDone
 {
-    return isCompleted;
+    return (responseOffset == [responseData length]);
 }
 
 -(BOOL)delayResponseHeaders
 {
-    return !isCompleted;
+    return !isDataLoaded;
 }
 
 -(NSInteger)status

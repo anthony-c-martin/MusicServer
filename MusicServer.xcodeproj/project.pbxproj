@@ -550,6 +550,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Anthony Martin";
 				TargetAttributes = {
+					0050CC7A18208ADA006D6247 = {
+						DevelopmentTeam = DD9R5N89H9;
+					};
 					0050CC9B18208ADA006D6247 = {
 						TestTargetID = 0050CC7A18208ADA006D6247;
 					};
@@ -873,6 +876,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -884,6 +888,7 @@
 				INFOPLIST_FILE = "MusicServer/MusicServer-Info.plist";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6353E253-9110-46EE-8617-4564A80E248E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -896,6 +901,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -907,6 +913,7 @@
 				INFOPLIST_FILE = "MusicServer/MusicServer-Info.plist";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6353E253-9110-46EE-8617-4564A80E248E";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

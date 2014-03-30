@@ -17,7 +17,7 @@
 	dispatch_queue_t requestQueue;
 	HTTPConnection *connection;
     BOOL isSuccessful;
-    BOOL isCompleted;
+    BOOL isDataLoaded;
 	UInt64 responseOffset;
     NSData *responseData;
     NSNumber *responseCode;

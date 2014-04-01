@@ -51,7 +51,6 @@
     self = [super initFromData:data];
     if (self)
     {
-        if (![self APIKey]) [self setAPIKey:@""];
         if (![self Token]) [self setToken:@""];
         if (![self Authentication]) [self setAuthentication:@""];
     }
@@ -65,7 +64,7 @@
     self = [super initFromData:data];
     if (self)
     {
-        if (![self APIKey]) [self setAPIKey:@""];
+        
     }
     return self;
 }
@@ -76,6 +75,7 @@
 {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             @"Session", @"Session",
+            @"Secret", @"Secret",
             nil];
 }
 @end
@@ -95,6 +95,15 @@
     return [NSDictionary dictionaryWithObjectsAndKeys:
             @"Result", @"Result",
             @"FileName", @"FileName",
+            nil];
+}
+@end
+
+@implementation AMAPIScrobbleTrackResponse
+-(NSDictionary *) propertiesToDictionaryEntriesMapping
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            @"Success", @"Success",
             nil];
 }
 @end

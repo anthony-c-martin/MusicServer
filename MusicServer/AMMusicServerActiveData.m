@@ -8,13 +8,14 @@
 
 #import "AMMusicServerActiveData.h"
 #import "AMPersistentData.h"
+#import "AMJSONAPIData.h"
 
 #define AMDefaultUsername @"username"
-#define AMDefaultPassword @"password"
-#define AMDefaultAPIKey @"iv78vu87gyv879Gf8YIyrTDLUyfpocI2"
+#define AMDefaultPassword @"75476581dd1db581d18afc1cfcd52ecb" //this is 'password', hashed against the username
 #define AMDefaultMaxSessions 5
 #define AMDefaultMaxCachedTracks 100
 #define AMDefaultUseAlbumArt 0
+#define AMMusicServerPlistName @"com.acm.AMMusicServer"
 
 #define REQUEST_BLACKLIST_AGE 600
 
@@ -24,7 +25,6 @@
     int requestsCounter;
     int authRequestsCounter;
     int ipBlackListCounter;
-    
 }
 
 @property (nonatomic, retain) NSMutableArray *cachedTracks;
@@ -50,7 +50,6 @@
 
 @synthesize username;
 @synthesize password;
-@synthesize apiKey;
 @synthesize maxSessions;
 @synthesize maxCachedTracks;
 @synthesize cachedTracks;
@@ -58,6 +57,9 @@
 @synthesize requests;
 @synthesize authRequests;
 @synthesize ipBlackList;
+@synthesize lastFMToken;
+@synthesize lastFMSessionKey;
+@synthesize lastFMUsername;
 
 +(AMMusicServerActiveData *)sharedInstance
 {
@@ -77,7 +79,7 @@
         [self setRequests:[[NSMutableDictionary alloc] init]];
         [self setAuthRequests:[[NSMutableDictionary alloc] init]];
         [self setIpBlackList:[[NSMutableDictionary alloc] init]];
-        [self setPersistentData:[[AMPersistentData alloc] initWithPlist:@"com.acm.AMMusicServer"]];
+        [self setPersistentData:[[AMPersistentData alloc] initWithPlist:AMMusicServerPlistName]];
     }
     return self;
 }
@@ -120,23 +122,12 @@
     return password;
 }
 
--(void)setApiKey:(NSString *)value
+-(void)storeCredentials:(NSString *)newUsername password:(NSString *)newPassword
 {
-    apiKey = [NSString stringWithString:value];
-    [[self persistentData] setString:apiKey WithKey:@"APIKey"];
-}
-
--(NSString *)apiKey
-{
-    if (!apiKey)
-    {
-        apiKey = [NSString stringWithString:[[self persistentData] getStringWithKey:@"APIKey"]];
-        if (!apiKey)
-        {
-            [self setApiKey:AMDefaultAPIKey];
-        }
-    }
-    return apiKey;
+    NSString *pwHash = [NSString stringWithFormat:@"%@:%@:%@", newUsername, AMMusicServerPlistName, newPassword];
+    
+    [self setPassword:[AMJSONAPIData CalculateMD5:pwHash]];
+    [self setUsername:newUsername];
 }
 
 -(void)setMaxSessions:(NSNumber *)value
@@ -194,6 +185,39 @@
         }
     }
     return useAlbumArt;
+}
+
+-(void)setLastFMToken:(NSString *)value
+{
+    lastFMToken = value;
+    [[self persistentData] setString:lastFMToken WithKey:@"LastFMToken"];
+}
+
+-(NSString *)lastFMToken
+{
+    return [[self persistentData] getStringWithKey:@"LastFMToken"];
+}
+
+-(void)setLastFMSessionKey:(NSString *)value
+{
+    lastFMSessionKey = value;
+    [[self persistentData] setString:lastFMSessionKey WithKey:@"LastFMSessionKey"];
+}
+
+-(NSString *)lastFMSessionKey
+{
+    return [[self persistentData] getStringWithKey:@"LastFMSessionKey"];
+}
+
+-(void)setLastFMUsername:(NSString *)value
+{
+    lastFMUsername = value;
+    [[self persistentData] setString:lastFMUsername WithKey:@"LastFMUsername"];
+}
+
+-(NSString *)lastFMUsername
+{
+    return [[self persistentData] getStringWithKey:@"LastFMUsername"];
 }
 
 -(void)saveCachedTracks

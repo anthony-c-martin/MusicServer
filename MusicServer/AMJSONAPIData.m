@@ -43,8 +43,7 @@
 
 -(BOOL) validateSignature:(NSDictionary *)dictionary
 {
-    if (![dictionary objectForKey:@"Signature"]
-        || ![dictionary objectForKey:@"APIKey"])
+    if (![dictionary objectForKey:@"Signature"])
     {
         return NO;
     }

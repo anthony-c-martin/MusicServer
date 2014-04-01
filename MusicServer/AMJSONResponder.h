@@ -10,11 +10,13 @@
 
 @protocol AMAPIDataResponder;
 @protocol AMAPIAuthenticationDataResponder;
+@protocol AMAPILastFMResponder;
 
 @interface AMJSONResponder : NSObject
 
 @property (nonatomic, retain) id<AMAPIDataResponder> delegate;
 @property (nonatomic, retain) id<AMAPIAuthenticationDataResponder> authDelegate;
+@property (nonatomic, retain) id<AMAPILastFMResponder> lastFMDelegate;
 
 -(id) initWithDelegate:(id<AMAPIDataResponder>)delegate
           authDelegate:(id<AMAPIAuthenticationDataResponder>)authDelegate;
@@ -24,8 +26,7 @@
          responseCode:(NSNumber **)responseCode
         connectedHost:(NSString *)ipAddress;
 
--(BOOL) validateSession:(NSString *)Session
-                 APIKey:(NSString *)APIKey;
+-(BOOL) validateSession:(NSString *)Session;
 
 -(void) dealloc;
 

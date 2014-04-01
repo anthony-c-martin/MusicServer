@@ -11,7 +11,7 @@
 
 @interface AMAuthenticationHandler : NSObject<AMAPIAuthenticationDataResponder>
 
-@property (nonatomic, retain) NSMutableDictionary *activeTokens;
+@property (nonatomic, retain) NSMutableArray *activeTokens;
 @property (nonatomic, retain) NSMutableDictionary *activeSessions;
 
 @end

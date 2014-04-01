@@ -8,10 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 #import <CocoaHTTPServer/HTTPServer.h>
+#import "PreferencesWindow.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet PreferencesWindow *prefsWindow;
 @property HTTPServer *Server;
+
+-(IBAction)showPrefsWindow:(id)sender;
 
 @end

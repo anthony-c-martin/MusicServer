@@ -130,6 +130,7 @@
         
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
+            break;
             NSImage *artwork = nil;
             if ([[[AMMusicServerActiveData sharedInstance] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
             {
@@ -250,6 +251,7 @@
         [track setAlbum:album];
         [track setArtist:artist];
         [track setDiscNumber:[NSNumber numberWithInteger:[[mediaItem album] discNumber]]];
+        [track setDuration:[NSNumber numberWithInteger:[mediaItem totalTime]]];
         [self getPointer:&track fromSet:trackSet];
         if (![[artist AlbumSet] containsObject:album])
         {

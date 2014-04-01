@@ -27,12 +27,10 @@
 @end
 
 @interface AMAPIGetTokenRequest : AMJSONAPIData
-@property (nonatomic, retain) NSString *APIKey;
 @end
 
 @interface AMAPIGetSessionRequest : AMJSONAPIData
 @property (nonatomic, retain) NSString *Authentication;
-@property (nonatomic, retain) NSString *APIKey;
 @property (nonatomic, retain) NSString *Token;
 @end
 
@@ -42,11 +40,16 @@
 
 @interface AMAPIGetSessionResponse : AMJSONAPIData
 @property (nonatomic, retain) NSString *Session;
+@property (nonatomic, retain) NSString *Secret;
 @end
 
 @interface AMAPIConvertTrackResponse : AMJSONAPIData
 @property (nonatomic, retain) NSString *Result;
 @property (nonatomic, retain) NSString *FileName;
+@end
+
+@interface AMAPIScrobbleTrackResponse: AMJSONAPIData
+@property (nonatomic, assign) Boolean Success;
 @end
 
 @interface AMAPIITTrack : AMJSONAPIData
@@ -55,6 +58,7 @@
 @property (nonatomic, retain) NSString *Location;
 @property (nonatomic, retain) NSNumber *TrackNumber;
 @property (nonatomic, retain) NSNumber *DiscNumber;
+@property (nonatomic, retain) NSNumber *Duration;
 @property (nonatomic, retain) AMAPIITArtist *Artist;
 @property (nonatomic, retain) AMAPIITAlbum *Album;
 @end

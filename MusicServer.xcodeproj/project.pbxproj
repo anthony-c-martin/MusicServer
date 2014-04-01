@@ -12,6 +12,11 @@
 		0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */; };
 		0005BAA01821A59A00C17FA9 /* AMJSONAPIDataObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */; };
 		00245CC118209E2900506730 /* AMJSONResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CC018209E2900506730 /* AMJSONResponder.m */; };
+		00326C8718EA08B300A28AAF /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 00326C8618EA08B300A28AAF /* PreferencesWindow.m */; };
+		00326C8E18EA471D00A28AAF /* LastFMAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00326C8D18EA46E300A28AAF /* LastFMAPI.framework */; };
+		00326C8F18EA473100A28AAF /* LastFMAPI.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 00326C8D18EA46E300A28AAF /* LastFMAPI.framework */; };
+		00326C9618EA4DD300A28AAF /* AMLastFMCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00326C9518EA4DD300A28AAF /* AMLastFMCommunicationManager.m */; };
+		00326C9A18EB65E400A28AAF /* AMMusicServer.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 00326C9918EB65E400A28AAF /* AMMusicServer.p12 */; };
 		0039A33918BC27C700F4B060 /* webroot in Resources */ = {isa = PBXBuildFile; fileRef = 0039A33818BC27B800F4B060 /* webroot */; };
 		00445B561826F98000174020 /* AMAudioConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00445B551826F98000174020 /* AMAudioConverter.mm */; };
 		00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00445B571826F99C00174020 /* AudioToolbox.framework */; };
@@ -43,12 +48,26 @@
 		00E192F618BD3B6A00B5A8D5 /* AMMusicServerActiveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192F518BD3B6A00B5A8D5 /* AMMusicServerActiveData.m */; };
 		00F6DA1218BC36B90036F43F /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
 		00F6DA1318BC36BC0036F43F /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6D9FD18BC36920036F43F /* CocoaAsyncSocket.framework */; };
-		00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
-		00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 00F6D9FD18BC36920036F43F /* CocoaAsyncSocket.framework */; };
-		00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */; };
+		00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
+		00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 00F6D9FD18BC36920036F43F /* CocoaAsyncSocket.framework */; };
+		00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		00326C8C18EA46E300A28AAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00326C8818EA46E300A28AAF /* LastFMAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 000839EB179BC5E200986A94;
+			remoteInfo = LastFMAPI;
+		};
+		00326C9018EA474200A28AAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00326C8818EA46E300A28AAF /* LastFMAPI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 000839EA179BC5E200986A94;
+			remoteInfo = LastFMAPI;
+		};
 		0050561818BBF9BF0011E0B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */;
@@ -164,16 +183,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		00F6DA1818BC37110036F43F /* CopyFiles */ = {
+		00F6DA1818BC37110036F43F /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in CopyFiles */,
-				00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in CopyFiles */,
-				00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in CopyFiles */,
+				00326C8F18EA473100A28AAF /* LastFMAPI.framework in Copy Files */,
+				00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in Copy Files */,
+				00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in Copy Files */,
+				00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -189,6 +210,15 @@
 		0005BA9F1821A59A00C17FA9 /* AMJSONAPIDataObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONAPIDataObjects.m; sourceTree = "<group>"; };
 		00245CBF18209E2900506730 /* AMJSONResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONResponder.h; sourceTree = "<group>"; };
 		00245CC018209E2900506730 /* AMJSONResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONResponder.m; sourceTree = "<group>"; };
+		00326C8518EA08B300A28AAF /* PreferencesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindow.h; sourceTree = "<group>"; };
+		00326C8618EA08B300A28AAF /* PreferencesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindow.m; sourceTree = "<group>"; };
+		00326C8818EA46E300A28AAF /* LastFMAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LastFMAPI.xcodeproj; path = MusicServer/Frameworks/LastFMAPI/LastFMAPI.xcodeproj; sourceTree = "<group>"; };
+		00326C9318EA4A9E00A28AAF /* AMAPILastFMResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPILastFMResponder.h; sourceTree = "<group>"; };
+		00326C9418EA4DD300A28AAF /* AMLastFMCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLastFMCommunicationManager.h; sourceTree = "<group>"; };
+		00326C9518EA4DD300A28AAF /* AMLastFMCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLastFMCommunicationManager.m; sourceTree = "<group>"; };
+		00326C9718EA502B00A28AAF /* AMLastFMAPISecrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMLastFMAPISecrets.h; sourceTree = "<group>"; };
+		00326C9818EA54AE00A28AAF /* AMScrobbleManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMScrobbleManagerDelegate.h; sourceTree = "<group>"; };
+		00326C9918EB65E400A28AAF /* AMMusicServer.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = AMMusicServer.p12; sourceTree = "<group>"; };
 		0039A33818BC27B800F4B060 /* webroot */ = {isa = PBXFileReference; lastKnownFileType = folder; name = webroot; path = MusicServer/GUI/webroot; sourceTree = "<group>"; };
 		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioConverter.h; sourceTree = "<group>"; };
 		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMAudioConverter.mm; sourceTree = "<group>"; };
@@ -255,6 +285,7 @@
 				00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */,
 				00DAE0E7182545D5007B6ABC /* iTunesLibrary.framework in Frameworks */,
 				0050CC7F18208ADA006D6247 /* Cocoa.framework in Frameworks */,
+				00326C8E18EA471D00A28AAF /* LastFMAPI.framework in Frameworks */,
 				0050562818BC0B040011E0B1 /* CocoaHTTPServer.framework in Frameworks */,
 				00F6DA1218BC36B90036F43F /* CocoaLumberjack.framework in Frameworks */,
 				00F6DA1318BC36BC0036F43F /* CocoaAsyncSocket.framework in Frameworks */,
@@ -283,6 +314,25 @@
 			);
 			name = IAModelBase;
 			path = MusicServer/IAModelBase;
+			sourceTree = "<group>";
+		};
+		00326C8918EA46E300A28AAF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00326C8D18EA46E300A28AAF /* LastFMAPI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00326C9218EA4A5B00A28AAF /* LastFM */ = {
+			isa = PBXGroup;
+			children = (
+				00326C9418EA4DD300A28AAF /* AMLastFMCommunicationManager.h */,
+				00326C9518EA4DD300A28AAF /* AMLastFMCommunicationManager.m */,
+				00326C9718EA502B00A28AAF /* AMLastFMAPISecrets.h */,
+				00326C9818EA54AE00A28AAF /* AMScrobbleManagerDelegate.h */,
+			);
+			name = LastFM;
 			sourceTree = "<group>";
 		};
 		00445B5B1826FE0D00174020 /* AudioConversion */ = {
@@ -338,6 +388,7 @@
 				00CBBCF418C35F990063DBF6 /* Security.framework */,
 				00445B5B1826FE0D00174020 /* AudioConversion */,
 				0005BA97182196CC00C17FA9 /* IAModelBase */,
+				00326C8818EA46E300A28AAF /* LastFMAPI.xcodeproj */,
 				00F6DA0218BC36A40036F43F /* CocoaLumberjack.xcodeproj */,
 				00F6D9F218BC36920036F43F /* CocoaAsyncSocket.xcodeproj */,
 				0050560D18BBF9BE0011E0B1 /* CocoaHTTPServer.xcodeproj */,
@@ -363,6 +414,7 @@
 		0050CC8418208ADA006D6247 /* MusicServer */ = {
 			isa = PBXGroup;
 			children = (
+				00326C9218EA4A5B00A28AAF /* LastFM */,
 				00D82E9D18D5AC2C0090E3EB /* Protocols */,
 				00D82E9C18D5AC1F0090E3EB /* Authentication */,
 				00CBBCF018C33C0F0063DBF6 /* JSON */,
@@ -374,6 +426,8 @@
 				0050CC8518208ADA006D6247 /* Supporting Files */,
 				0050CC9618208ADA006D6247 /* Images.xcassets */,
 				0050CC9318208ADA006D6247 /* MainMenu.xib */,
+				00326C8518EA08B300A28AAF /* PreferencesWindow.h */,
+				00326C8618EA08B300A28AAF /* PreferencesWindow.m */,
 			);
 			path = MusicServer;
 			sourceTree = "<group>";
@@ -381,6 +435,7 @@
 		0050CC8518208ADA006D6247 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				00326C9918EB65E400A28AAF /* AMMusicServer.p12 */,
 				00E192F218BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist */,
 				0050CC8618208ADA006D6247 /* MusicServer-Info.plist */,
 				0050CC8718208ADA006D6247 /* InfoPlist.strings */,
@@ -451,6 +506,7 @@
 			children = (
 				009D49A518D4527D006CA309 /* AMAPIAuthenticationDataResponder.h */,
 				009D49A418D450FE006CA309 /* AMAPIDataResponder.h */,
+				00326C9318EA4A9E00A28AAF /* AMAPILastFMResponder.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -509,11 +565,12 @@
 				0050CC7718208ADA006D6247 /* Sources */,
 				0050CC7818208ADA006D6247 /* Frameworks */,
 				0050CC7918208ADA006D6247 /* Resources */,
-				00F6DA1818BC37110036F43F /* CopyFiles */,
+				00F6DA1818BC37110036F43F /* Copy Files */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				00326C9118EA474200A28AAF /* PBXTargetDependency */,
 				00F6DA1718BC36CC0036F43F /* PBXTargetDependency */,
 				00F6DA1518BC36C70036F43F /* PBXTargetDependency */,
 				0050562118BBF9FC0011E0B1 /* PBXTargetDependency */,
@@ -582,6 +639,10 @@
 					ProductGroup = 00F6DA0318BC36A40036F43F /* Products */;
 					ProjectRef = 00F6DA0218BC36A40036F43F /* CocoaLumberjack.xcodeproj */;
 				},
+				{
+					ProductGroup = 00326C8918EA46E300A28AAF /* Products */;
+					ProjectRef = 00326C8818EA46E300A28AAF /* LastFMAPI.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -592,6 +653,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		00326C8D18EA46E300A28AAF /* LastFMAPI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LastFMAPI.framework;
+			remoteRef = 00326C8C18EA46E300A28AAF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		0050561918BBF9BF0011E0B1 /* libCocoaHTTPServer.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -686,6 +754,7 @@
 				0039A33918BC27C700F4B060 /* webroot in Resources */,
 				0050CC8918208ADA006D6247 /* InfoPlist.strings in Resources */,
 				0050CC9718208ADA006D6247 /* Images.xcassets in Resources */,
+				00326C9A18EB65E400A28AAF /* AMMusicServer.p12 in Resources */,
 				00E192F318BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist in Resources */,
 				0050CC8F18208ADA006D6247 /* Credits.rtf in Resources */,
 				0050CC9518208ADA006D6247 /* MainMenu.xib in Resources */,
@@ -723,7 +792,9 @@
 				00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */,
 				00CBBCF318C33C440063DBF6 /* AMJSONITunesResponder.m in Sources */,
 				00445B641826FE0D00174020 /* CAXException.cpp in Sources */,
+				00326C8718EA08B300A28AAF /* PreferencesWindow.m in Sources */,
 				00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */,
+				00326C9618EA4DD300A28AAF /* AMLastFMCommunicationManager.m in Sources */,
 				009D49A318D44F83006CA309 /* AMHTTPErrorResponse.m in Sources */,
 				00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */,
 			);
@@ -740,6 +811,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		00326C9118EA474200A28AAF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LastFMAPI;
+			targetProxy = 00326C9018EA474200A28AAF /* PBXContainerItemProxy */;
+		};
 		0050562118BBF9FC0011E0B1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CocoaHTTPServerOSX;

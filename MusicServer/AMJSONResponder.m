@@ -10,6 +10,8 @@
 #import "AMAPIDataResponder.h"
 #import "AMMusicServerActiveData.h"
 #import "AMAPIAuthenticationDataResponder.h"
+#import "AMLastFMCommunicationManager.h"
+#import "AMAPILastFMResponder.h"
 
 @implementation AMJSONResponder
 
@@ -21,14 +23,14 @@
     {
         [self setDelegate:delegate];
         [self setAuthDelegate:authDelegate];
+        [self setLastFMDelegate:[AMLastFMCommunicationManager sharedInstance]];
     }
     return self;
 }
 
 -(BOOL) validateSession:(NSString *)Session
-                 APIKey:(NSString *)APIKey
 {
-    return [[self authDelegate] validateSession:Session APIKey:APIKey];
+    return [[self authDelegate] validateSession:Session];
 }
  
 -(BOOL) handleRequest:(NSData *)data
@@ -72,11 +74,10 @@
     if (command != AMJSONCommandGetSession && command != AMJSONCommandGetToken)
     {
         BOOL validated = NO;
-        if ([dictionary objectForKey:@"Session"] && [dictionary objectForKey:@"APIKey"])
+        if ([dictionary objectForKey:@"Session"])
         {
             NSString *session = [dictionary objectForKey:@"Session"];
-            NSString *apiKey = [dictionary objectForKey:@"APIKey"];
-            validated = ([[self authDelegate] validateSession:session APIKey:apiKey]);
+            validated = ([[self authDelegate] validateSession:session]);
         }
         if (!validated)
         {
@@ -254,6 +255,24 @@
                 responseData = (AMJSONAPIData *)output;
             }
             break;
+/*
+        case AMJSONCommandLFMScrobbleTrack:
+            if ([[self lastFMDelegate] respondsToSelector:@selector(scrobbleTrackByID:)])
+            {
+                AMAPIScrobbleTrackResponse *output = [[AMAPIScrobbleTrackResponse alloc] init];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
+                [output setSuccess:[[self lastFMDelegate] scrobbleTrackByID:[request String]]];
+                responseData = (AMJSONAPIData *)output;
+            }
+        case AMJSONCommandLFMNowPlayingTrack:
+            if ([[self lastFMDelegate] respondsToSelector:@selector(nowPlayingTrackByID:)])
+            {
+                AMAPIScrobbleTrackResponse *output = [[AMAPIScrobbleTrackResponse alloc] init];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
+                [output setSuccess:[[self lastFMDelegate] nowPlayingTrackByID:[request String]]];
+                responseData = (AMJSONAPIData *)output;
+            }
+*/
         case AMJSONCommandUnknown:
             success = NO;
             break;

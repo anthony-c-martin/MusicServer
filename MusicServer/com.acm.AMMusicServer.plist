@@ -8,8 +8,6 @@
 	<string>username</string>
 	<key>Password</key>
 	<string>password</string>
-	<key>APIKey</key>
-	<string>iv78vu87gyv879Gf8YIyrTDLUyfpocI2</string>
 	<key>MaxSessions</key>
 	<integer>1</integer>
 	<key>MaxCachedTracks</key>

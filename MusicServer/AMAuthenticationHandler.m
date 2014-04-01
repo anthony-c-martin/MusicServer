@@ -19,7 +19,7 @@
     if (self)
     {
         [self setActiveSessions:[[NSMutableDictionary alloc] init]];
-        [self setActiveTokens:[[NSMutableDictionary alloc] init]];
+        [self setActiveTokens:[[NSMutableArray alloc] init]];
     }
     return self;
 }
@@ -33,8 +33,7 @@
         
         *response = [[AMAPIGetSessionResponse alloc] init];
         __block BOOL found = NO;
-        NSMutableArray *tokens = [[self activeTokens] objectForKey:[request APIKey]];
-        [tokens enumerateObjectsUsingBlock:^(NSArray *token, NSUInteger idx, BOOL *stop) {
+        [[self activeTokens] enumerateObjectsUsingBlock:^(NSArray *token, NSUInteger idx, BOOL *stop) {
             if ([[request Token] isEqualTo:[token objectAtIndex:0]])
             {
                 found = YES;
@@ -46,30 +45,28 @@
             return NO;
         }
         
-        NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@:%@",
+        NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@",
                                                      [request Token],
                                                      [[AMMusicServerActiveData sharedInstance] username],
                                                      [[AMMusicServerActiveData sharedInstance] password],
-                                                     [request APIKey],
                                                      [request Token]]];
         
         if ([MD5 isEqualTo:[request Authentication]])
         {
             [*response setSession:[AMJSONAPIData randomAlphanumericString]];
-            [[self activeSessions] setObject:[request APIKey] forKey:[*response Session]];
+            [*response setSecret:[AMJSONAPIData randomAlphanumericString]];
+            [[self activeSessions] setObject:[*response Secret] forKey:[*response Session]];
             return YES;
         }
         return NO;
     }
 }
 
--(BOOL) validateSession:(NSString *)Session
-                 APIKey:(NSString *)APIKey
+-(BOOL) validateSession:(NSString *)Session;
 {
     @synchronized(self)
     {
-        return ([[self activeSessions] objectForKey:Session]
-                && [APIKey isEqualTo:[[self activeSessions] objectForKey:Session]]);
+        return ([[self activeSessions] objectForKey:Session] != nil);
     }
 }
 
@@ -83,14 +80,8 @@
         *response = [[AMAPIGetTokenResponse alloc] init];
         [*response setToken:[AMJSONAPIData randomAlphanumericString]];
         
-        if (![[self activeTokens] objectForKey:[request APIKey]])
-        {
-            [[self activeTokens] setObject:[[NSMutableArray alloc] init] forKey:[request APIKey]];
-        }
-        
-        NSMutableArray *tokenArray = [[self activeTokens] objectForKey:[request APIKey]];
         NSDate *expiry = [[NSDate date] dateByAddingTimeInterval:3600];
-        [tokenArray addObject:[NSArray arrayWithObjects:[*response Token], expiry, nil]];
+        [[self activeTokens] addObject:[NSArray arrayWithObjects:[*response Token], expiry, nil]];
         return YES;
     }
 }
@@ -99,22 +90,13 @@
 {
     @synchronized(self)
     {
-        for (id key in [self activeTokens])
-        {
-            NSMutableArray *tokens = [[self activeTokens] objectForKey:key];
-            [tokens enumerateObjectsUsingBlock:^(NSArray *token, NSUInteger idx, BOOL *stop) {
-                NSDate *expiryDate = [token objectAtIndex:1];
-                if ([expiryDate compare:[NSDate date]] == NSOrderedAscending)
-                {
-                    [tokens removeObjectAtIndex:idx];
-                }
-            }];
-            
-            if (![tokens count])
+        [[self activeTokens] enumerateObjectsUsingBlock:^(NSArray *token, NSUInteger idx, BOOL *stop) {
+            NSDate *expiryDate = [token objectAtIndex:1];
+            if ([expiryDate compare:[NSDate date]] == NSOrderedAscending)
             {
-                [[self activeTokens] removeObjectForKey:key];
+                [[self activeTokens] removeObjectAtIndex:idx];
             }
-        }
+        }];
     }
 }
 

@@ -14,6 +14,7 @@
 #import <CocoaHTTPServer/HTTPMessage.h>
 #import <CocoaHTTPServer/HTTPAsyncFileResponse.h>
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
+#import <Security/Security.h>
 
 @implementation AMHTTPConnection
 
@@ -68,9 +69,9 @@
             }
             
             BOOL authorised = NO;
-            if ([kvPairs objectForKey:@"FileName"] && [kvPairs objectForKey:@"Session"] && [kvPairs objectForKey:@"APIKey"])
+            if ([kvPairs objectForKey:@"FileName"] && [kvPairs objectForKey:@"Session"])
             {
-                authorised = [[AMJSONITunesResponder sharedInstance] validateSession:[kvPairs objectForKey:@"Session"] APIKey:[kvPairs objectForKey:@"APIKey"]];
+                authorised = [[AMJSONITunesResponder sharedInstance] validateSession:[kvPairs objectForKey:@"Session"]];
             }
             
             if (authorised)
@@ -109,6 +110,46 @@
         [[AMMusicServerActiveData sharedInstance] auditRequestFromIP:[self connectedHost]];
     }
     return self;
+}
+
+-(BOOL)isSecureServer
+{
+	return YES;
+}
+
+-(NSArray *)sslIdentityAndCertificates
+{
+    SecIdentityRef identityRef = NULL;
+    SecCertificateRef certificateRef = NULL;
+    SecTrustRef trustRef = NULL;
+    
+    NSString *thePath = [[NSBundle mainBundle] pathForResource:@"AMMusicServer" ofType:@"p12"];
+    NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:thePath];
+    CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;
+    CFStringRef password = CFSTR("bFwmaMOoGh5rg306tvVqN9p1x6EfNQfcZs1uWPZyFmUYGdocpYCJJcdDhuwZwUT");
+    const void *keys[] = { kSecImportExportPassphrase };
+    const void *values[] = { password };
+    CFDictionaryRef optionsDictionary = CFDictionaryCreate(NULL, keys, values, 1, NULL, NULL);
+    CFArrayRef items = CFArrayCreate(NULL, 0, 0, NULL);
+    
+    OSStatus securityError = errSecSuccess;
+    securityError =  SecPKCS12Import(inPKCS12Data, optionsDictionary, &items);
+    if (securityError == 0) {
+        CFDictionaryRef myIdentityAndTrust = CFArrayGetValueAtIndex (items, 0);
+        const void *tempIdentity = NULL;
+        tempIdentity = CFDictionaryGetValue (myIdentityAndTrust, kSecImportItemIdentity);
+        identityRef = (SecIdentityRef)tempIdentity;
+        const void *tempTrust = NULL;
+        tempTrust = CFDictionaryGetValue (myIdentityAndTrust, kSecImportItemTrust);
+        trustRef = (SecTrustRef)tempTrust;
+    } else {
+        return nil;
+    }
+    
+    SecIdentityCopyCertificate(identityRef, &certificateRef);
+    NSArray *result = [[NSArray alloc] initWithObjects:(__bridge id)identityRef, (__bridge id)certificateRef, nil];
+    
+    return result;
 }
 
 @end

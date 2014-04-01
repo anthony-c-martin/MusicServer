@@ -24,10 +24,12 @@ typedef NS_OPTIONS(NSUInteger, AMJSONCommandOptions)
     AMJSONCommandGetToken,
     AMJSONCommandGetSession,
     AMJSONCommandConvertTrackByID,
+    AMJSONCommandLFMScrobbleTrack,
+    AMJSONCommandLFMNowPlayingTrack,
     AMJSONCommandUnknown,
 };
 
-#define AMJSONCommands @"GetTrackByID", @"GetTracks", @"GetAlbums", @"GetArtists", @"SearchTracks", @"SearchAlbums", @"SearchArtists", @"GetTracksByArtist", @"GetTracksByAlbum", @"GetAlbumsByArtist", @"GetToken", @"GetSession", @"ConvertTrackByID", nil
+#define AMJSONCommands @"GetTrackByID", @"GetTracks", @"GetAlbums", @"GetArtists", @"SearchTracks", @"SearchAlbums", @"SearchArtists", @"GetTracksByArtist", @"GetTracksByAlbum", @"GetAlbumsByArtist", @"GetToken", @"GetSession", @"ConvertTrackByID", @"LFMScrobbleTrack", @"LFMNowPlayingTrack", nil
 
 @interface AMJSONAPIData : IAModelBase
 

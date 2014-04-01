@@ -27,4 +27,10 @@
     [[self Server] start:nil];
 }
 
+-(IBAction)showPrefsWindow:(id)sender
+{
+    [[self prefsWindow] loadSettings];
+    [[self prefsWindow] makeKeyAndOrderFront:self];
+}
+
 @end

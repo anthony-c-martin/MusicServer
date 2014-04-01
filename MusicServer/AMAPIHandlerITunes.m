@@ -130,7 +130,6 @@
         
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
-            break;
             NSImage *artwork = nil;
             if ([[[AMMusicServerActiveData sharedInstance] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
             {

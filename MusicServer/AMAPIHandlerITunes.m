@@ -88,18 +88,9 @@
 @end
 
 @implementation AMAPIHandlerITunes
+@synthesize activeData;
 
-+(AMAPIHandlerITunes *)sharedInstance
-{
-    static AMAPIHandlerITunes *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[AMAPIHandlerITunes alloc] init];
-    });
-    return sharedInstance;
-}
-
--(id) init
+-(id) initWithActiveData:(AMMusicServerActiveData *)data
 {
     self = [super init];
     if (self)
@@ -111,6 +102,7 @@
         [self setTracks:[[NSSet alloc] init]];
         [self setArtists:[[NSSet alloc] init]];
         [self setAlbums:[[NSSet alloc] init]];
+        [self setActiveData:data];
     }
     return self;
 }
@@ -130,8 +122,9 @@
         
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
+            if (albumID > 100) break;
             NSImage *artwork = nil;
-            if ([[[AMMusicServerActiveData sharedInstance] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
+            if ([[[self activeData] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
             {
                 artwork = [[mediaItem artwork] image];
             }
@@ -250,7 +243,7 @@
         [track setAlbum:album];
         [track setArtist:artist];
         [track setDiscNumber:[NSNumber numberWithInteger:[[mediaItem album] discNumber]]];
-        [track setDuration:[NSNumber numberWithInteger:[mediaItem totalTime]]];
+        [track setDuration:[NSNumber numberWithInteger:[mediaItem totalTime]/1000]];
         [self getPointer:&track fromSet:trackSet];
         if (![[artist AlbumSet] containsObject:album])
         {
@@ -615,23 +608,23 @@
         //Prevent multiple conversions from taking place at the same time.
         @synchronized(self)
         {
-            if ([[AMMusicServerActiveData sharedInstance] getCachedTrackLocation:fileName])
+            if ([[self activeData] getCachedTrackLocation:fileName])
             {
                 [*response setFileName:fileName];
                 result = YES;
             }
             else
             {
-                NSURL *output = [[AMMusicServerActiveData sharedInstance] getLocationForTrack:fileName];
+                NSURL *output = [[self activeData] getLocationForTrack:fileName];
                 if ([AMAudioConverter ConvertToM4A:[NSURL URLWithString:[track Location]] output:output])
                 {
-                    [[AMMusicServerActiveData sharedInstance] addCachedTrack:fileName];
+                    [[self activeData] addCachedTrack:fileName];
                     [*response setFileName:fileName];
                     result = YES;
                 }
                 else
                 {
-                    [[AMMusicServerActiveData sharedInstance] removeCachedTrack:fileName];
+                    [[self activeData] removeCachedTrack:fileName];
                 }
             }
         }

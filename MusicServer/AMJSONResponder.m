@@ -10,20 +10,25 @@
 #import "AMAPIDataResponder.h"
 #import "AMMusicServerActiveData.h"
 #import "AMAPIAuthenticationDataResponder.h"
-#import "AMLastFMCommunicationManager.h"
-#import "AMAPILastFMResponder.h"
 
 @implementation AMJSONResponder
+@synthesize delegate;
+@synthesize authDelegate;
+@synthesize lastFMDelegate;
+@synthesize activeData;
 
--(id) initWithDelegate:(id<AMAPIDataResponder>)delegate
-          authDelegate:(id<AMAPIAuthenticationDataResponder>)authDelegate
+-(id) initWithDelegate:(id<AMAPIDataResponder>)inputDelegate
+          authDelegate:(id<AMAPIAuthenticationDataResponder>)inputAuthDelegate
+        lastFMDelegate:(AMLastFMCommunicationManager *)inputLastFMDelegate
+            activeData:(AMMusicServerActiveData *)data
 {
     self = [super init];
     if (self)
     {
-        [self setDelegate:delegate];
-        [self setAuthDelegate:authDelegate];
-        [self setLastFMDelegate:[AMLastFMCommunicationManager sharedInstance]];
+        [self setDelegate:inputDelegate];
+        [self setAuthDelegate:inputAuthDelegate];
+        [self setLastFMDelegate:inputLastFMDelegate];
+        [self setActiveData:data];
     }
     return self;
 }
@@ -93,7 +98,7 @@
             if ([[self delegate] respondsToSelector:@selector(getTrackByID:Response:)])
             {
                 AMAPIITTrack *output;
-                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getTrackByID:[request String]
                                                Response:&output];
                 responseData = (AMJSONAPIData *)output;
@@ -103,7 +108,7 @@
             if ([[self delegate] respondsToSelector:@selector(getTracksResponse:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data];
+                AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getTracksResponse:&output
                                                        Start:[request Start]
                                                        Limit:[request Limit]];
@@ -115,7 +120,7 @@
             if ([[self delegate] respondsToSelector:@selector(getAlbumsResponse:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data];
+                AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getAlbumsResponse:&output
                                                        Start:[request Start]
                                                        Limit:[request Limit]];
@@ -127,7 +132,7 @@
             if ([[self delegate] respondsToSelector:@selector(getArtistsResponse:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data];
+                AMAPIDataRequest *request = [[AMAPIDataRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getArtistsResponse:&output
                                                         Start:[request Start]
                                                         Limit:[request Limit]];
@@ -139,7 +144,7 @@
             if ([[self delegate] respondsToSelector:@selector(getTracksBySearchString:Response:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getTracksBySearchString:[request String]
                                                           Response:&output
                                                              Start:[request Start]
@@ -153,7 +158,7 @@
             {
                 
                 NSArray *output;
-                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getAlbumsBySearchString:[request String]
                                                           Response:&output
                                                              Start:[request Start]
@@ -166,7 +171,7 @@
             if ([[self delegate] respondsToSelector:@selector(getArtistsBySearchString:Response:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getArtistsBySearchString:[request String]
                                                           Response:&output
                                                              Start:[request Start]
@@ -179,7 +184,7 @@
             if ([[self delegate] respondsToSelector:@selector(getTracksByArtist:Response:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data];
+                AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getTracksByArtist:[request ID]
                                                     Response:&output
                                                        Start:[request Start]
@@ -192,7 +197,7 @@
             if ([[self delegate] respondsToSelector:@selector(getTracksByAlbum:Response:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data];
+                AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getTracksByAlbum:[request ID]
                                                    Response:&output
                                                       Start:[request Start]
@@ -205,7 +210,7 @@
             if ([[self delegate] respondsToSelector:@selector(getAlbumsByArtist:Response:Start:Limit:)])
             {
                 NSArray *output;
-                AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data];
+                AMAPIDataIDRequest *request = [[AMAPIDataIDRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] getAlbumsByArtist:[request ID]
                                                     Response:&output
                                                        Start:[request Start]
@@ -217,7 +222,7 @@
         case AMJSONCommandGetToken:
             if ([[self authDelegate] respondsToSelector:@selector(getToken:response:)])
             {
-                AMAPIGetTokenRequest *request = [[AMAPIGetTokenRequest alloc] initFromData:data];
+                AMAPIGetTokenRequest *request = [[AMAPIGetTokenRequest alloc] initFromData:data responder:self];
                 AMAPIGetTokenResponse *output;
                 
                 success = [[self authDelegate] getToken:request
@@ -229,16 +234,16 @@
         case AMJSONCommandGetSession:
             if ([[self authDelegate] respondsToSelector:@selector(getSession:response:)])
             {
-                AMAPIGetSessionRequest *request = [[AMAPIGetSessionRequest alloc] initFromData:data];
+                AMAPIGetSessionRequest *request = [[AMAPIGetSessionRequest alloc] initFromData:data responder:self];
                 AMAPIGetSessionResponse *output;
                 
                 success = [[self authDelegate] getSession:request
-                                  response:&output];
+                                                 response:&output];
                 
                 if (!success) {
                     *responseCode = [NSNumber numberWithInt:401];
                     *response = nil;
-                    [[AMMusicServerActiveData sharedInstance] auditFailedAuthFromIP:ipAddress];
+                    [[self activeData] auditFailedAuthFromIP:ipAddress];
                     return NO;
                 }
                 
@@ -249,7 +254,7 @@
             if ([[self delegate] respondsToSelector:@selector(convertTrackByID:Response:)])
             {
                 AMAPIConvertTrackResponse *output;
-                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
                 success = [[self delegate] convertTrackByID:[request String]
                                                    Response:&output];
                 responseData = (AMJSONAPIData *)output;
@@ -259,18 +264,23 @@
             if ([[self lastFMDelegate] respondsToSelector:@selector(scrobbleTrackByID:)])
             {
                 AMAPIScrobbleTrackResponse *output = [[AMAPIScrobbleTrackResponse alloc] init];
-                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
-                [output setSuccess:[[self lastFMDelegate] scrobbleTrackByID:[request String]]];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
+                [[self lastFMDelegate] scrobbleTrackByID:[request String]];
+                [output setSuccess:YES];
                 responseData = (AMJSONAPIData *)output;
             }
+            break;
         case AMJSONCommandLFMNowPlayingTrack:
             if ([[self lastFMDelegate] respondsToSelector:@selector(nowPlayingTrackByID:)])
             {
+                [(AMLastFMCommunicationManager *)[self lastFMDelegate] RequestNewSession];
                 AMAPIScrobbleTrackResponse *output = [[AMAPIScrobbleTrackResponse alloc] init];
-                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data];
-                [output setSuccess:[[self lastFMDelegate] nowPlayingTrackByID:[request String]]];
+                AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
+                [[self lastFMDelegate] nowPlayingTrackByID:[request String]];
+                [output setSuccess:YES];
                 responseData = (AMJSONAPIData *)output;
             }
+            break;
         case AMJSONCommandUnknown:
             success = NO;
             break;

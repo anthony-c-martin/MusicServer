@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00002EBB18ECCB3800243001 /* AMHTTPMusicServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00002EBA18ECCB3800243001 /* AMHTTPMusicServer.m */; };
 		0005BA96182196B700C17FA9 /* AMJSONAPIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA95182196B700C17FA9 /* AMJSONAPIData.m */; };
 		0005BA9C182196CC00C17FA9 /* IAModelBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA99182196CC00C17FA9 /* IAModelBase.m */; };
 		0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */; };
@@ -37,7 +38,6 @@
 		0050CCA918208ADA006D6247 /* MusicServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050CCA818208ADA006D6247 /* MusicServerTests.m */; };
 		009D49A318D44F83006CA309 /* AMHTTPErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */; };
 		00CBBCEE18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */; };
-		00CBBCF318C33C440063DBF6 /* AMJSONITunesResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBCF218C33C440063DBF6 /* AMJSONITunesResponder.m */; };
 		00CBBCF518C35F990063DBF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CBBCF418C35F990063DBF6 /* Security.framework */; };
 		00D82E9B18D5A98A0090E3EB /* AMAuthenticationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D82E9A18D5A98A0090E3EB /* AMAuthenticationHandler.m */; };
 		00DAE0E5182542EC007B6ABC /* AMAPIHandlerITunes.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DAE0E4182542EC007B6ABC /* AMAPIHandlerITunes.m */; };
@@ -199,6 +199,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00002EB918ECCB3800243001 /* AMHTTPMusicServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPMusicServer.h; sourceTree = "<group>"; };
+		00002EBA18ECCB3800243001 /* AMHTTPMusicServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPMusicServer.m; sourceTree = "<group>"; };
 		0005BA94182196B700C17FA9 /* AMJSONAPIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONAPIData.h; sourceTree = "<group>"; };
 		0005BA95182196B700C17FA9 /* AMJSONAPIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONAPIData.m; sourceTree = "<group>"; };
 		0005BA98182196CC00C17FA9 /* IAModelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAModelBase.h; sourceTree = "<group>"; };
@@ -212,7 +214,6 @@
 		00326C8518EA08B300A28AAF /* PreferencesWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindow.h; sourceTree = "<group>"; };
 		00326C8618EA08B300A28AAF /* PreferencesWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindow.m; sourceTree = "<group>"; };
 		00326C8818EA46E300A28AAF /* LastFMAPI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LastFMAPI.xcodeproj; path = MusicServer/Frameworks/LastFMAPI/LastFMAPI.xcodeproj; sourceTree = "<group>"; };
-		00326C9318EA4A9E00A28AAF /* AMAPILastFMResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPILastFMResponder.h; sourceTree = "<group>"; };
 		00326C9418EA4DD300A28AAF /* AMLastFMCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLastFMCommunicationManager.h; sourceTree = "<group>"; };
 		00326C9518EA4DD300A28AAF /* AMLastFMCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLastFMCommunicationManager.m; sourceTree = "<group>"; };
 		00326C9718EA502B00A28AAF /* AMLastFMAPISecrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMLastFMAPISecrets.h; sourceTree = "<group>"; };
@@ -257,8 +258,6 @@
 		009D49A518D4527D006CA309 /* AMAPIAuthenticationDataResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPIAuthenticationDataResponder.h; sourceTree = "<group>"; };
 		00CBBCEC18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPAsyncJSONResponse.h; sourceTree = "<group>"; };
 		00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPAsyncJSONResponse.m; sourceTree = "<group>"; };
-		00CBBCF118C33C440063DBF6 /* AMJSONITunesResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONITunesResponder.h; sourceTree = "<group>"; };
-		00CBBCF218C33C440063DBF6 /* AMJSONITunesResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONITunesResponder.m; sourceTree = "<group>"; };
 		00CBBCF418C35F990063DBF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		00D82E9918D5A98A0090E3EB /* AMAuthenticationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAuthenticationHandler.h; sourceTree = "<group>"; };
 		00D82E9A18D5A98A0090E3EB /* AMAuthenticationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAuthenticationHandler.m; sourceTree = "<group>"; };
@@ -470,6 +469,8 @@
 				0050562318BBFBBD0011E0B1 /* AMHTTPConnection.m */,
 				009D49A118D44F83006CA309 /* AMHTTPErrorResponse.h */,
 				009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */,
+				00002EB918ECCB3800243001 /* AMHTTPMusicServer.h */,
+				00002EBA18ECCB3800243001 /* AMHTTPMusicServer.m */,
 			);
 			name = HTTP;
 			sourceTree = "<group>";
@@ -477,8 +478,6 @@
 		00CBBCF018C33C0F0063DBF6 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				00CBBCF118C33C440063DBF6 /* AMJSONITunesResponder.h */,
-				00CBBCF218C33C440063DBF6 /* AMJSONITunesResponder.m */,
 				00245CBF18209E2900506730 /* AMJSONResponder.h */,
 				00245CC018209E2900506730 /* AMJSONResponder.m */,
 				0005BA94182196B700C17FA9 /* AMJSONAPIData.h */,
@@ -503,7 +502,6 @@
 			children = (
 				009D49A518D4527D006CA309 /* AMAPIAuthenticationDataResponder.h */,
 				009D49A418D450FE006CA309 /* AMAPIDataResponder.h */,
-				00326C9318EA4A9E00A28AAF /* AMAPILastFMResponder.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -786,8 +784,8 @@
 				00E192F618BD3B6A00B5A8D5 /* AMMusicServerActiveData.m in Sources */,
 				00445B561826F98000174020 /* AMAudioConverter.mm in Sources */,
 				00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */,
-				00CBBCF318C33C440063DBF6 /* AMJSONITunesResponder.m in Sources */,
 				00445B641826FE0D00174020 /* CAXException.cpp in Sources */,
+				00002EBB18ECCB3800243001 /* AMHTTPMusicServer.m in Sources */,
 				00326C8718EA08B300A28AAF /* PreferencesWindow.m in Sources */,
 				00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */,
 				00326C9618EA4DD300A28AAF /* AMLastFMCommunicationManager.m in Sources */,

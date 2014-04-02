@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "./IAModelBase/IAModelBase.h"
 
+@class AMJSONResponder;
+
 typedef NS_OPTIONS(NSUInteger, AMJSONCommandOptions)
 {
     AMJSONCommandGetTrackByID,
@@ -35,7 +37,8 @@ typedef NS_OPTIONS(NSUInteger, AMJSONCommandOptions)
 
 @property (nonatomic, retain) NSString *Signature;
 
--(id) initFromData:(NSData *)data;
+-(id) initFromData:(NSData *)data
+         responder:(AMJSONResponder *)responder;
 
 -(NSData *) dataFromObject;
 

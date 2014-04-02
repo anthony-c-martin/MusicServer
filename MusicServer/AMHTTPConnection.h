@@ -9,8 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <CocoaHTTPServer/HTTPConnection.h>
 
+@class AMJSONResponder;
+
 @interface AMHTTPConnection : HTTPConnection
 
 @property (nonatomic, retain) NSString *connectedHost;
+@property (nonatomic, retain) AMJSONResponder *responder;
 
 @end

@@ -17,7 +17,6 @@
 @property (nonatomic, retain) NSString *lastFMSessionKey;
 @property (nonatomic, retain) NSString *lastFMUsername;
 
-+(AMMusicServerActiveData *)sharedInstance;
 -(void)addCachedTrack:(NSString *)name;
 -(void)removeCachedTrack:(NSString *)name;
 -(NSURL *)getCachedTrackLocation:(NSString *)name;

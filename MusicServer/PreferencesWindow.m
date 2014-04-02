@@ -10,11 +10,12 @@
 #import "AMMusicServerActiveData.h"
 #import "AMLastFMCommunicationManager.h"
 #import "AMAPIHandlerITunes.h"
-#import "AMJSONITunesResponder.h"
+#import "AMJSONResponder.h"
 
 NSString *const API_LFM_TOKEN_REQUEST_URL = @"http://www.last.fm/api/auth/";
 
 @implementation PreferencesWindow
+@synthesize responder;
 
 -(void)controlTextDidChange:(NSNotification *)aNotification
 {
@@ -34,15 +35,14 @@ NSString *const API_LFM_TOKEN_REQUEST_URL = @"http://www.last.fm/api/auth/";
 
 -(void)loadSettings
 {
-    AMMusicServerActiveData *activeData = [AMMusicServerActiveData sharedInstance];
-    AMJSONITunesResponder *jsonResponder = [AMJSONITunesResponder sharedInstance];
+    AMMusicServerActiveData *activeData = [[self responder] activeData];
     [self setPwChanged:NO];
     [[self username] setStringValue:[activeData username]];
     [[self password] setStringValue:@"******"];
-    [[self maxSessions] setIntegerValue:[[activeData maxSessions] integerValue]];
+    [[self maxSessions] setIntegerValue:[[[[self responder] activeData] maxSessions] integerValue]];
     [[self maxCachedTracks] setIntegerValue:[[activeData maxCachedTracks] integerValue]];
     [[self lastFMUsername] setStringValue:[activeData lastFMUsername]];
-    [[self currentSesssions] setIntegerValue:[jsonResponder sessionCount]];
+    [[self currentSesssions] setIntegerValue:[[self responder] sessionCount]];
     if ([[activeData lastFMSessionKey] length] > 0)
     {
         [[self lastFMActive] setStringValue:@"Active"];
@@ -55,7 +55,7 @@ NSString *const API_LFM_TOKEN_REQUEST_URL = @"http://www.last.fm/api/auth/";
 
 -(IBAction)saveButtonPressed:(id)sender
 {
-    AMMusicServerActiveData *activeData = [AMMusicServerActiveData sharedInstance];
+    AMMusicServerActiveData *activeData = [[self responder] activeData];
     if ([self pwChanged])
     {
         [activeData storeCredentials:[[self username] stringValue] password:[[self password] stringValue]];
@@ -67,21 +67,20 @@ NSString *const API_LFM_TOKEN_REQUEST_URL = @"http://www.last.fm/api/auth/";
 
 -(IBAction)clearSessionsButtonPressed:(id)sender
 {
-    AMJSONITunesResponder *jsonResponder = [AMJSONITunesResponder sharedInstance];
-    [jsonResponder clearSessions];
+    [[self responder] clearSessions];
     [self loadSettings];
 }
 
 -(IBAction)addLastFMButtonPressed:(id)sender
 {
-    AMMusicServerActiveData *activeData = [AMMusicServerActiveData sharedInstance];
+    AMMusicServerActiveData *activeData = [[self responder] activeData];
     [activeData setLastFMSessionKey:@""];
     [activeData setLastFMUsername:@""];
     [self loadSettings];
     AMLastFMCommunicationManager *lastFMManager = [[AMLastFMCommunicationManager alloc]
                                                    initWithDelegate:self
-                                                   activeData:[AMMusicServerActiveData sharedInstance]
-                                                   itunesHandler:[AMAPIHandlerITunes sharedInstance]];
+                                                   activeData:[[self responder] activeData]
+                                                   dataResponder:[[self responder] delegate]];
     [lastFMManager RequestNewSession];
 }
 

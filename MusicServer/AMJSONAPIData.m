@@ -8,11 +8,12 @@
 
 #import "AMJSONAPIData.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "AMJSONITunesResponder.h"
+#import "AMJSONResponder.h"
 
 @implementation AMJSONAPIData
 
 -(id) initFromData:(NSData *)data
+         responder:(AMJSONResponder *)responder
 {
     NSError *error;
     NSDictionary *dictionary = [AMJSONAPIData deserialiseJSON:data Error:error];
@@ -21,15 +22,16 @@
         return nil;
     }
     
-    return [self initWithDictionary:dictionary];
+    return [self initWithDictionary:dictionary responder:responder];
 }
 
 -(id) initWithDictionary:(NSDictionary *)dictionary
+               responder:(AMJSONResponder *)responder
 {
     self = [super initWithDictionary:dictionary];
     if (self)
     {
-        if (![self validateSignature:dictionary])
+        if (![self validateSignature:dictionary responder:responder])
         {
             return nil;
         }
@@ -38,6 +40,7 @@
 }
 
 -(BOOL) validateSignature:(NSDictionary *)dictionary
+               responder:(AMJSONResponder *)responder
 {
     if (![dictionary objectForKey:@"Signature"])
     {
@@ -56,7 +59,7 @@
     
     if ([dictionary objectForKey:@"Session"])
     {
-        NSString *sessionSecret = [[AMJSONITunesResponder sharedInstance] secretForSession:[dictionary objectForKey:@"Session"]];
+        NSString *sessionSecret = [responder secretForSession:[dictionary objectForKey:@"Session"]];
         [dataString appendFormat:@"%@;", sessionSecret];
     }
     

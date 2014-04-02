@@ -61,16 +61,6 @@
 @synthesize lastFMSessionKey;
 @synthesize lastFMUsername;
 
-+(AMMusicServerActiveData *)sharedInstance
-{
-    static AMMusicServerActiveData *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[AMMusicServerActiveData alloc] init];
-    });
-    return sharedInstance;
-}
-
 -(id)init
 {
     self = [super init];

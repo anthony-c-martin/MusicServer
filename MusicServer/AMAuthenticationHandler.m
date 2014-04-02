@@ -13,13 +13,14 @@
 
 @implementation AMAuthenticationHandler
 
--(id) init
+-(id) initWithActiveData:(AMMusicServerActiveData *)data
 {
     self = [super init];
     if (self)
     {
         [self setActiveSessions:[[NSMutableDictionary alloc] init]];
         [self setActiveTokens:[[NSMutableArray alloc] init]];
+        [self setActiveData:data];
     }
     return self;
 }
@@ -47,8 +48,8 @@
         
         NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@",
                                                      [request Token],
-                                                     [[AMMusicServerActiveData sharedInstance] username],
-                                                     [[AMMusicServerActiveData sharedInstance] password],
+                                                     [[self activeData] username],
+                                                     [[self activeData] password],
                                                      [request Token]]];
         
         if ([MD5 isEqualTo:[request Authentication]])

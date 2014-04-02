@@ -10,8 +10,9 @@
 
 @implementation AMAPIDataRequest
 -(id) initFromData:(NSData *)data
+         responder:(AMJSONResponder *)responder
 {
-    self = [super initFromData:data];
+    self = [super initFromData:data responder:responder];
     if (self)
     {
         if (![self Start]) [self setStart:[NSNumber numberWithInt:0]];
@@ -23,8 +24,9 @@
 
 @implementation AMAPIDataIDRequest
 -(id) initFromData:(NSData *)data
+         responder:(AMJSONResponder *)responder
 {
-    self = [super initFromData:data];
+    self = [super initFromData:data responder:responder];
     if (self)
     {
         if (![self ID]) [self setID:[NSNumber numberWithInt:0]];
@@ -35,8 +37,9 @@
 
 @implementation AMAPIDataStringRequest
 -(id) initFromData:(NSData *)data
+         responder:(AMJSONResponder *)responder
 {
-    self = [super initFromData:data];
+    self = [super initFromData:data responder:responder];
     if (self)
     {
         if (![self String]) [self setString:@""];
@@ -47,8 +50,9 @@
 
 @implementation AMAPIGetSessionRequest
 -(id) initFromData:(NSData *)data
+         responder:(AMJSONResponder *)responder
 {
-    self = [super initFromData:data];
+    self = [super initFromData:data responder:responder];
     if (self)
     {
         if (![self Token]) [self setToken:@""];
@@ -60,8 +64,9 @@
 
 @implementation AMAPIGetTokenRequest
 -(id) initFromData:(NSData *)data
+         responder:(AMJSONResponder *)responder
 {
-    self = [super initFromData:data];
+    self = [super initFromData:data responder:responder];
     if (self)
     {
         
@@ -251,6 +256,7 @@
             @"Name", @"Name",
             @"TrackNumber", @"TrackNumber",
             @"DiscNumber", @"DiscNumber",
+            @"Duration", @"Duration",
             @"Artist", @"Artist",
             @"Album", @"Album",
             nil];

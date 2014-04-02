@@ -9,10 +9,21 @@
 #import "AMLastFMCommunicationManager.h"
 #import "AMLastFMAPISecrets.h"
 #import "AMMusicServerActiveData.h"
+#import "AMAPIDataResponder.h"
+#import "AMScrobbleManagerDelegate.h"
 #import <LastFMAPI/AMDefinitions.h>
-#import "AMAPIHandlerITunes.h"
 
 @implementation AMLastFMCommunicationManager
+@synthesize trackRequest;
+@synthesize authRequest;
+@synthesize scrobblerDelegate;
+@synthesize dataResponder;
+@synthesize responseQueue;
+@synthesize nowPlayingResponse;
+@synthesize tokenResponse;
+@synthesize sessionResponse;
+@synthesize activeData;
+@synthesize currentTrack;
 
 -(id) initWithActiveData:(AMMusicServerActiveData *)data
 {
@@ -25,20 +36,19 @@
         [self setTokenResponse:nil];
         [self setSessionResponse:nil];
         [self setActiveData: data];
-
     }
     return self;
 }
 
 -(id)initWithDelegate:(id <AMScrobbleManagerDelegate>)delegate
            activeData:(AMMusicServerActiveData *)data
-        itunesHandler:(AMAPIHandlerITunes *)itHandler;
+        dataResponder:(id <AMAPIDataResponder>)responder;
 
 {
     self = [self initWithActiveData:data];
     if (self)
     {
-        [self setItunesHandler:itHandler];
+        [self setDataResponder:responder];
         [self setScrobblerDelegate:delegate];
     }
     return self;
@@ -47,14 +57,19 @@
 -(void)RequestNewToken
 {
     [self setTokenResponse:[[AMAuthResponse alloc] initWithDelegate:self]];
-    [[self authRequest] GetToken:[self tokenResponse]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self authRequest] GetToken:[self tokenResponse]];
+    });
+    
 }
 
 -(void)RequestNewSession
 {
     [self setSessionResponse:[[AMAuthResponse alloc] initWithDelegate:self]];
-    [[self authRequest] GetSession:[self sessionResponse]
-                             Token:[[self activeData] lastFMToken]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self authRequest] GetSession:[self sessionResponse]
+                                 Token:[[self activeData] lastFMToken]];
+    });
 }
 
 -(void)TrackResponse:(AMTrackResponse *)Response Scrobble:(AMScrobbles *)Scrobbles
@@ -64,7 +79,7 @@
 
 -(void)TrackResponse:(AMTrackResponse *)Response UpdateNowPlaying:(AMNowPlaying *)NowPlaying
 {
-    
+
 }
 
 -(void)AuthResponse:(AMAuthResponse *)Response GetToken:(AMToken *)Token
@@ -86,7 +101,10 @@
     {
         [[self activeData] setLastFMSessionKey:[Session Key]];
         [[self activeData] setLastFMUsername:[Session Name]];
-        [[self scrobblerDelegate] newSessionCreated];
+        if ([[self scrobblerDelegate] respondsToSelector:@selector(newSessionCreated)])
+        {
+            [[self scrobblerDelegate] newSessionCreated];
+        }
     }
     [self setSessionResponse:nil];
 }
@@ -137,13 +155,13 @@
     }
 }
 
--(BOOL) scrobbleTrackByID:(NSString *)request
+-(void)scrobbleTrackByID:(NSString *)request
 {
     if (![[self activeData] lastFMUsername]) {
-        return NO;
+        return;
     }
     AMAPIITTrack *trackDetails;
-    [[self itunesHandler] getTrackByID:request Response:&trackDetails];
+    [[self dataResponder] getTrackByID:request Response:&trackDetails];
     
     if (trackDetails)
     {
@@ -157,59 +175,55 @@
         
         AMTrackResponse *response = [[AMTrackResponse alloc] initWithDelegate:self];
         [[self responseQueue] addObject:response];
-        return [[self trackRequest] Scrobble:response
-                                      Artist:[[trackDetails Artist] Name]
-                                       Track:[trackDetails Name]
-                                   Timestamp:[NSNumber numberWithInteger:timeStamp]
-                                       Album:[[trackDetails Album] Name]
-                                     Context:nil
-                                    StreamId:nil
-                                ChosenByUser:nil
-                                 TrackNumber:[trackDetails TrackNumber]
-                                        MBID:nil
-                                 AlbumArtist:[[[trackDetails Album] Artist] Name]
-                                    Duration:[trackDetails Duration]
-                                  SessionKey:[[self activeData] lastFMSessionKey]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self trackRequest] Scrobble:response
+                                   Artist:[[trackDetails Artist] Name]
+                                    Track:[trackDetails Name]
+                                Timestamp:[NSNumber numberWithInteger:timeStamp]
+                                    Album:[[trackDetails Album] Name]
+                                  Context:nil
+                                 StreamId:nil
+                             ChosenByUser:nil
+                              TrackNumber:[trackDetails TrackNumber]
+                                     MBID:nil
+                              AlbumArtist:[[[trackDetails Album] Artist] Name]
+                                 Duration:[trackDetails Duration]
+                               SessionKey:[[self activeData] lastFMSessionKey]];
+        });
     }
-    return NO;
 }
 
--(BOOL) nowPlayingTrackByID:(NSString *)request
+-(void)nowPlayingTrackByID:(NSString *)request
 {
     if (![[self activeData] lastFMUsername]) {
-        return NO;
+        return;
     }
     AMAPIITTrack *trackDetails;
-    [[self itunesHandler] getTrackByID:request Response:&trackDetails];
+    [[self dataResponder] getTrackByID:request Response:&trackDetails];
     [self setCurrentTrack:trackDetails];
     
     if (trackDetails)
     {
         [self setStartTime:[[NSDate date] timeIntervalSince1970]];
         
-        AMTrackResponse *response = [[AMTrackResponse alloc] initWithDelegate:self];
-        return [[self trackRequest] UpdateNowPlaying:response
-                                              Artist:[[trackDetails Artist] Name]
-                                               Track:[trackDetails Name]
-                                               Album:[[trackDetails Album] Name]
-                                         TrackNumber:[trackDetails TrackNumber]
-                                             Context:nil
-                                                MBID:nil
-                                            Duration:[trackDetails Duration]
-                                         AlbumArtist:[[[trackDetails Album] Artist] Name]
-                                          SessionKey:[[self activeData] lastFMSessionKey]];
+        if ([self nowPlayingResponse]) {
+            [self setNowPlayingResponse:nil];
+        }
+        [self setNowPlayingResponse:[[AMTrackResponse alloc] initWithDelegate:self]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self trackRequest] UpdateNowPlaying:[self nowPlayingResponse]
+                                           Artist:[[trackDetails Artist] Name]
+                                            Track:[trackDetails Name]
+                                            Album:[[trackDetails Album] Name]
+                                      TrackNumber:[trackDetails TrackNumber]
+                                          Context:nil
+                                             MBID:nil
+                                         Duration:[trackDetails Duration]
+                                      AlbumArtist:[[[trackDetails Album] Artist] Name]
+                                       SessionKey:[[self activeData] lastFMSessionKey]];
+        });
     }
-    return NO;
-}
 
-+(AMLastFMCommunicationManager *)sharedInstance
-{
-    static AMLastFMCommunicationManager *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[AMLastFMCommunicationManager alloc] initWithActiveData:[AMMusicServerActiveData sharedInstance]];
-    });
-    return sharedInstance;
 }
 
 @end

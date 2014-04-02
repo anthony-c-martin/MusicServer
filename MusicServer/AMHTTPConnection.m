@@ -7,7 +7,7 @@
 //
 
 #import "AMHTTPConnection.h"
-#import "AMJSONITunesResponder.h"
+#import "AMJSONResponder.h"
 #import "AMMusicServerActiveData.h"
 #import "AMHTTPAsyncJSONResponse.h"
 #import "AMHTTPErrorResponse.h"
@@ -15,6 +15,7 @@
 #import <CocoaHTTPServer/HTTPAsyncFileResponse.h>
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 #import <Security/Security.h>
+#import "AMHTTPMusicServer.h"
 
 @implementation AMHTTPConnection
 
@@ -40,7 +41,7 @@
 
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path
 {
-    if ([[AMMusicServerActiveData sharedInstance] ipAddressIsBlackListed:[self connectedHost]])
+    if ([[[self responder] activeData] ipAddressIsBlackListed:[self connectedHost]])
     {
         return [[AMHTTPErrorResponse alloc] initWithCode:[NSNumber numberWithInt:400]];
     }
@@ -48,7 +49,7 @@
 	if ([method isEqualToString:@"POST"] && [path isEqualToString:@"/api"])
 	{
         return [[AMHTTPAsyncJSONResponse alloc] initWithRequest:[request body]
-                                                   JSONResponder:[AMJSONITunesResponder sharedInstance]
+                                                   JSONResponder:[self responder]
                                                      Connection:self];
 	}
     
@@ -71,12 +72,12 @@
             BOOL authorised = NO;
             if ([kvPairs objectForKey:@"FileName"] && [kvPairs objectForKey:@"Session"])
             {
-                authorised = [[AMJSONITunesResponder sharedInstance] validateSession:[kvPairs objectForKey:@"Session"]];
+                authorised = [[self responder] validateSession:[kvPairs objectForKey:@"Session"]];
             }
             
             if (authorised)
             {
-                NSURL *fileURL = [[AMMusicServerActiveData sharedInstance] getCachedTrackLocation:[kvPairs objectForKey:@"FileName"]];
+                NSURL *fileURL = [[[self responder] activeData] getCachedTrackLocation:[kvPairs objectForKey:@"FileName"]];
                 if (fileURL != nil)
                 {
                     NSString *filePath = [fileURL path];
@@ -106,8 +107,9 @@
     self = [super initWithAsyncSocket:newSocket configuration:aConfig];
     if (self)
     {
+        [self setResponder:[(AMHTTPMusicServer *)[aConfig server] responder]];
         [self setConnectedHost:[[newSocket connectedHost] copy]];
-        [[AMMusicServerActiveData sharedInstance] auditRequestFromIP:[self connectedHost]];
+        [[[self responder] activeData] auditRequestFromIP:[self connectedHost]];
     }
     return self;
 }

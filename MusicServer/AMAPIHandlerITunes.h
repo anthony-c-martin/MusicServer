@@ -9,14 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "AMAPIDataResponder.h"
 
+@class AMMusicServerActiveData;
+
 @interface AMAPIHandlerITunes : NSObject<AMAPIDataResponder>
 
 @property (nonatomic, retain) NSSet *Tracks;
 @property (nonatomic, retain) NSSet *Artists;
 @property (nonatomic, retain) NSSet *Albums;
+@property (nonatomic, retain) AMMusicServerActiveData *activeData;
 
--(id) init;
+-(id) initWithActiveData:(AMMusicServerActiveData *)data;
 -(BOOL) loadLibrary;
-+(AMAPIHandlerITunes *)sharedInstance;
 
 @end

@@ -7,39 +7,41 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMAPILastFMResponder.h"
-#import "AMScrobbleManagerDelegate.h"
 #import <LastFMAPI/AMAuthRequest.h>
 #import <LastFMAPI/AMTrackRequest.h>
 
 @class AMMusicServerActiveData;
-@class AMAPIHandlerITunes;
 @class AMAPIITTrack;
+@protocol AMAPIDataResponder;
+@protocol AMScrobbleManagerDelegate;
 
-@interface AMLastFMCommunicationManager : NSObject <AMTrackResponseDelegate, AMAuthResponseDelegate, AMAPILastFMResponder>
+@interface AMLastFMCommunicationManager : NSObject <AMTrackResponseDelegate, AMAuthResponseDelegate>
 
-@property (nonatomic, retain) AMTrackRequest *trackRequest;
+@property (nonatomic, retain) AMTrackRequest *trackRequest; 
 @property (nonatomic, retain) AMAuthRequest *authRequest;
-@property (nonatomic, assign) id <AMScrobbleManagerDelegate> scrobblerDelegate;
+@property (nonatomic, retain) id <AMScrobbleManagerDelegate> scrobblerDelegate;
+@property (nonatomic, retain) id <AMAPIDataResponder> dataResponder;
 @property (nonatomic, retain) NSMutableArray *responseQueue;
+@property (nonatomic, retain) AMTrackResponse *nowPlayingResponse;
 @property (nonatomic, retain) AMAuthResponse *tokenResponse;
 @property (nonatomic, retain) AMAuthResponse *sessionResponse;
 @property (nonatomic, retain) AMMusicServerActiveData *activeData;
-@property (nonatomic, retain) AMAPIHandlerITunes *itunesHandler;
 @property (nonatomic, retain) AMAPIITTrack *currentTrack;
 @property (nonatomic, assign) NSInteger startTime;
 
 -(id)initWithDelegate:(id <AMScrobbleManagerDelegate>)delegate
            activeData:(AMMusicServerActiveData *)data
-        itunesHandler:(AMAPIHandlerITunes *)itHandler;
+        dataResponder:(id <AMAPIDataResponder>)dataResponder;
 
 -(void)TrackResponse:(AMTrackResponse *)Response UpdateNowPlaying:(AMNowPlaying *)NowPlaying;
 -(void)TrackResponse:(AMTrackResponse *)Response Scrobble:(AMScrobbles *)Scrobbles;
 -(void)AuthResponse:(AMAuthResponse *)Response GetToken:(AMToken *)Token;
 -(void)AuthResponse:(AMAuthResponse *)Response GetSession:(AMSession *)Session;
+
+-(void)scrobbleTrackByID:(NSString *)request;
+-(void)nowPlayingTrackByID:(NSString *)request;
 -(void)RequestNewSession;
 
-+(AMLastFMCommunicationManager *)sharedInstance;
 -(void)Response:(AMBaseResponse *)Response Error:(NSError *)Error;
 
 @end

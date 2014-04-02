@@ -9,6 +9,8 @@
 #import <Cocoa/Cocoa.h>
 #import "AMScrobbleManagerDelegate.h"
 
+@class AMJSONResponder;
+
 @interface PreferencesWindow : NSWindow<NSTextFieldDelegate, AMScrobbleManagerDelegate>
 
 @property (assign) IBOutlet NSTextField *username;
@@ -21,6 +23,7 @@
 @property (assign) IBOutlet NSTextField *lastFMActive;
 
 @property (nonatomic, assign) Boolean pwChanged;
+@property (nonatomic, retain) AMJSONResponder *responder;
 
 -(void)loadSettings;
 -(IBAction)saveButtonPressed:(id)sender;

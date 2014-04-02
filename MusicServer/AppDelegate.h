@@ -7,13 +7,24 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <CocoaHTTPServer/HTTPServer.h>
 #import "PreferencesWindow.h"
+
+@class AMMusicServerActiveData;
+@class AMAPIHandlerITunes;
+@class AMAuthenticationHandler;
+@class AMLastFMCommunicationManager;
+@class AMJSONResponder;
+@class AMHTTPMusicServer;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet PreferencesWindow *prefsWindow;
-@property HTTPServer *Server;
+@property (nonatomic, retain) AMHTTPMusicServer *Server;
+@property (nonatomic, retain) AMMusicServerActiveData *activeData;
+@property (nonatomic, retain) AMAPIHandlerITunes *itunesHandler;
+@property (nonatomic, retain) AMAuthenticationHandler *authHandler;
+@property (nonatomic, retain) AMLastFMCommunicationManager *lastFMHandler;
+@property (nonatomic, retain) AMJSONResponder *responder;
 
 -(IBAction)showPrefsWindow:(id)sender;
 

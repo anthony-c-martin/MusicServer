@@ -7,19 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AMLastFMCommunicationManager.h"
 
 @protocol AMAPIDataResponder;
 @protocol AMAPIAuthenticationDataResponder;
-@protocol AMAPILastFMResponder;
+@class AMMusicServerActiveData;
 
 @interface AMJSONResponder : NSObject
 
 @property (nonatomic, retain) id<AMAPIDataResponder> delegate;
 @property (nonatomic, retain) id<AMAPIAuthenticationDataResponder> authDelegate;
-@property (nonatomic, retain) id<AMAPILastFMResponder> lastFMDelegate;
+@property (nonatomic, retain) AMLastFMCommunicationManager *lastFMDelegate;
+@property (nonatomic, retain) AMMusicServerActiveData *activeData;
 
 -(id) initWithDelegate:(id<AMAPIDataResponder>)delegate
-          authDelegate:(id<AMAPIAuthenticationDataResponder>)authDelegate;
+          authDelegate:(id<AMAPIAuthenticationDataResponder>)authDelegate
+        lastFMDelegate:(AMLastFMCommunicationManager *)lastFMDelegate
+            activeData:(AMMusicServerActiveData *)data;
 
 -(BOOL) handleRequest:(NSData *)data
          responseData:(NSData **)responseData

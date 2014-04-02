@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "AMAPIAuthenticationDataResponder.h"
 
+@class AMMusicServerActiveData;
+
 @interface AMAuthenticationHandler : NSObject<AMAPIAuthenticationDataResponder>
 
 @property (nonatomic, retain) NSMutableArray *activeTokens;
 @property (nonatomic, retain) NSMutableDictionary *activeSessions;
+@property (nonatomic, retain) AMMusicServerActiveData *activeData;
+
+-(id) initWithActiveData:(AMMusicServerActiveData *)data;
 
 @end

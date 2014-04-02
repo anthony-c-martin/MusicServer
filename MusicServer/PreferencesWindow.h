@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "AMScrobbleManagerDelegate.h"
 
-@interface PreferencesWindow : NSWindow<NSTextFieldDelegate>
+@interface PreferencesWindow : NSWindow<NSTextFieldDelegate, AMScrobbleManagerDelegate>
 
 @property (assign) IBOutlet NSTextField *username;
 @property (assign) IBOutlet NSTextField *password;
@@ -17,6 +18,7 @@
 @property (assign) IBOutlet NSTextField *currentSesssions;
 
 @property (assign) IBOutlet NSTextField *lastFMUsername;
+@property (assign) IBOutlet NSTextField *lastFMActive;
 
 @property (nonatomic, assign) Boolean pwChanged;
 
@@ -25,6 +27,9 @@
 -(IBAction)clearSessionsButtonPressed:(id)sender;
 -(IBAction)addLastFMButtonPressed:(id)sender;
 -(void)controlTextDidChange:(NSNotification *)aNotification;
+-(void)requestTokenValidation:(NSString *)Token
+                       APIKey:(NSString *)APIKey;
+-(void)newSessionCreated;
 
 @end
 

@@ -100,4 +100,27 @@
     }
 }
 
+-(void) clearSessions
+{
+    @synchronized(self)
+    {
+        [[self activeSessions] removeAllObjects];
+        [[self activeTokens] removeAllObjects];
+    }
+}
+
+-(NSInteger) sessionCount
+{
+    return [[self activeSessions] count];
+}
+
+-(NSString *)secretForSession:(NSString *)Session
+{
+    @synchronized(self)
+    {
+        NSString *Secret = [[self activeSessions] objectForKey:Session];
+        return Secret;
+    }
+}
+
 @end

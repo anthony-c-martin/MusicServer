@@ -12,4 +12,6 @@
 
 -(void)requestTokenValidation:(NSString *)Token APIKey:(NSString *)APIKey;
 
+-(void)newSessionCreated;
+
 @end

@@ -255,7 +255,6 @@
                 responseData = (AMJSONAPIData *)output;
             }
             break;
-/*
         case AMJSONCommandLFMScrobbleTrack:
             if ([[self lastFMDelegate] respondsToSelector:@selector(scrobbleTrackByID:)])
             {
@@ -272,7 +271,6 @@
                 [output setSuccess:[[self lastFMDelegate] nowPlayingTrackByID:[request String]]];
                 responseData = (AMJSONAPIData *)output;
             }
-*/
         case AMJSONCommandUnknown:
             success = NO;
             break;
@@ -294,6 +292,22 @@
     }
     
     return success;
+}
+
+-(void) clearSessions
+{
+    [[self authDelegate] clearSessions];
+}
+
+-(NSInteger) sessionCount
+{
+    return [[self authDelegate] sessionCount];
+}
+
+
+-(NSString *)secretForSession:(NSString *)Session
+{
+    return [[self authDelegate] secretForSession:Session];
 }
 
 -(void) dealloc

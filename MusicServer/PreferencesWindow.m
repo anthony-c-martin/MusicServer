@@ -8,6 +8,11 @@
 
 #import "PreferencesWindow.h"
 #import "AMMusicServerActiveData.h"
+#import "AMLastFMCommunicationManager.h"
+#import "AMAPIHandlerITunes.h"
+#import "AMJSONITunesResponder.h"
+
+NSString *const API_LFM_TOKEN_REQUEST_URL = @"http://www.last.fm/api/auth/";
 
 @implementation PreferencesWindow
 
@@ -30,12 +35,22 @@
 -(void)loadSettings
 {
     AMMusicServerActiveData *activeData = [AMMusicServerActiveData sharedInstance];
+    AMJSONITunesResponder *jsonResponder = [AMJSONITunesResponder sharedInstance];
     [self setPwChanged:NO];
     [[self username] setStringValue:[activeData username]];
     [[self password] setStringValue:@"******"];
     [[self maxSessions] setIntegerValue:[[activeData maxSessions] integerValue]];
     [[self maxCachedTracks] setIntegerValue:[[activeData maxCachedTracks] integerValue]];
-    [[self lastFMUsername] setStringValue:@""];
+    [[self lastFMUsername] setStringValue:[activeData lastFMUsername]];
+    [[self currentSesssions] setIntegerValue:[jsonResponder sessionCount]];
+    if ([[activeData lastFMSessionKey] length] > 0)
+    {
+        [[self lastFMActive] setStringValue:@"Active"];
+    }
+    else
+    {
+        [[self lastFMActive] setStringValue:@"Inactive"];
+    }
 }
 
 -(IBAction)saveButtonPressed:(id)sender
@@ -52,12 +67,36 @@
 
 -(IBAction)clearSessionsButtonPressed:(id)sender
 {
-    
+    AMJSONITunesResponder *jsonResponder = [AMJSONITunesResponder sharedInstance];
+    [jsonResponder clearSessions];
+    [self loadSettings];
 }
 
 -(IBAction)addLastFMButtonPressed:(id)sender
 {
+    AMMusicServerActiveData *activeData = [AMMusicServerActiveData sharedInstance];
+    [activeData setLastFMSessionKey:@""];
+    [activeData setLastFMUsername:@""];
+    [self loadSettings];
+    AMLastFMCommunicationManager *lastFMManager = [[AMLastFMCommunicationManager alloc]
+                                                   initWithDelegate:self
+                                                   activeData:[AMMusicServerActiveData sharedInstance]
+                                                   itunesHandler:[AMAPIHandlerITunes sharedInstance]];
+    [lastFMManager RequestNewSession];
+}
+
+-(void)requestTokenValidation:(NSString *)Token
+                       APIKey:(NSString *)APIKey
+{
+    NSString *validationURL = [NSString stringWithFormat:@"%@?api_key=%@&token=%@",
+                               API_LFM_TOKEN_REQUEST_URL, APIKey, Token];
     
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:validationURL]];
+}
+
+-(void)newSessionCreated
+{
+    [self loadSettings];
 }
 
 @end

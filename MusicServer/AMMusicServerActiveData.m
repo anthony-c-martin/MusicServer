@@ -187,17 +187,6 @@
     return useAlbumArt;
 }
 
--(void)setLastFMToken:(NSString *)value
-{
-    lastFMToken = value;
-    [[self persistentData] setString:lastFMToken WithKey:@"LastFMToken"];
-}
-
--(NSString *)lastFMToken
-{
-    return [[self persistentData] getStringWithKey:@"LastFMToken"];
-}
-
 -(void)setLastFMSessionKey:(NSString *)value
 {
     lastFMSessionKey = value;
@@ -206,7 +195,15 @@
 
 -(NSString *)lastFMSessionKey
 {
-    return [[self persistentData] getStringWithKey:@"LastFMSessionKey"];
+    if (!lastFMSessionKey)
+    {
+        lastFMSessionKey = [[self persistentData] getStringWithKey:@"LastFMSessionKey"];
+        if (!lastFMSessionKey)
+        {
+            [self setLastFMSessionKey:@""];
+        }
+    }
+    return lastFMSessionKey;
 }
 
 -(void)setLastFMUsername:(NSString *)value
@@ -217,7 +214,15 @@
 
 -(NSString *)lastFMUsername
 {
-    return [[self persistentData] getStringWithKey:@"LastFMUsername"];
+    if (!lastFMUsername)
+    {
+        lastFMUsername = [[self persistentData] getStringWithKey:@"LastFMUsername"];
+        if (!lastFMUsername)
+        {
+            [self setLastFMUsername:@""];
+        }
+    }
+    return lastFMUsername;
 }
 
 -(void)saveCachedTracks

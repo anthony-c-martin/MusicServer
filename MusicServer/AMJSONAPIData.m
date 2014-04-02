@@ -8,6 +8,7 @@
 
 #import "AMJSONAPIData.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "AMJSONITunesResponder.h"
 
 @implementation AMJSONAPIData
 
@@ -20,12 +21,7 @@
         return nil;
     }
     
-    self = [super initWithDictionary:dictionary];
-    if (self)
-    {
-        
-    }
-    return self;
+    return [self initWithDictionary:dictionary];
 }
 
 -(id) initWithDictionary:(NSDictionary *)dictionary
@@ -49,19 +45,19 @@
     }
     
     NSMutableString *dataString = [NSMutableString stringWithString:@""];
-    NSMutableDictionary *sortedDictionary;
     
-    for (id key in [[dictionary allKeys] sortedArrayUsingSelector: @selector(caseSensitive)])
+    for (id key in [[dictionary allKeys] sortedArrayUsingSelector: @selector(localizedCompare:)])
     {
-        [sortedDictionary setObject:[dictionary valueForKey:key] forKey:key];
+        if (![key isEqualToString:@"Signature"])
+        {
+            [dataString appendFormat:@"%@:%@;", key, [dictionary objectForKey:key]];
+        }
     }
     
-    for (NSString *key in sortedDictionary)
+    if ([dictionary objectForKey:@"Session"])
     {
-        if (![[sortedDictionary objectForKey:key] isEqualToString:@"Signature"])
-        {
-            [dataString appendFormat:@"%@:%@;", key, [sortedDictionary objectForKey:key]];
-        }
+        NSString *sessionSecret = [[AMJSONITunesResponder sharedInstance] secretForSession:[dictionary objectForKey:@"Session"]];
+        [dataString appendFormat:@"%@;", sessionSecret];
     }
     
     return ([[dictionary objectForKey:@"Signature"] isEqualToString:[AMJSONAPIData CalculateMD5:dataString]]);

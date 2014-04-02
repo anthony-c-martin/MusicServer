@@ -28,7 +28,6 @@
 		0050CC7F18208ADA006D6247 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050CC7E18208ADA006D6247 /* Cocoa.framework */; };
 		0050CC8918208ADA006D6247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0050CC8718208ADA006D6247 /* InfoPlist.strings */; };
 		0050CC8B18208ADA006D6247 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050CC8A18208ADA006D6247 /* main.m */; };
-		0050CC8F18208ADA006D6247 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0050CC8D18208ADA006D6247 /* Credits.rtf */; };
 		0050CC9218208ADA006D6247 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050CC9118208ADA006D6247 /* AppDelegate.m */; };
 		0050CC9518208ADA006D6247 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0050CC9318208ADA006D6247 /* MainMenu.xib */; };
 		0050CC9718208ADA006D6247 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0050CC9618208ADA006D6247 /* Images.xcassets */; };
@@ -243,7 +242,6 @@
 		0050CC8818208ADA006D6247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0050CC8A18208ADA006D6247 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0050CC8C18208ADA006D6247 /* MusicServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MusicServer-Prefix.pch"; sourceTree = "<group>"; };
-		0050CC8E18208ADA006D6247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		0050CC9018208ADA006D6247 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0050CC9118208ADA006D6247 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0050CC9418208ADA006D6247 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -441,7 +439,6 @@
 				0050CC8718208ADA006D6247 /* InfoPlist.strings */,
 				0050CC8A18208ADA006D6247 /* main.m */,
 				0050CC8C18208ADA006D6247 /* MusicServer-Prefix.pch */,
-				0050CC8D18208ADA006D6247 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -756,7 +753,6 @@
 				0050CC9718208ADA006D6247 /* Images.xcassets in Resources */,
 				00326C9A18EB65E400A28AAF /* AMMusicServer.p12 in Resources */,
 				00E192F318BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist in Resources */,
-				0050CC8F18208ADA006D6247 /* Credits.rtf in Resources */,
 				0050CC9518208ADA006D6247 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -845,14 +841,6 @@
 				0050CC8818208ADA006D6247 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		0050CC8D18208ADA006D6247 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0050CC8E18208ADA006D6247 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		0050CC9318208ADA006D6247 /* MainMenu.xib */ = {

@@ -86,6 +86,7 @@
     {
         [[self activeData] setLastFMSessionKey:[Session Key]];
         [[self activeData] setLastFMUsername:[Session Name]];
+        [[self scrobblerDelegate] newSessionCreated];
     }
     [self setSessionResponse:nil];
 }
@@ -138,6 +139,9 @@
 
 -(BOOL) scrobbleTrackByID:(NSString *)request
 {
+    if (![[self activeData] lastFMUsername]) {
+        return NO;
+    }
     AMAPIITTrack *trackDetails;
     [[self itunesHandler] getTrackByID:request Response:&trackDetails];
     
@@ -172,6 +176,9 @@
 
 -(BOOL) nowPlayingTrackByID:(NSString *)request
 {
+    if (![[self activeData] lastFMUsername]) {
+        return NO;
+    }
     AMAPIITTrack *trackDetails;
     [[self itunesHandler] getTrackByID:request Response:&trackDetails];
     [self setCurrentTrack:trackDetails];

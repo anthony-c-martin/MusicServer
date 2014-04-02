@@ -18,5 +18,9 @@
         response:(AMAPIGetTokenResponse **)response;
 
 -(BOOL) validateSession:(NSString *)Session;
+-(NSString *)secretForSession:(NSString *)Session;
+
+-(void) clearSessions;
+-(NSInteger) sessionCount;
 
 @end

@@ -27,6 +27,10 @@
         connectedHost:(NSString *)ipAddress;
 
 -(BOOL) validateSession:(NSString *)Session;
+-(NSString *)secretForSession:(NSString *)Session;
+
+-(void) clearSessions;
+-(NSInteger) sessionCount;
 
 -(void) dealloc;
 

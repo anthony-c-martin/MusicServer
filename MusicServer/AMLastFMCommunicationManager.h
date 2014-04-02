@@ -37,6 +37,7 @@
 -(void)TrackResponse:(AMTrackResponse *)Response Scrobble:(AMScrobbles *)Scrobbles;
 -(void)AuthResponse:(AMAuthResponse *)Response GetToken:(AMToken *)Token;
 -(void)AuthResponse:(AMAuthResponse *)Response GetSession:(AMSession *)Session;
+-(void)RequestNewSession;
 
 +(AMLastFMCommunicationManager *)sharedInstance;
 -(void)Response:(AMBaseResponse *)Response Error:(NSError *)Error;

@@ -13,11 +13,16 @@
 #import "AMHTTPErrorResponse.h"
 #import <CocoaHTTPServer/HTTPMessage.h>
 #import <CocoaHTTPServer/HTTPAsyncFileResponse.h>
+#import <CocoaHTTPServer/HTTPFileResponse.h>
 #import <CocoaAsyncSocket/GCDAsyncSocket.h>
 #import <Security/Security.h>
 #import "AMHTTPMusicServer.h"
+#import "AMHTTPFileResponse.h"
 
 @implementation AMHTTPConnection
+@synthesize sslCert;
+@synthesize connectedHost;
+@synthesize responder;
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
 {
@@ -84,14 +89,15 @@
                     return [[HTTPAsyncFileResponse alloc] initWithFilePath:filePath forConnection:self];
                 }
             }
-            return [super httpResponseForMethod:method URI:path];
+            return [[AMHTTPErrorResponse alloc] initWithCode:[NSNumber numberWithInt:404]];
         }
         
-        if ([[url path] isEqualToString:@"/"])
+        NSString *filePath = [self filePathForURI:path allowDirectory:NO];
+        BOOL isDir = NO;
+        if (filePath && [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] && !isDir)
         {
-            return [super httpResponseForMethod:method URI:@"/index.html"];
+            return [[AMHTTPFileResponse alloc] initWithFilePath:filePath forConnection:self];
         }
-        return [super httpResponseForMethod:method URI:path];
     }
     
     return [[AMHTTPErrorResponse alloc] initWithCode:[NSNumber numberWithInt:500]];
@@ -107,6 +113,7 @@
     self = [super initWithAsyncSocket:newSocket configuration:aConfig];
     if (self)
     {
+        [self setSslCert:[self generateSSLCertArray]];
         [self setResponder:[(AMHTTPMusicServer *)[aConfig server] responder]];
         [self setConnectedHost:[[newSocket connectedHost] copy]];
         [[[self responder] activeData] auditRequestFromIP:[self connectedHost]];
@@ -114,12 +121,7 @@
     return self;
 }
 
--(BOOL)isSecureServer
-{
-	return YES;
-}
-
--(NSArray *)sslIdentityAndCertificates
+-(NSArray *)generateSSLCertArray
 {
     SecIdentityRef identityRef = NULL;
     SecCertificateRef certificateRef = NULL;
@@ -152,6 +154,16 @@
     NSArray *result = [[NSArray alloc] initWithObjects:(__bridge id)identityRef, (__bridge id)certificateRef, nil];
     
     return result;
+}
+
+-(BOOL)isSecureServer
+{
+	return YES;
+}
+
+-(NSArray *)sslIdentityAndCertificates
+{
+    return [self sslCert];
 }
 
 @end

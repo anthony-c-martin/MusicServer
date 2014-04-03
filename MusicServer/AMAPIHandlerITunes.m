@@ -122,6 +122,7 @@
         
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
+            if (albumID > 100) break;
             NSImage *artwork = nil;
             if ([[[self activeData] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
             {

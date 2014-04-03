@@ -26,7 +26,7 @@
 @property (nonatomic, retain) NSString *String;
 @end
 
-@interface AMAPIGetTokenRequest : AMJSONAPIData
+@interface AMAPIBlankRequest : AMJSONAPIData
 @end
 
 @interface AMAPIGetSessionRequest : AMJSONAPIData
@@ -41,6 +41,10 @@
 @interface AMAPIGetSessionResponse : AMJSONAPIData
 @property (nonatomic, retain) NSString *Session;
 @property (nonatomic, retain) NSString *Secret;
+@end
+
+@interface AMAPIGetUserPreferencesResponse : AMJSONAPIData
+@property (nonatomic, assign) Boolean ScrobblingEnabled;
 @end
 
 @interface AMAPIConvertTrackResponse : AMJSONAPIData

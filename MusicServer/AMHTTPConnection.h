@@ -14,6 +14,7 @@
 @interface AMHTTPConnection : HTTPConnection
 
 @property (nonatomic, retain) NSString *connectedHost;
+@property (nonatomic, retain) NSArray *sslCert;
 @property (nonatomic, retain) AMJSONResponder *responder;
 
 @end

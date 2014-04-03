@@ -14,7 +14,7 @@
 -(BOOL) getSession:(AMAPIGetSessionRequest *)request
           response:(AMAPIGetSessionResponse **)response;
 
--(BOOL) getToken:(AMAPIGetTokenRequest *)request
+-(BOOL) getToken:(AMAPIBlankRequest *)request
         response:(AMAPIGetTokenResponse **)response;
 
 -(BOOL) validateSession:(NSString *)Session;

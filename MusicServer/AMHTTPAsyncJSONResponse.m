@@ -96,6 +96,14 @@
     return 500;
 }
 
+-(NSDictionary *)httpHeaders
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            @"no-cache", @"Cache-Control",
+            @"application/json", @"Content-Type",
+            nil];
+}
+
 - (void)connectionDidClose
 {
     dispatch_sync(requestQueue, ^{

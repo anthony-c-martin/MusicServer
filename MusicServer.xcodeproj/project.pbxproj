@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00002EBB18ECCB3800243001 /* AMHTTPMusicServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00002EBA18ECCB3800243001 /* AMHTTPMusicServer.m */; };
+		00002ED718EE0FC600243001 /* AMHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00002ED618EE0FC600243001 /* AMHTTPFileResponse.m */; };
 		0005BA96182196B700C17FA9 /* AMJSONAPIData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA95182196B700C17FA9 /* AMJSONAPIData.m */; };
 		0005BA9C182196CC00C17FA9 /* IAModelBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA99182196CC00C17FA9 /* IAModelBase.m */; };
 		0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0005BA9B182196CC00C17FA9 /* IAModelCollectionBase.m */; };
@@ -201,6 +202,8 @@
 /* Begin PBXFileReference section */
 		00002EB918ECCB3800243001 /* AMHTTPMusicServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPMusicServer.h; sourceTree = "<group>"; };
 		00002EBA18ECCB3800243001 /* AMHTTPMusicServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPMusicServer.m; sourceTree = "<group>"; };
+		00002ED518EE0FC600243001 /* AMHTTPFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPFileResponse.h; sourceTree = "<group>"; };
+		00002ED618EE0FC600243001 /* AMHTTPFileResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPFileResponse.m; sourceTree = "<group>"; };
 		0005BA94182196B700C17FA9 /* AMJSONAPIData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJSONAPIData.h; sourceTree = "<group>"; };
 		0005BA95182196B700C17FA9 /* AMJSONAPIData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJSONAPIData.m; sourceTree = "<group>"; };
 		0005BA98182196CC00C17FA9 /* IAModelBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAModelBase.h; sourceTree = "<group>"; };
@@ -471,6 +474,8 @@
 				009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */,
 				00002EB918ECCB3800243001 /* AMHTTPMusicServer.h */,
 				00002EBA18ECCB3800243001 /* AMHTTPMusicServer.m */,
+				00002ED518EE0FC600243001 /* AMHTTPFileResponse.h */,
+				00002ED618EE0FC600243001 /* AMHTTPFileResponse.m */,
 			);
 			name = HTTP;
 			sourceTree = "<group>";
@@ -774,6 +779,7 @@
 				0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */,
 				0005BA9C182196CC00C17FA9 /* IAModelBase.m in Sources */,
 				0050CC9218208ADA006D6247 /* AppDelegate.m in Sources */,
+				00002ED718EE0FC600243001 /* AMHTTPFileResponse.m in Sources */,
 				0005BA96182196B700C17FA9 /* AMJSONAPIData.m in Sources */,
 				0005BAA01821A59A00C17FA9 /* AMJSONAPIDataObjects.m in Sources */,
 				00245CC118209E2900506730 /* AMJSONResponder.m in Sources */,

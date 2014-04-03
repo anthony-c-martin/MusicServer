@@ -62,7 +62,7 @@
 }
 @end
 
-@implementation AMAPIGetTokenRequest
+@implementation AMAPIBlankRequest
 -(id) initFromData:(NSData *)data
          responder:(AMJSONResponder *)responder
 {
@@ -90,6 +90,15 @@
 {
     return [NSDictionary dictionaryWithObjectsAndKeys:
             @"Token", @"Token",
+            nil];
+}
+@end
+
+@implementation AMAPIGetUserPreferencesResponse
+-(NSDictionary *) propertiesToDictionaryEntriesMapping
+{
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+            @"ScrobblingEnabled", @"ScrobblingEnabled",
             nil];
 }
 @end

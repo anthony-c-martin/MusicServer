@@ -71,7 +71,7 @@
     }
 }
 
--(BOOL) getToken:(AMAPIGetTokenRequest *)request
+-(BOOL) getToken:(AMAPIBlankRequest *)request
         response:(AMAPIGetTokenResponse **)response
 {
     @synchronized(self)

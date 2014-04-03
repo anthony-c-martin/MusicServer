@@ -222,7 +222,7 @@
         case AMJSONCommandGetToken:
             if ([[self authDelegate] respondsToSelector:@selector(getToken:response:)])
             {
-                AMAPIGetTokenRequest *request = [[AMAPIGetTokenRequest alloc] initFromData:data responder:self];
+                AMAPIBlankRequest *request = [[AMAPIBlankRequest alloc] initFromData:data responder:self];
                 AMAPIGetTokenResponse *output;
                 
                 success = [[self authDelegate] getToken:request
@@ -273,7 +273,6 @@
         case AMJSONCommandLFMNowPlayingTrack:
             if ([[self lastFMDelegate] respondsToSelector:@selector(nowPlayingTrackByID:)])
             {
-                [(AMLastFMCommunicationManager *)[self lastFMDelegate] RequestNewSession];
                 AMAPIScrobbleTrackResponse *output = [[AMAPIScrobbleTrackResponse alloc] init];
                 AMAPIDataStringRequest *request = [[AMAPIDataStringRequest alloc] initFromData:data responder:self];
                 [[self lastFMDelegate] nowPlayingTrackByID:[request String]];
@@ -281,6 +280,13 @@
                 responseData = (AMJSONAPIData *)output;
             }
             break;
+        case AMJSONCommandGetUserPreferences:
+        {
+            AMAPIGetUserPreferencesResponse *output = [[AMAPIGetUserPreferencesResponse alloc] init];
+            [output setScrobblingEnabled:([[[self activeData] lastFMSessionKey] length] > 0)];
+            responseData = (AMJSONAPIData *)output;
+            break;
+        }
         case AMJSONCommandUnknown:
             success = NO;
             break;

@@ -56,6 +56,9 @@
         {
             [*response setSession:[AMJSONAPIData randomAlphanumericString]];
             [*response setSecret:[AMJSONAPIData randomAlphanumericString]];
+            if ([[self activeSessions] count] > 0 && [[self activeSessions] count] == [[[self activeData] maxSessions] integerValue]) {
+                [[self activeSessions] removeObjectForKey:[[[self activeSessions] allKeys] objectAtIndex:0]];
+            }
             [[self activeSessions] setObject:[*response Secret] forKey:[*response Session]];
             return YES;
         }

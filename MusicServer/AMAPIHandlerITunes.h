@@ -10,6 +10,7 @@
 #import "AMAPIDataResponder.h"
 
 @class AMMusicServerActiveData;
+@protocol AMPercentageValueUpdater;
 
 @interface AMAPIHandlerITunes : NSObject<AMAPIDataResponder>
 
@@ -17,8 +18,9 @@
 @property (nonatomic, retain) NSSet *Artists;
 @property (nonatomic, retain) NSSet *Albums;
 @property (nonatomic, retain) AMMusicServerActiveData *activeData;
+@property (nonatomic, retain) id <AMPercentageValueUpdater> valueUpdater;
 
--(id) initWithActiveData:(AMMusicServerActiveData *)data;
+-(id) initWithActiveData:(AMMusicServerActiveData *)data valueUpdater:(id <AMPercentageValueUpdater>)updater;
 -(BOOL) loadLibrary;
 
 @end

@@ -29,20 +29,32 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self setActiveData:[[AMMusicServerActiveData alloc] init]];
-    [self setItunesHandler:[[AMAPIHandlerITunes alloc] initWithActiveData:[self activeData]]];
+    [self setItunesHandler:[[AMAPIHandlerITunes alloc] initWithActiveData:[self activeData] valueUpdater:self]];
     [self setAuthHandler:[[AMAuthenticationHandler alloc] initWithActiveData:[self activeData]]];
     [self setLastFMHandler:[[AMLastFMCommunicationManager alloc] initWithDelegate:nil activeData:[self activeData] dataResponder:[self itunesHandler]]];
     [self setResponder:[[AMJSONResponder alloc] initWithDelegate:[self itunesHandler] authDelegate:[self authHandler] lastFMDelegate:[self lastFMHandler] activeData:[self activeData]]];
-    
-    [[self itunesHandler] loadLibrary];
-    
     [self setServer:[[AMHTTPMusicServer alloc] init]];
     [[self Server] setType:@"_https._tcp"];
     [[self Server] setPort:12345];
     [[self Server] setConnectionClass:[AMHTTPConnection class]];
     [[self Server] setDocumentRoot:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"webroot"]];
     [[self Server] setResponder:[self responder]];
-    [[self Server] start:nil];
+    
+    dispatch_queue_t loadQueue = dispatch_queue_create("AppDelegateLoad", NULL);
+    dispatch_async(loadQueue, ^{
+        [[self itunesHandler] loadLibrary];
+        [[self Server] start:nil];
+    });
+}
+
+-(void)setProgress:(NSNumber *)percentComplete {
+    NSDockTile *docTile = [[NSApplication sharedApplication] dockTile];
+    if (percentComplete != nil) {
+        [docTile setBadgeLabel:[NSString stringWithFormat:@"%ld%%", (long)[percentComplete integerValue]]];
+    }
+    else {
+        [docTile setBadgeLabel:nil];
+    }
 }
 
 -(IBAction)showPrefsWindow:(id)sender

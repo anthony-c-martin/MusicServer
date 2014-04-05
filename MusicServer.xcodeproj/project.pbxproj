@@ -255,6 +255,7 @@
 		0050CCA418208ADA006D6247 /* MusicServerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicServerTests-Info.plist"; sourceTree = "<group>"; };
 		0050CCA618208ADA006D6247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0050CCA818208ADA006D6247 /* MusicServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicServerTests.m; sourceTree = "<group>"; };
+		0052E33218EFFF5C0046BA8C /* AMPercentageValueUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMPercentageValueUpdater.h; sourceTree = "<group>"; };
 		009D49A118D44F83006CA309 /* AMHTTPErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPErrorResponse.h; sourceTree = "<group>"; };
 		009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPErrorResponse.m; sourceTree = "<group>"; };
 		009D49A418D450FE006CA309 /* AMAPIDataResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPIDataResponder.h; sourceTree = "<group>"; };
@@ -423,6 +424,7 @@
 				00DAE0E218254215007B6ABC /* ITunesHandler */,
 				0050CC9018208ADA006D6247 /* AppDelegate.h */,
 				0050CC9118208ADA006D6247 /* AppDelegate.m */,
+				0052E33218EFFF5C0046BA8C /* AMPercentageValueUpdater.h */,
 				0050CC8518208ADA006D6247 /* Supporting Files */,
 				0050CC9618208ADA006D6247 /* Images.xcassets */,
 				0050CC9318208ADA006D6247 /* MainMenu.xib */,
@@ -943,7 +945,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -968,7 +970,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (

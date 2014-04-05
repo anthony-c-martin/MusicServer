@@ -15,6 +15,7 @@
 #import "./AMJSONAPIDataObjects.h"
 #import "./AMAudioConverter.h"
 #import "AMMusicServerActiveData.h"
+#import "AMPercentageValueUpdater.h"
 
 @interface NSImage (scalingAdditions)
 -(NSString *) base64String;
@@ -89,8 +90,9 @@
 
 @implementation AMAPIHandlerITunes
 @synthesize activeData;
+@synthesize valueUpdater;
 
--(id) initWithActiveData:(AMMusicServerActiveData *)data
+-(id) initWithActiveData:(AMMusicServerActiveData *)data valueUpdater:(id<AMPercentageValueUpdater>)updater
 {
     self = [super init];
     if (self)
@@ -103,6 +105,7 @@
         [self setArtists:[[NSSet alloc] init]];
         [self setAlbums:[[NSSet alloc] init]];
         [self setActiveData:data];
+        [self setValueUpdater:updater];
     }
     return self;
 }
@@ -120,8 +123,20 @@
         int albumID = 1;
         int artistID = 1;
         
+        NSUInteger librarySize = [[library allMediaItems] count];
+        int itemCount = 0;
+        int percentComplete = 0;
+        [[self valueUpdater] setProgress:[NSNumber numberWithInt:percentComplete]];
+        
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
+            itemCount++;
+            int percentCurrent = (int)(((float)itemCount / (float)librarySize) * 100);
+            if (percentCurrent > percentComplete) {
+                percentComplete = percentCurrent;
+                [[self valueUpdater] setProgress:[NSNumber numberWithInt:percentComplete]];
+            }
+            
             NSImage *artwork = nil;
             if ([[[self activeData] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
             {
@@ -141,6 +156,7 @@
         [self setAlbums:(NSSet *)albums];
         [self setArtists:(NSSet *)artists];
         
+        [[self valueUpdater] setProgress:nil];
         return YES;
     }
     return NO;

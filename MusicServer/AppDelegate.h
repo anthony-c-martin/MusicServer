@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PreferencesWindow.h"
+#import "AMPercentageValueUpdater.h"
 
 @class AMMusicServerActiveData;
 @class AMAPIHandlerITunes;
@@ -16,7 +17,7 @@
 @class AMJSONResponder;
 @class AMHTTPMusicServer;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, AMPercentageValueUpdater>
 
 @property (assign) IBOutlet PreferencesWindow *prefsWindow;
 @property (nonatomic, retain) AMHTTPMusicServer *Server;

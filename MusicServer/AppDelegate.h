@@ -28,5 +28,6 @@
 @property (nonatomic, retain) AMJSONResponder *responder;
 
 -(IBAction)showPrefsWindow:(id)sender;
+-(IBAction)showWebInterface:(id)sender;
 
 @end

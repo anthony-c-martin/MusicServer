@@ -30,6 +30,18 @@
                                     <action selector="showPrefsWindow:" target="494" id="582-hu-Ndq"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Launch Web Interface" id="8ab-5k-S1z">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showWebInterface:" target="494" id="Tfp-RJ-bm8"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Rescan Library" id="e1i-ev-aPF">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="rescanLibrary:" target="494" id="xMD-bW-zwG"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -78,7 +90,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES"/>
             <rect key="contentRect" x="100" y="500" width="389" height="522"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1050"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1200"/>
             <view key="contentView" id="yYi-UK-qOo">
                 <rect key="frame" x="0.0" y="0.0" width="389" height="522"/>
                 <autoresizingMask key="autoresizingMask"/>

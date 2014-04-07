@@ -140,7 +140,7 @@
     {
         return NSOrderedAscending;
     }
-    return [[self Name] compare:[object Name]];
+    return [[self Name] compare:[object Name] options:NSCaseInsensitiveSearch];
 }
 
 -(BOOL) isEqual:(id)object
@@ -188,7 +188,7 @@
         return result;
     }
     
-    return [[self Name] compare:[object Name]];
+    return [[self Name] compare:[object Name] options:NSCaseInsensitiveSearch];
 }
 
 -(BOOL) isEqual:(id)object
@@ -223,7 +223,7 @@
         
     }
     return self;
-}
+}   
 
 -(NSComparisonResult)compare:(id)object
 {
@@ -245,7 +245,7 @@
         return result;
     }
     
-    return [[self Name] compare:[object Name]];
+    return [[self Name] compare:[object Name] options:NSCaseInsensitiveSearch];
 }
 
 -(BOOL) isEqual:(id)object

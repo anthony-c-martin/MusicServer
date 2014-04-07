@@ -13,13 +13,15 @@
 #import "AMAudioConverter.h"
 #import "AMHTTPMusicServer.h"
 
-
 #import "AMLastFMCommunicationManager.h"
 #import "AMJSONResponder.h"
 #import "AMMusicServerActiveData.h"
 #import "AMAuthenticationHandler.h"
 
 @implementation AppDelegate
+{
+    Boolean scanInProgress;
+}
 @synthesize activeData;
 @synthesize itunesHandler;
 @synthesize authHandler;
@@ -39,12 +41,32 @@
     [[self Server] setConnectionClass:[AMHTTPConnection class]];
     [[self Server] setDocumentRoot:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"webroot"]];
     [[self Server] setResponder:[self responder]];
-    
-    dispatch_queue_t loadQueue = dispatch_queue_create("AppDelegateLoad", NULL);
-    dispatch_async(loadQueue, ^{
-        [[self itunesHandler] loadLibrary];
-        [[self Server] start:nil];
-    });
+    [self initializeLibrary];
+}
+
+-(void)initializeLibrary
+{
+    if (self->scanInProgress)
+    {
+        return;
+    }
+    @synchronized([self Server])
+    {
+        self->scanInProgress = YES;
+        [[self Server] stop];
+        
+        dispatch_queue_t loadQueue = dispatch_queue_create("AppDelegateLoad", NULL);
+        dispatch_async(loadQueue, ^{
+            [[self itunesHandler] loadLibrary];
+            [[self Server] start:nil];
+            self->scanInProgress = NO;
+        });
+    }
+}
+
+-(IBAction)rescanLibrary:(id)sender
+{
+    [self initializeLibrary];
 }
 
 -(void)setProgress:(NSNumber *)percentComplete {
@@ -57,11 +79,34 @@
     }
 }
 
+-(NSMenu *)applicationDockMenu:(NSApplication *)sender
+{
+    NSMenu *menu = [[NSMenu alloc] init];
+    NSMenuItem *menuItem1;
+    menuItem1 = [[NSMenuItem alloc]
+                 initWithTitle:@"Launch Web Interface"
+                 action:@selector(showWebInterface:)
+                 keyEquivalent:@""];
+    NSMenuItem *menuItem2 = [[NSMenuItem alloc]
+                 initWithTitle:@"Rescan Library"
+                 action:@selector(rescanLibrary:)
+                 keyEquivalent:@""];
+    [menu addItem:menuItem1];
+    [menu addItem:menuItem2];
+    return menu;
+}
+
 -(IBAction)showPrefsWindow:(id)sender
 {
     [[self prefsWindow] setResponder:[self responder]];
     [[self prefsWindow] loadSettings];
     [[self prefsWindow] makeKeyAndOrderFront:self];
+}
+
+-(IBAction)showWebInterface:(id)sender
+{
+    NSString *appURL = @"https://localhost:12345/";
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:appURL]];
 }
 
 @end

@@ -424,7 +424,6 @@
 				00DAE0E218254215007B6ABC /* ITunesHandler */,
 				0050CC9018208ADA006D6247 /* AppDelegate.h */,
 				0050CC9118208ADA006D6247 /* AppDelegate.m */,
-				0052E33218EFFF5C0046BA8C /* AMPercentageValueUpdater.h */,
 				0050CC8518208ADA006D6247 /* Supporting Files */,
 				0050CC9618208ADA006D6247 /* Images.xcassets */,
 				0050CC9318208ADA006D6247 /* MainMenu.xib */,
@@ -509,6 +508,7 @@
 			children = (
 				009D49A518D4527D006CA309 /* AMAPIAuthenticationDataResponder.h */,
 				009D49A418D450FE006CA309 /* AMAPIDataResponder.h */,
+				0052E33218EFFF5C0046BA8C /* AMPercentageValueUpdater.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

@@ -11,6 +11,49 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
+        <menu id="DTB-bi-ODa">
+            <items>
+                <menuItem title="About MusicServer" id="iOE-4X-pR0">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="orderFrontStandardAboutPanel:" target="-2" id="8Fs-0y-CXr"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="Za1-UG-Dc7">
+                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                </menuItem>
+                <menuItem title="Preferences…" id="129">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showPrefsWindow:" target="494" id="582-hu-Ndq"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="XQr-8O-4xo">
+                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                </menuItem>
+                <menuItem title="Launch Web Interface" id="aqw-NU-pU1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showWebInterface:" target="494" id="3Qg-VJ-0Zw"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Rescan Library" id="n4f-nH-GmV">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="rescanLibrary:" target="494" id="rky-Q0-rwf"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="ncM-h1-jx1">
+                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                </menuItem>
+                <menuItem title="Quit MusicServer" id="5hx-Jo-zeS">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="terminate:" target="-3" id="pEv-Sn-db4"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="MusicServer" id="56">
@@ -25,22 +68,12 @@
                             <menuItem isSeparatorItem="YES" id="236">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Preferences…" keyEquivalent="," id="129">
-                                <connections>
-                                    <action selector="showPrefsWindow:" target="494" id="582-hu-Ndq"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Preferences…" keyEquivalent="," id="02s-ZO-Yd2"/>
                             <menuItem title="Launch Web Interface" id="8ab-5k-S1z">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="showWebInterface:" target="494" id="Tfp-RJ-bm8"/>
-                                </connections>
                             </menuItem>
                             <menuItem title="Rescan Library" id="e1i-ev-aPF">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="rescanLibrary:" target="494" id="xMD-bW-zwG"/>
-                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
@@ -83,6 +116,7 @@
         <customObject id="494" customClass="AppDelegate">
             <connections>
                 <outlet property="prefsWindow" destination="AgJ-eU-iVx" id="nqv-db-xei"/>
+                <outlet property="statusMenu" destination="DTB-bi-ODa" id="Szw-1A-Mkg"/>
             </connections>
         </customObject>
         <customObject id="420" customClass="NSFontManager"/>

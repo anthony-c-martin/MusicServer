@@ -26,6 +26,8 @@
 @property (nonatomic, retain) AMAuthenticationHandler *authHandler;
 @property (nonatomic, retain) AMLastFMCommunicationManager *lastFMHandler;
 @property (nonatomic, retain) AMJSONResponder *responder;
+@property (strong, nonatomic) IBOutlet NSMenu *statusMenu;
+@property (strong, nonatomic) NSStatusItem *statusItem;
 
 -(IBAction)showPrefsWindow:(id)sender;
 -(IBAction)showWebInterface:(id)sender;

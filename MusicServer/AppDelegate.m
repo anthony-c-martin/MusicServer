@@ -30,6 +30,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [self createStatusItem];
     [self setActiveData:[[AMMusicServerActiveData alloc] init]];
     [self setItunesHandler:[[AMAPIHandlerITunes alloc] initWithActiveData:[self activeData] valueUpdater:self]];
     [self setAuthHandler:[[AMAuthenticationHandler alloc] initWithActiveData:[self activeData]]];
@@ -42,6 +43,20 @@
     [[self Server] setDocumentRoot:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"webroot"]];
     [[self Server] setResponder:[self responder]];
     [self initializeLibrary];
+}
+
+-(void)createStatusItem
+{
+    NSSize imageSize;
+    imageSize.width = [[NSFont menuFontOfSize:0] pointSize];
+    imageSize.height = imageSize.width;
+    NSImage *statusItemImage = [NSImage imageNamed:@"Note"];
+    [statusItemImage setSize:imageSize];
+    
+    [self setStatusItem:[[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength]];
+    [[self statusItem] setMenu:[self statusMenu]];
+    [[self statusItem] setHighlightMode:YES];
+    [[self statusItem] setImage:statusItemImage];
 }
 
 -(void)initializeLibrary
@@ -72,9 +87,12 @@
 -(void)setProgress:(NSNumber *)percentComplete {
     NSDockTile *docTile = [[NSApplication sharedApplication] dockTile];
     if (percentComplete != nil) {
-        [docTile setBadgeLabel:[NSString stringWithFormat:@"%ld%%", (long)[percentComplete integerValue]]];
+        NSString *pcComplete = [NSString stringWithFormat:@"%ld%%", (long)[percentComplete integerValue]];
+        [[self statusItem] setTitle:pcComplete];
+        [docTile setBadgeLabel:pcComplete];
     }
     else {
+        [[self statusItem] setTitle:nil];
         [docTile setBadgeLabel:nil];
     }
 }

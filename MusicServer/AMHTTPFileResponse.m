@@ -29,6 +29,9 @@
         else if ([extension isEqualToString:@"svg"]) {
             contentType = @"image/svg+xml";
         }
+        else if ([extension isEqualToString:@"jpg"]) {
+            contentType = @"image/jpeg";
+        }
         else {
             contentType = @"text/plain";
         }

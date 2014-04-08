@@ -134,6 +134,16 @@
     return self;
 }
 
+-(void)setName:(NSString *)Name
+{
+    if ([Name length] > 0) {
+        _Name = Name;
+    }
+    else {
+        _Name = @"Unknown Artist";
+    }
+}
+
 -(NSComparisonResult) compare:(id)object
 {
     if (![object isKindOfClass:[AMAPIITArtist class]])
@@ -172,6 +182,16 @@
         [self setTrackSet:[[NSMutableSet alloc] init]];
     }
     return self;
+}
+
+-(void)setName:(NSString *)Name
+{
+    if ([Name length] > 0) {
+        _Name = Name;
+    }
+    else {
+        _Name = @"Unknown Album";
+    }
 }
 
 -(NSComparisonResult) compare:(id)object
@@ -223,7 +243,17 @@
         
     }
     return self;
-}   
+}
+
+-(void)setName:(NSString *)Name
+{
+    if ([Name length] > 0) {
+        _Name = Name;
+    }
+    else {
+        _Name = @"Unknown";
+    }
+}
 
 -(NSComparisonResult)compare:(id)object
 {

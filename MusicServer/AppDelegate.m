@@ -114,8 +114,15 @@
     return menu;
 }
 
+-(IBAction)showAboutWindow:(id)sender
+{
+    [NSApp activateIgnoringOtherApps:YES];
+    [NSApp orderFrontStandardAboutPanel:sender];
+}
+
 -(IBAction)showPrefsWindow:(id)sender
 {
+    [NSApp activateIgnoringOtherApps:YES];
     [[self prefsWindow] setResponder:[self responder]];
     [[self prefsWindow] loadSettings];
     [[self prefsWindow] makeKeyAndOrderFront:self];

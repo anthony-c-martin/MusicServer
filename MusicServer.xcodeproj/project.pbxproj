@@ -265,7 +265,7 @@
 		009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPErrorResponse.m; sourceTree = "<group>"; };
 		009D49A418D450FE006CA309 /* AMAPIDataResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPIDataResponder.h; sourceTree = "<group>"; };
 		009D49A518D4527D006CA309 /* AMAPIAuthenticationDataResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPIAuthenticationDataResponder.h; sourceTree = "<group>"; };
-		00B6DF8C199D6EED00B6DDE8 /* codesign-old.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "codesign-old.sh"; path = "Scripts/codesign-old.sh"; sourceTree = "<group>"; };
+		00B6DF8C199D6EED00B6DDE8 /* codesign-application.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "codesign-application.sh"; path = "Scripts/codesign-application.sh"; sourceTree = "<group>"; };
 		00CBBCEC18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPAsyncJSONResponse.h; sourceTree = "<group>"; };
 		00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPAsyncJSONResponse.m; sourceTree = "<group>"; };
 		00CBBCF418C35F990063DBF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -328,9 +328,9 @@
 			children = (
 				00720C74199D6BE90093B25F /* xcode-build-bump.sh */,
 				00720C75199D6BE90093B25F /* xcode-version-bump.sh */,
+				00B6DF8C199D6EED00B6DDE8 /* codesign-application.sh */,
 				00669DA9199D5D960041673D /* codesign-frameworks.sh */,
 				00669DAF199D61BC0041673D /* copy-application.sh */,
-				00B6DF8C199D6EED00B6DDE8 /* codesign-old.sh */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -590,6 +590,7 @@
 				0050CC7918208ADA006D6247 /* Resources */,
 				00F6DA1818BC37110036F43F /* Copy Embedded Frameworks */,
 				00D68FFE18F7CB94005585BB /* Code Sign Embedded Frameworks */,
+				00B6DF8D199D70BA00B6DDE8 /* Code Sign Application */,
 				00D6900B18F7CCA0005585BB /* Update Applications folder and create DMG */,
 			);
 			buildRules = (
@@ -819,9 +820,24 @@
 			shellScript = "sh ./Scripts/xcode-version-bump.sh\nsh ./Scripts/xcode-build-bump.sh";
 			showEnvVarsInLog = 0;
 		};
+		00B6DF8D199D70BA00B6DDE8 /* Code Sign Application */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Code Sign Application";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "sh ./Scripts/codesign-application.sh";
+			showEnvVarsInLog = 0;
+		};
 		00D68FFE18F7CB94005585BB /* Code Sign Embedded Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -829,9 +845,9 @@
 			name = "Code Sign Embedded Frameworks";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "sh ./Scripts/codesign-old.sh";
+			shellScript = "sh ./Scripts/codesign-frameworks.sh";
 			showEnvVarsInLog = 0;
 		};
 		00D6900B18F7CCA0005585BB /* Update Applications folder and create DMG */ = {

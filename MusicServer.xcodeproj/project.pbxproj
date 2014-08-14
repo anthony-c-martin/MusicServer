@@ -258,11 +258,14 @@
 		00669DA9199D5D960041673D /* codesign-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "codesign-frameworks.sh"; path = "Scripts/codesign-frameworks.sh"; sourceTree = "<group>"; };
 		00669DAE199D5FC40041673D /* MusicServer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MusicServer.entitlements; sourceTree = "<group>"; };
 		00669DAF199D61BC0041673D /* copy-application.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "copy-application.sh"; path = "Scripts/copy-application.sh"; sourceTree = "<group>"; };
+		00720C74199D6BE90093B25F /* xcode-build-bump.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "xcode-build-bump.sh"; path = "Scripts/xcode-build-bump.sh"; sourceTree = "<group>"; };
+		00720C75199D6BE90093B25F /* xcode-version-bump.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "xcode-version-bump.sh"; path = "Scripts/xcode-version-bump.sh"; sourceTree = "<group>"; };
 		00801461199BEF9600B0D1B0 /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; name = public; path = MusicServer/GUI/public; sourceTree = "<group>"; };
 		009D49A118D44F83006CA309 /* AMHTTPErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPErrorResponse.h; sourceTree = "<group>"; };
 		009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPErrorResponse.m; sourceTree = "<group>"; };
 		009D49A418D450FE006CA309 /* AMAPIDataResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPIDataResponder.h; sourceTree = "<group>"; };
 		009D49A518D4527D006CA309 /* AMAPIAuthenticationDataResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPIAuthenticationDataResponder.h; sourceTree = "<group>"; };
+		00B6DF8C199D6EED00B6DDE8 /* codesign-old.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "codesign-old.sh"; path = "Scripts/codesign-old.sh"; sourceTree = "<group>"; };
 		00CBBCEC18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPAsyncJSONResponse.h; sourceTree = "<group>"; };
 		00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPAsyncJSONResponse.m; sourceTree = "<group>"; };
 		00CBBCF418C35F990063DBF6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -323,8 +326,11 @@
 		00234280199D5D05007D3AC6 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				00720C74199D6BE90093B25F /* xcode-build-bump.sh */,
+				00720C75199D6BE90093B25F /* xcode-version-bump.sh */,
 				00669DA9199D5D960041673D /* codesign-frameworks.sh */,
 				00669DAF199D61BC0041673D /* copy-application.sh */,
+				00B6DF8C199D6EED00B6DDE8 /* codesign-old.sh */,
 			);
 			name = Scripts;
 			sourceTree = "<group>";
@@ -580,6 +586,7 @@
 			buildPhases = (
 				0050CC7718208ADA006D6247 /* Sources */,
 				0050CC7818208ADA006D6247 /* Frameworks */,
+				00720C76199D6BF20093B25F /* Increment Version & Build Numbers */,
 				0050CC7918208ADA006D6247 /* Resources */,
 				00F6DA1818BC37110036F43F /* Copy Embedded Frameworks */,
 				00D68FFE18F7CB94005585BB /* Code Sign Embedded Frameworks */,
@@ -628,6 +635,9 @@
 					0050CC7A18208ADA006D6247 = {
 						DevelopmentTeam = DD9R5N89H9;
 						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 0;
 							};
@@ -794,6 +804,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		00720C76199D6BF20093B25F /* Increment Version & Build Numbers */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Version & Build Numbers";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "sh ./Scripts/xcode-version-bump.sh\nsh ./Scripts/xcode-build-bump.sh";
+			showEnvVarsInLog = 0;
+		};
 		00D68FFE18F7CB94005585BB /* Code Sign Embedded Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -806,7 +831,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh ./Scripts/codesign-frameworks.sh";
+			shellScript = "sh ./Scripts/codesign-old.sh";
 			showEnvVarsInLog = 0;
 		};
 		00D6900B18F7CCA0005585BB /* Update Applications folder and create DMG */ = {
@@ -1001,6 +1026,7 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_ENTITLEMENTS = MusicServer/MusicServer.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1026,6 +1052,7 @@
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_ENTITLEMENTS = MusicServer/MusicServer.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -16,7 +16,7 @@
 		00245CC118209E2900506730 /* AMJSONResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = 00245CC018209E2900506730 /* AMJSONResponder.m */; };
 		00326C8718EA08B300A28AAF /* PreferencesWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 00326C8618EA08B300A28AAF /* PreferencesWindow.m */; };
 		00326C8E18EA471D00A28AAF /* LastFMAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00326C8D18EA46E300A28AAF /* LastFMAPI.framework */; };
-		00326C8F18EA473100A28AAF /* LastFMAPI.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 00326C8D18EA46E300A28AAF /* LastFMAPI.framework */; };
+		00326C8F18EA473100A28AAF /* LastFMAPI.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 00326C8D18EA46E300A28AAF /* LastFMAPI.framework */; };
 		00326C9618EA4DD300A28AAF /* AMLastFMCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00326C9518EA4DD300A28AAF /* AMLastFMCommunicationManager.m */; };
 		00326C9A18EB65E400A28AAF /* AMMusicServer.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 00326C9918EB65E400A28AAF /* AMMusicServer.p12 */; };
 		00445B561826F98000174020 /* AMAudioConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00445B551826F98000174020 /* AMAudioConverter.mm */; };
@@ -48,9 +48,9 @@
 		00E192F618BD3B6A00B5A8D5 /* AMMusicServerActiveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192F518BD3B6A00B5A8D5 /* AMMusicServerActiveData.m */; };
 		00F6DA1218BC36B90036F43F /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
 		00F6DA1318BC36BC0036F43F /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6D9FD18BC36920036F43F /* CocoaAsyncSocket.framework */; };
-		00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
-		00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 00F6D9FD18BC36920036F43F /* CocoaAsyncSocket.framework */; };
-		00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */; };
+		00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6DA0D18BC36A40036F43F /* CocoaLumberjack.framework */; };
+		00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 00F6D9FD18BC36920036F43F /* CocoaAsyncSocket.framework */; };
+		00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in Copy Embedded Frameworks */ = {isa = PBXBuildFile; fileRef = 0050561B18BBF9BF0011E0B1 /* CocoaHTTPServer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,18 +183,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		00F6DA1818BC37110036F43F /* Copy Files */ = {
+		00F6DA1818BC37110036F43F /* Copy Embedded Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				00326C8F18EA473100A28AAF /* LastFMAPI.framework in Copy Files */,
-				00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in Copy Files */,
-				00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in Copy Files */,
-				00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in Copy Files */,
+				00326C8F18EA473100A28AAF /* LastFMAPI.framework in Copy Embedded Frameworks */,
+				00F6DA1918BC37260036F43F /* CocoaLumberjack.framework in Copy Embedded Frameworks */,
+				00F6DA1A18BC372E0036F43F /* CocoaAsyncSocket.framework in Copy Embedded Frameworks */,
+				00F6DA1B18BC37360036F43F /* CocoaHTTPServer.framework in Copy Embedded Frameworks */,
 			);
-			name = "Copy Files";
+			name = "Copy Embedded Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -255,6 +255,9 @@
 		0050CCA618208ADA006D6247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0050CCA818208ADA006D6247 /* MusicServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicServerTests.m; sourceTree = "<group>"; };
 		0052E33218EFFF5C0046BA8C /* AMPercentageValueUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMPercentageValueUpdater.h; sourceTree = "<group>"; };
+		00669DA9199D5D960041673D /* codesign-frameworks.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "codesign-frameworks.sh"; path = "Scripts/codesign-frameworks.sh"; sourceTree = "<group>"; };
+		00669DAE199D5FC40041673D /* MusicServer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MusicServer.entitlements; sourceTree = "<group>"; };
+		00669DAF199D61BC0041673D /* copy-application.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = "copy-application.sh"; path = "Scripts/copy-application.sh"; sourceTree = "<group>"; };
 		00801461199BEF9600B0D1B0 /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; name = public; path = MusicServer/GUI/public; sourceTree = "<group>"; };
 		009D49A118D44F83006CA309 /* AMHTTPErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPErrorResponse.h; sourceTree = "<group>"; };
 		009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPErrorResponse.m; sourceTree = "<group>"; };
@@ -317,6 +320,15 @@
 			path = MusicServer/IAModelBase;
 			sourceTree = "<group>";
 		};
+		00234280199D5D05007D3AC6 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				00669DA9199D5D960041673D /* codesign-frameworks.sh */,
+				00669DAF199D61BC0041673D /* copy-application.sh */,
+			);
+			name = Scripts;
+			sourceTree = "<group>";
+		};
 		00326C8918EA46E300A28AAF /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +378,7 @@
 		0050CC7218208ADA006D6247 = {
 			isa = PBXGroup;
 			children = (
+				00234280199D5D05007D3AC6 /* Scripts */,
 				00801461199BEF9600B0D1B0 /* public */,
 				0050CC8418208ADA006D6247 /* MusicServer */,
 				0050CCA218208ADA006D6247 /* MusicServerTests */,
@@ -415,6 +428,7 @@
 		0050CC8418208ADA006D6247 /* MusicServer */ = {
 			isa = PBXGroup;
 			children = (
+				00669DAE199D5FC40041673D /* MusicServer.entitlements */,
 				00326C9218EA4A5B00A28AAF /* LastFM */,
 				00D82E9D18D5AC2C0090E3EB /* Protocols */,
 				00D82E9C18D5AC1F0090E3EB /* Authentication */,
@@ -567,9 +581,9 @@
 				0050CC7718208ADA006D6247 /* Sources */,
 				0050CC7818208ADA006D6247 /* Frameworks */,
 				0050CC7918208ADA006D6247 /* Resources */,
-				00F6DA1818BC37110036F43F /* Copy Files */,
-				00D68FFE18F7CB94005585BB /* Run Script - Sign code */,
-				00D6900B18F7CCA0005585BB /* Run Script - copy to /Applications and create DMG */,
+				00F6DA1818BC37110036F43F /* Copy Embedded Frameworks */,
+				00D68FFE18F7CB94005585BB /* Code Sign Embedded Frameworks */,
+				00D6900B18F7CCA0005585BB /* Update Applications folder and create DMG */,
 			);
 			buildRules = (
 			);
@@ -613,6 +627,11 @@
 				TargetAttributes = {
 					0050CC7A18208ADA006D6247 = {
 						DevelopmentTeam = DD9R5N89H9;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					0050CC9B18208ADA006D6247 = {
 						TestTargetID = 0050CC7A18208ADA006D6247;
@@ -775,33 +794,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00D68FFE18F7CB94005585BB /* Run Script - Sign code */ = {
+		00D68FFE18F7CB94005585BB /* Code Sign Embedded Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Run Script - Sign code";
+			name = "Code Sign Embedded Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "IDENTITY=\"Developer ID Application: Anthony Martin (DD9R5N89H9)\"\nFRAMEWORK_LOC=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/CocoaAsyncSocket.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/CocoaHTTPServer.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/CocoaLumberjack.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/LastFMAPI.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME\"";
+			shellScript = "sh ./Scripts/codesign-frameworks.sh";
+			showEnvVarsInLog = 0;
 		};
-		00D6900B18F7CCA0005585BB /* Run Script - copy to /Applications and create DMG */ = {
+		00D6900B18F7CCA0005585BB /* Update Applications folder and create DMG */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Run Script - copy to /Applications and create DMG";
+			name = "Update Applications folder and create DMG";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf \"/Applications/$PROJECT_NAME.app\"\ncp -rf \"$INSTALL_DIR/$PROJECT_NAME.app\" \"/Applications/\"\nrm -f \"$HOME/Desktop/$PROJECT_NAME.dmg\"\nhdiutil create -srcfolder \"$INSTALL_DIR\" -volname \"$PROJECT_NAME\" \"$HOME/Desktop/$PROJECT_NAME.dmg\"";
+			shellScript = "sh ./Scripts/copy-application.sh";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -978,8 +999,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_ENTITLEMENTS = MusicServer/MusicServer.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -991,7 +1012,7 @@
 				INFOPLIST_FILE = "MusicServer/MusicServer-Info.plist";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6353E253-9110-46EE-8617-4564A80E248E";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1003,8 +1024,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
+				CODE_SIGN_ENTITLEMENTS = MusicServer/MusicServer.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1016,7 +1037,7 @@
 				INFOPLIST_FILE = "MusicServer/MusicServer-Info.plist";
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6353E253-9110-46EE-8617-4564A80E248E";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

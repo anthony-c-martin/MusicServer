@@ -19,7 +19,6 @@
 		00326C8F18EA473100A28AAF /* LastFMAPI.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = 00326C8D18EA46E300A28AAF /* LastFMAPI.framework */; };
 		00326C9618EA4DD300A28AAF /* AMLastFMCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00326C9518EA4DD300A28AAF /* AMLastFMCommunicationManager.m */; };
 		00326C9A18EB65E400A28AAF /* AMMusicServer.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 00326C9918EB65E400A28AAF /* AMMusicServer.p12 */; };
-		0039A33918BC27C700F4B060 /* webroot in Resources */ = {isa = PBXBuildFile; fileRef = 0039A33818BC27B800F4B060 /* webroot */; };
 		00445B561826F98000174020 /* AMAudioConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 00445B551826F98000174020 /* AMAudioConverter.mm */; };
 		00445B581826F99C00174020 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00445B571826F99C00174020 /* AudioToolbox.framework */; };
 		00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 00445B5E1826FE0D00174020 /* CAStreamBasicDescription.cpp */; };
@@ -37,6 +36,7 @@
 		0050CC9F18208ADA006D6247 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0050CC7E18208ADA006D6247 /* Cocoa.framework */; };
 		0050CCA718208ADA006D6247 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0050CCA518208ADA006D6247 /* InfoPlist.strings */; };
 		0050CCA918208ADA006D6247 /* MusicServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0050CCA818208ADA006D6247 /* MusicServerTests.m */; };
+		00801462199BEF9600B0D1B0 /* public in Resources */ = {isa = PBXBuildFile; fileRef = 00801461199BEF9600B0D1B0 /* public */; };
 		009D49A318D44F83006CA309 /* AMHTTPErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */; };
 		00CBBCEE18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CBBCED18C2CF900063DBF6 /* AMHTTPAsyncJSONResponse.m */; };
 		00CBBCF518C35F990063DBF6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00CBBCF418C35F990063DBF6 /* Security.framework */; };
@@ -222,7 +222,6 @@
 		00326C9718EA502B00A28AAF /* AMLastFMAPISecrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMLastFMAPISecrets.h; sourceTree = "<group>"; };
 		00326C9818EA54AE00A28AAF /* AMScrobbleManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMScrobbleManagerDelegate.h; sourceTree = "<group>"; };
 		00326C9918EB65E400A28AAF /* AMMusicServer.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = AMMusicServer.p12; sourceTree = "<group>"; };
-		0039A33818BC27B800F4B060 /* webroot */ = {isa = PBXFileReference; lastKnownFileType = folder; name = webroot; path = MusicServer/GUI/webroot; sourceTree = "<group>"; };
 		00445B541826F98000174020 /* AMAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioConverter.h; sourceTree = "<group>"; };
 		00445B551826F98000174020 /* AMAudioConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AMAudioConverter.mm; sourceTree = "<group>"; };
 		00445B571826F99C00174020 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -256,6 +255,7 @@
 		0050CCA618208ADA006D6247 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0050CCA818208ADA006D6247 /* MusicServerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MusicServerTests.m; sourceTree = "<group>"; };
 		0052E33218EFFF5C0046BA8C /* AMPercentageValueUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMPercentageValueUpdater.h; sourceTree = "<group>"; };
+		00801461199BEF9600B0D1B0 /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; name = public; path = MusicServer/GUI/public; sourceTree = "<group>"; };
 		009D49A118D44F83006CA309 /* AMHTTPErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMHTTPErrorResponse.h; sourceTree = "<group>"; };
 		009D49A218D44F83006CA309 /* AMHTTPErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMHTTPErrorResponse.m; sourceTree = "<group>"; };
 		009D49A418D450FE006CA309 /* AMAPIDataResponder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAPIDataResponder.h; sourceTree = "<group>"; };
@@ -366,7 +366,7 @@
 		0050CC7218208ADA006D6247 = {
 			isa = PBXGroup;
 			children = (
-				0039A33818BC27B800F4B060 /* webroot */,
+				00801461199BEF9600B0D1B0 /* public */,
 				0050CC8418208ADA006D6247 /* MusicServer */,
 				0050CCA218208ADA006D6247 /* MusicServerTests */,
 				0050CC7D18208ADA006D6247 /* Frameworks */,
@@ -568,6 +568,8 @@
 				0050CC7818208ADA006D6247 /* Frameworks */,
 				0050CC7918208ADA006D6247 /* Resources */,
 				00F6DA1818BC37110036F43F /* Copy Files */,
+				00D68FFE18F7CB94005585BB /* Run Script - Sign code */,
+				00D6900B18F7CCA0005585BB /* Run Script - copy to /Applications and create DMG */,
 			);
 			buildRules = (
 			);
@@ -753,7 +755,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0039A33918BC27C700F4B060 /* webroot in Resources */,
+				00801462199BEF9600B0D1B0 /* public in Resources */,
 				0050CC8918208ADA006D6247 /* InfoPlist.strings in Resources */,
 				0050CC9718208ADA006D6247 /* Images.xcassets in Resources */,
 				00326C9A18EB65E400A28AAF /* AMMusicServer.p12 in Resources */,
@@ -771,6 +773,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00D68FFE18F7CB94005585BB /* Run Script - Sign code */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - Sign code";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "IDENTITY=\"Developer ID Application: Anthony Martin (DD9R5N89H9)\"\nFRAMEWORK_LOC=\"${BUILT_PRODUCTS_DIR}\"/\"${FRAMEWORKS_FOLDER_PATH}\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/CocoaAsyncSocket.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/CocoaHTTPServer.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/CocoaLumberjack.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$FRAMEWORK_LOC/LastFMAPI.framework/Versions/A\"\ncodesign --verbose --force --sign \"$IDENTITY\" \"$BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME\"";
+		};
+		00D6900B18F7CCA0005585BB /* Run Script - copy to /Applications and create DMG */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - copy to /Applications and create DMG";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "rm -rf \"/Applications/$PROJECT_NAME.app\"\ncp -rf \"$INSTALL_DIR/$PROJECT_NAME.app\" \"/Applications/\"\nrm -f \"$HOME/Desktop/$PROJECT_NAME.dmg\"\nhdiutil create -srcfolder \"$INSTALL_DIR\" -volname \"$PROJECT_NAME\" \"$HOME/Desktop/$PROJECT_NAME.dmg\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0050CC7718208ADA006D6247 /* Sources */ = {

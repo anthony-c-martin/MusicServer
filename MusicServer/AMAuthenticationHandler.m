@@ -25,6 +25,26 @@
     return self;
 }
 
+-(BOOL) getAuthentication:(NSString **)authentication
+                    token:(NSString **)token
+{
+    @synchronized(self)
+    {
+        *token = [self generateTokenWithAccessKey:YES accessKey:authentication];
+        
+        return YES;
+    }
+}
+
+-(NSString *) getAuthentication:(NSString *)token
+{
+    return [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@",
+                                                 token,
+                                                 [[self activeData] username],
+                                                 [[self activeData] password],
+                                                 token]];
+}
+
 -(BOOL) getSession:(AMAPIGetSessionRequest *)request
           response:(AMAPIGetSessionResponse **)response
 {
@@ -33,26 +53,22 @@
         [self removeStaleTokens];
         
         *response = [[AMAPIGetSessionResponse alloc] init];
-        __block BOOL found = NO;
+        __block BOOL accessKeyMatches = NO;
+        __block BOOL tokenFound = NO;
         [[self activeTokens] enumerateObjectsUsingBlock:^(NSArray *token, NSUInteger idx, BOOL *stop) {
             if ([[request Token] isEqualTo:[token objectAtIndex:0]])
             {
-                found = YES;
+                tokenFound = YES;
                 *stop = YES;
+                accessKeyMatches = ([token count] > 2) && [[request Authentication] isEqualTo:[token objectAtIndex:2]];
             }
         }];
-        if (!found)
+        if (!tokenFound)
         {
             return NO;
         }
         
-        NSString *MD5 = [AMJSONAPIData CalculateMD5:[NSString stringWithFormat:@"%@:%@:%@:%@",
-                                                     [request Token],
-                                                     [[self activeData] username],
-                                                     [[self activeData] password],
-                                                     [request Token]]];
-        
-        if ([MD5 isEqualTo:[request Authentication]])
+        if (accessKeyMatches || [[self getAuthentication:[request Token]] isEqualTo:[request Authentication]])
         {
             [*response setSession:[AMJSONAPIData randomAlphanumericString]];
             [*response setSecret:[AMJSONAPIData randomAlphanumericString]];
@@ -77,16 +93,31 @@
 -(BOOL) getToken:(AMAPIBlankRequest *)request
         response:(AMAPIGetTokenResponse **)response
 {
+    *response = [[AMAPIGetTokenResponse alloc] init];
+    [*response setToken:[self generateToken]];
+
+    return YES;
+}
+
+-(NSString *) generateToken
+{
+    NSString *accessKey;
+    return [self generateTokenWithAccessKey:NO accessKey:&accessKey];
+}
+
+-(NSString *) generateTokenWithAccessKey:(BOOL)withAccessKey
+                               accessKey:(NSString **)accessKey
+{
     @synchronized(self)
     {
         [self removeStaleTokens];
         
-        *response = [[AMAPIGetTokenResponse alloc] init];
-        [*response setToken:[AMJSONAPIData randomAlphanumericString]];
-        
+        NSString *token = [AMJSONAPIData randomAlphanumericString];
         NSDate *expiry = [[NSDate date] dateByAddingTimeInterval:3600];
-        [[self activeTokens] addObject:[NSArray arrayWithObjects:[*response Token], expiry, nil]];
-        return YES;
+        *accessKey = withAccessKey ? [AMJSONAPIData randomAlphanumericString] : nil;
+        [[self activeTokens] addObject:[NSArray arrayWithObjects:token, expiry, *accessKey, nil]];
+
+        return token;
     }
 }
 

@@ -11,6 +11,9 @@
 
 @protocol AMAPIAuthenticationDataResponder <NSObject>
 
+-(BOOL) getAuthentication:(NSString **)authentication
+                    token:(NSString **)token;
+
 -(BOOL) getSession:(AMAPIGetSessionRequest *)request
           response:(AMAPIGetSessionResponse **)response;
 

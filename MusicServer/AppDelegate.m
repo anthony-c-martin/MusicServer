@@ -40,7 +40,7 @@
     [[self Server] setType:@"_https._tcp"];
     [[self Server] setPort:12345];
     [[self Server] setConnectionClass:[AMHTTPConnection class]];
-    [[self Server] setDocumentRoot:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"public"]];
+    [[self Server] setDocumentRoot:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"dist"]];
     [[self Server] setResponder:[self responder]];
     [self initializeLibrary];
 }

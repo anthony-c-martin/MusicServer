@@ -4,6 +4,6 @@
 [submodule "MusicServer/Frameworks/LastFMAPI"]
 	path = MusicServer/Frameworks/LastFMAPI
 	url = git://github.com/antm611/LastFMAPI.git
-[submodule "MusicServer/GUI"]
-	path = MusicServer/GUI
-	url = git://github.com/antm611/MusicServerGUI.git
+[submodule "ResponsiveMusicServer"]
+	path = ResponsiveMusicServer
+	url = git://github.com/antm611/ResponsiveMusicServer.git

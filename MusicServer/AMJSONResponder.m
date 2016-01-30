@@ -40,7 +40,7 @@
  
 -(BOOL) handleRequest:(NSData *)data
          responseData:(NSData **)responseData
-         responseCode:(NSNumber **)responseCode
+         responseCode:(NSInteger *)responseCode
         connectedHost:(NSString *)ipAddress
 {
     AMJSONAPIData *response = [AMJSONAPIData alloc];
@@ -60,7 +60,7 @@
 
 -(BOOL) handleRequest:(NSData *)data
              response:(AMJSONAPIData **)response
-         responseCode:(NSNumber **)responseCode
+         responseCode:(NSInteger *)responseCode
         connectedHost:(NSString *)ipAddress;
 {
     BOOL success = YES;
@@ -68,7 +68,7 @@
     NSDictionary *dictionary = [AMJSONAPIData deserialiseJSON:data Error:error];
     if (error)
     {
-        *responseCode = [NSNumber numberWithInt:500];
+        *responseCode = 500;
         *response = nil;
         return NO;
     }
@@ -86,7 +86,7 @@
         }
         if (!validated)
         {
-            *responseCode = [NSNumber numberWithInt:401];
+            *responseCode = 401;
             *response = nil;
             return NO;
         }
@@ -241,7 +241,7 @@
                                                  response:&output];
                 
                 if (!success) {
-                    *responseCode = [NSNumber numberWithInt:401];
+                    *responseCode = 401;
                     *response = nil;
                     [[self activeData] auditFailedAuthFromIP:ipAddress];
                     return NO;
@@ -293,17 +293,17 @@
     }
     if (success)
     {
-        *responseCode = [NSNumber numberWithInt:200];
+        *responseCode = 200;
         *response = (AMJSONAPIData *)responseData;
     }
     else if (command == AMJSONCommandUnknown)
     {
-        *responseCode = [NSNumber numberWithInt:404];
+        *responseCode = 404;
         *response = nil;
     }
     else
     {
-        *responseCode = [NSNumber numberWithInt:500];
+        *responseCode = 500;
         *response = nil;
     }
     

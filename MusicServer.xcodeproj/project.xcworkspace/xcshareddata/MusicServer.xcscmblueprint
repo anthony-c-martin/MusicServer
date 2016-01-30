@@ -5,6 +5,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "5CBFF13F8CAACED5813B0D5626B1E8872CC6161E" : 0,
+    "F6F96CA34C5878B0A9123C7C37855491A5E599DA" : 0,
     "D6C6F103F581E350A825749A345233D6CEE7DDB7" : 0,
     "E6912EA9975573092E614A13CFA9EB8BB12D0437" : 0,
     "EE1B84854587F27BAF1355B9CEC308CB4D85C420" : 0,
@@ -15,6 +16,7 @@
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "39792598-470C-486D-96C0-1F33544DF68F",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "5CBFF13F8CAACED5813B0D5626B1E8872CC6161E" : "MusicServer",
+    "F6F96CA34C5878B0A9123C7C37855491A5E599DA" : "MusicServer\/MusicServer\/Frameworks\/GCDWebServer\/",
     "D6C6F103F581E350A825749A345233D6CEE7DDB7" : "MusicServerMusicServer\/Frameworks\/LastFMAPI",
     "E6912EA9975573092E614A13CFA9EB8BB12D0437" : "MusicServerMusicServer\/Frameworks\/CocoaHTTPServerFramework\/Frameworks\/CocoaAsyncSocket",
     "EE1B84854587F27BAF1355B9CEC308CB4D85C420" : "MusicServerMusicServer\/GUI",
@@ -60,6 +62,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/antm611\/MusicServerGUI.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EE1B84854587F27BAF1355B9CEC308CB4D85C420"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/swisspol\/GCDWebServer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F6F96CA34C5878B0A9123C7C37855491A5E599DA"
     }
   ]
 }

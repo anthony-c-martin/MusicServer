@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "AMHTTPConnection.h"
 #import "AMJSONResponder.h"
 #import "AMAPIHandlerITunes.h"
 #import "AMAudioConverter.h"
@@ -36,12 +35,7 @@
     [self setAuthHandler:[[AMAuthenticationHandler alloc] initWithActiveData:[self activeData]]];
     [self setLastFMHandler:[[AMLastFMCommunicationManager alloc] initWithDelegate:nil activeData:[self activeData] dataResponder:[self itunesHandler]]];
     [self setResponder:[[AMJSONResponder alloc] initWithDelegate:[self itunesHandler] authDelegate:[self authHandler] lastFMDelegate:[self lastFMHandler] activeData:[self activeData]]];
-    [self setServer:[[AMHTTPMusicServer alloc] init]];
-    [[self Server] setType:@"_https._tcp"];
-    [[self Server] setPort:12345];
-    [[self Server] setConnectionClass:[AMHTTPConnection class]];
-    [[self Server] setDocumentRoot:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"dist"]];
-    [[self Server] setResponder:[self responder]];
+    [self setServer:[[AMHTTPMusicServer alloc] initWithResponder:responder]];
     [self initializeLibrary];
 }
 
@@ -68,12 +62,15 @@
     @synchronized([self Server])
     {
         self->scanInProgress = YES;
-        [[self Server] stop];
+        if ([[self Server] isStarted])
+        {
+            [[self Server] stop];
+        }
         
         dispatch_queue_t loadQueue = dispatch_queue_create("AppDelegateLoad", NULL);
         dispatch_async(loadQueue, ^{
             [[self itunesHandler] loadLibrary];
-            [[self Server] start:nil];
+            [[self Server] start];
             self->scanInProgress = NO;
         });
     }
@@ -133,7 +130,7 @@
     NSString *token;
     NSString *authentication;
     [[self authHandler] getAuthentication:&authentication token:&token];
-    NSString *appURL = [NSString stringWithFormat:@"https://localhost:12345/#login/%@/%@", token, authentication];
+    NSString *appURL = [NSString stringWithFormat:@"http://localhost:12345/#login/%@/%@", token, authentication];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:appURL]];
 }
 

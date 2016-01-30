@@ -7,3 +7,6 @@
 [submodule "ResponsiveMusicServer"]
 	path = ResponsiveMusicServer
 	url = git://github.com/antm611/ResponsiveMusicServer.git
+[submodule "MusicServer/Frameworks/GCDWebServer"]
+	path = MusicServer/Frameworks/GCDWebServer
+	url = https://github.com/swisspol/GCDWebServer.git

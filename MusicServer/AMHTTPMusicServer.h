@@ -7,12 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CocoaHTTPServer/HTTPServer.h>
 
 @class AMJSONResponder;
 
-@interface AMHTTPMusicServer : HTTPServer
+@interface AMHTTPMusicServer : NSObject
 
 @property (nonatomic, retain) AMJSONResponder *responder;
+
+@property (nonatomic, strong) dispatch_queue_t requestQueue;
+
+-(id)initWithResponder:(AMJSONResponder *)jsonResponder;
+-(void)start;
+-(void)stop;
+-(BOOL)isStarted;
 
 @end

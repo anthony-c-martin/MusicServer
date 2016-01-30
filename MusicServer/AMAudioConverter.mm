@@ -7,6 +7,8 @@
 //
 
 #import "AMAudioConverter.h"
+#import <CoreAudio/CoreAudioTypes.h>
+#import <AudioToolbox/AudioFile.h>
 
 extern OSStatus DoConvertFile(CFURLRef sourceURL, CFURLRef destinationURL, OSType outputFileType, OSType outputFormat, Float64 outputSampleRate);
 
@@ -23,18 +25,18 @@ enum AMAudioConverterFormat
            toFormat:(AMAudioConverterFormat)outputFormat
            withRate:(double)outputRate
 {
-    UInt32 format;
-    UInt32 fileFormat;
+    OSType format;
+    OSType fileFormat;
     
     switch (outputFormat)
     {
         case kAMAudioConverterFormatPCM:
-            format = 'lpcm';
-            fileFormat = 'caff';
+            format = kAudioFormatLinearPCM;
+            fileFormat = kAudioFileCAFType;
             break;
         case kAMAudioConverterFormatM4A:
-            format = 'aac ';
-            fileFormat = 'm4af';
+            format = kAudioFormatMPEG4AAC;
+            fileFormat = kAudioFileM4AType;
             break;
     }
     

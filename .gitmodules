@@ -10,3 +10,6 @@
 [submodule "MusicServer/Frameworks/GCDWebServer"]
 	path = MusicServer/Frameworks/GCDWebServer
 	url = https://github.com/swisspol/GCDWebServer.git
+[submodule "MusicServer/Frameworks/miniupnp"]
+	path = MusicServer/Frameworks/miniupnp
+	url = https://github.com/miniupnp/miniupnp.git

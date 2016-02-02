@@ -44,6 +44,19 @@
 		00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192E418BD2B1500B5A8D5 /* AMPersistentData.m */; };
 		00E192F318BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00E192F218BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist */; };
 		00E192F618BD3B6A00B5A8D5 /* AMMusicServerActiveData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E192F518BD3B6A00B5A8D5 /* AMMusicServerActiveData.m */; };
+		00E34D901C612ED700F873C7 /* connecthostport.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D631C612ED700F873C7 /* connecthostport.c */; };
+		00E34D911C612ED700F873C7 /* igd_desc_parse.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D651C612ED700F873C7 /* igd_desc_parse.c */; };
+		00E34D951C612ED700F873C7 /* minisoap.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D6A1C612ED700F873C7 /* minisoap.c */; };
+		00E34D961C612ED700F873C7 /* minissdpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D6C1C612ED700F873C7 /* minissdpc.c */; };
+		00E34D971C612ED700F873C7 /* miniupnpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D6F1C612ED700F873C7 /* miniupnpc.c */; };
+		00E34D991C612ED700F873C7 /* miniwget.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D731C612ED700F873C7 /* miniwget.c */; };
+		00E34D9A1C612ED700F873C7 /* minixml.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D751C612ED700F873C7 /* minixml.c */; };
+		00E34D9C1C612ED700F873C7 /* portlistingparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D781C612ED700F873C7 /* portlistingparse.c */; };
+		00E34D9E1C612ED700F873C7 /* receivedata.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D7B1C612ED700F873C7 /* receivedata.c */; };
+		00E34DA51C612ED700F873C7 /* upnpcommands.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D831C612ED700F873C7 /* upnpcommands.c */; };
+		00E34DA61C612ED700F873C7 /* upnpdev.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D851C612ED700F873C7 /* upnpdev.c */; };
+		00E34DA71C612ED700F873C7 /* upnperrors.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D871C612ED700F873C7 /* upnperrors.c */; };
+		00E34DA81C612ED700F873C7 /* upnpreplyparse.c in Sources */ = {isa = PBXBuildFile; fileRef = 00E34D891C612ED700F873C7 /* upnpreplyparse.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -214,6 +227,36 @@
 		00E192F218BD2CA200B5A8D5 /* com.acm.AMMusicServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.acm.AMMusicServer.plist; sourceTree = "<group>"; };
 		00E192F418BD3B6A00B5A8D5 /* AMMusicServerActiveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMusicServerActiveData.h; sourceTree = "<group>"; };
 		00E192F518BD3B6A00B5A8D5 /* AMMusicServerActiveData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMusicServerActiveData.m; sourceTree = "<group>"; };
+		00E34D621C612ED700F873C7 /* codelength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codelength.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/codelength.h; sourceTree = "<group>"; };
+		00E34D631C612ED700F873C7 /* connecthostport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = connecthostport.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/connecthostport.c; sourceTree = "<group>"; };
+		00E34D641C612ED700F873C7 /* connecthostport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = connecthostport.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/connecthostport.h; sourceTree = "<group>"; };
+		00E34D651C612ED700F873C7 /* igd_desc_parse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = igd_desc_parse.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/igd_desc_parse.c; sourceTree = "<group>"; };
+		00E34D661C612ED700F873C7 /* igd_desc_parse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = igd_desc_parse.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/igd_desc_parse.h; sourceTree = "<group>"; };
+		00E34D6A1C612ED700F873C7 /* minisoap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = minisoap.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/minisoap.c; sourceTree = "<group>"; };
+		00E34D6B1C612ED700F873C7 /* minisoap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = minisoap.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/minisoap.h; sourceTree = "<group>"; };
+		00E34D6C1C612ED700F873C7 /* minissdpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = minissdpc.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/minissdpc.c; sourceTree = "<group>"; };
+		00E34D6D1C612ED700F873C7 /* minissdpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = minissdpc.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/minissdpc.h; sourceTree = "<group>"; };
+		00E34D6E1C612ED700F873C7 /* miniupnpc_declspec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = miniupnpc_declspec.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/miniupnpc_declspec.h; sourceTree = "<group>"; };
+		00E34D6F1C612ED700F873C7 /* miniupnpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = miniupnpc.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/miniupnpc.c; sourceTree = "<group>"; };
+		00E34D701C612ED700F873C7 /* miniupnpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = miniupnpc.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/miniupnpc.h; sourceTree = "<group>"; };
+		00E34D721C612ED700F873C7 /* miniupnpctypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = miniupnpctypes.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/miniupnpctypes.h; sourceTree = "<group>"; };
+		00E34D731C612ED700F873C7 /* miniwget.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = miniwget.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/miniwget.c; sourceTree = "<group>"; };
+		00E34D741C612ED700F873C7 /* miniwget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = miniwget.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/miniwget.h; sourceTree = "<group>"; };
+		00E34D751C612ED700F873C7 /* minixml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = minixml.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/minixml.c; sourceTree = "<group>"; };
+		00E34D761C612ED700F873C7 /* minixml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = minixml.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/minixml.h; sourceTree = "<group>"; };
+		00E34D781C612ED700F873C7 /* portlistingparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = portlistingparse.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/portlistingparse.c; sourceTree = "<group>"; };
+		00E34D791C612ED700F873C7 /* portlistingparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = portlistingparse.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/portlistingparse.h; sourceTree = "<group>"; };
+		00E34D7B1C612ED700F873C7 /* receivedata.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = receivedata.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/receivedata.c; sourceTree = "<group>"; };
+		00E34D7C1C612ED700F873C7 /* receivedata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = receivedata.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/receivedata.h; sourceTree = "<group>"; };
+		00E34D831C612ED700F873C7 /* upnpcommands.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = upnpcommands.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnpcommands.c; sourceTree = "<group>"; };
+		00E34D841C612ED700F873C7 /* upnpcommands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = upnpcommands.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnpcommands.h; sourceTree = "<group>"; };
+		00E34D851C612ED700F873C7 /* upnpdev.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = upnpdev.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnpdev.c; sourceTree = "<group>"; };
+		00E34D861C612ED700F873C7 /* upnpdev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = upnpdev.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnpdev.h; sourceTree = "<group>"; };
+		00E34D871C612ED700F873C7 /* upnperrors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = upnperrors.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnperrors.c; sourceTree = "<group>"; };
+		00E34D881C612ED700F873C7 /* upnperrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = upnperrors.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnperrors.h; sourceTree = "<group>"; };
+		00E34D891C612ED700F873C7 /* upnpreplyparse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = upnpreplyparse.c; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnpreplyparse.c; sourceTree = "<group>"; };
+		00E34D8A1C612ED700F873C7 /* upnpreplyparse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = upnpreplyparse.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/upnpreplyparse.h; sourceTree = "<group>"; };
+		00E34DAF1C612FF200F873C7 /* miniupnpcstrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = miniupnpcstrings.h; path = MusicServer/Frameworks/miniupnp/miniupnpc/miniupnpcstrings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +369,7 @@
 		0050CC7D18208ADA006D6247 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00E34D5E1C612E8A00F873C7 /* miniupnpc */,
 				008332601C5D2A5400313BB3 /* libz.tbd */,
 				00CBBCF418C35F990063DBF6 /* Security.framework */,
 				00445B5B1826FE0D00174020 /* AudioConversion */,
@@ -470,6 +514,43 @@
 			name = ITunesHandler;
 			sourceTree = "<group>";
 		};
+		00E34D5E1C612E8A00F873C7 /* miniupnpc */ = {
+			isa = PBXGroup;
+			children = (
+				00E34D621C612ED700F873C7 /* codelength.h */,
+				00E34D631C612ED700F873C7 /* connecthostport.c */,
+				00E34D641C612ED700F873C7 /* connecthostport.h */,
+				00E34D651C612ED700F873C7 /* igd_desc_parse.c */,
+				00E34D661C612ED700F873C7 /* igd_desc_parse.h */,
+				00E34D6A1C612ED700F873C7 /* minisoap.c */,
+				00E34D6B1C612ED700F873C7 /* minisoap.h */,
+				00E34D6C1C612ED700F873C7 /* minissdpc.c */,
+				00E34D6D1C612ED700F873C7 /* minissdpc.h */,
+				00E34D6E1C612ED700F873C7 /* miniupnpc_declspec.h */,
+				00E34D6F1C612ED700F873C7 /* miniupnpc.c */,
+				00E34D701C612ED700F873C7 /* miniupnpc.h */,
+				00E34DAF1C612FF200F873C7 /* miniupnpcstrings.h */,
+				00E34D721C612ED700F873C7 /* miniupnpctypes.h */,
+				00E34D731C612ED700F873C7 /* miniwget.c */,
+				00E34D741C612ED700F873C7 /* miniwget.h */,
+				00E34D751C612ED700F873C7 /* minixml.c */,
+				00E34D761C612ED700F873C7 /* minixml.h */,
+				00E34D781C612ED700F873C7 /* portlistingparse.c */,
+				00E34D791C612ED700F873C7 /* portlistingparse.h */,
+				00E34D7B1C612ED700F873C7 /* receivedata.c */,
+				00E34D7C1C612ED700F873C7 /* receivedata.h */,
+				00E34D831C612ED700F873C7 /* upnpcommands.c */,
+				00E34D841C612ED700F873C7 /* upnpcommands.h */,
+				00E34D851C612ED700F873C7 /* upnpdev.c */,
+				00E34D861C612ED700F873C7 /* upnpdev.h */,
+				00E34D871C612ED700F873C7 /* upnperrors.c */,
+				00E34D881C612ED700F873C7 /* upnperrors.h */,
+				00E34D891C612ED700F873C7 /* upnpreplyparse.c */,
+				00E34D8A1C612ED700F873C7 /* upnpreplyparse.h */,
+			);
+			name = miniupnpc;
+			sourceTree = "<group>";
+		};
 		00FBC6EA18BE871A0023E4C5 /* ActiveData */ = {
 			isa = PBXGroup;
 			children = (
@@ -488,6 +569,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0050CCAC18208ADA006D6247 /* Build configuration list for PBXNativeTarget "MusicServer" */;
 			buildPhases = (
+				00E34DB01C61300D00F873C7 /* Update miniupnpcstrings.h */,
 				0050CC7718208ADA006D6247 /* Sources */,
 				0050CC7818208ADA006D6247 /* Frameworks */,
 				00720C76199D6BF20093B25F /* Increment Version & Build Numbers */,
@@ -723,6 +805,20 @@
 			shellScript = "sh ./Scripts/copy-application.sh";
 			showEnvVarsInLog = 0;
 		};
+		00E34DB01C61300D00F873C7 /* Update miniupnpcstrings.h */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update miniupnpcstrings.h";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd MusicServer/Frameworks/miniupnp/miniupnpc\nsh updateminiupnpcstrings.sh";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -730,23 +826,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E34D901C612ED700F873C7 /* connecthostport.c in Sources */,
 				00D82E9B18D5A98A0090E3EB /* AMAuthenticationHandler.m in Sources */,
 				0005BA9D182196CC00C17FA9 /* IAModelCollectionBase.m in Sources */,
+				00E34D9A1C612ED700F873C7 /* minixml.c in Sources */,
 				0005BA9C182196CC00C17FA9 /* IAModelBase.m in Sources */,
 				0050CC9218208ADA006D6247 /* AppDelegate.m in Sources */,
+				00E34D961C612ED700F873C7 /* minissdpc.c in Sources */,
+				00E34D911C612ED700F873C7 /* igd_desc_parse.c in Sources */,
+				00E34D991C612ED700F873C7 /* miniwget.c in Sources */,
 				0005BA96182196B700C17FA9 /* AMJSONAPIData.m in Sources */,
 				0005BAA01821A59A00C17FA9 /* AMJSONAPIDataObjects.m in Sources */,
+				00E34D9E1C612ED700F873C7 /* receivedata.c in Sources */,
 				00245CC118209E2900506730 /* AMJSONResponder.m in Sources */,
+				00E34D951C612ED700F873C7 /* minisoap.c in Sources */,
 				0050CC8B18208ADA006D6247 /* main.m in Sources */,
+				00E34DA51C612ED700F873C7 /* upnpcommands.c in Sources */,
 				00DAE0E5182542EC007B6ABC /* AMAPIHandlerITunes.m in Sources */,
 				00E192F618BD3B6A00B5A8D5 /* AMMusicServerActiveData.m in Sources */,
 				00445B561826F98000174020 /* AMAudioConverter.mm in Sources */,
+				00E34DA61C612ED700F873C7 /* upnpdev.c in Sources */,
 				00445B6D1827065500174020 /* ExtAudioFileConvert.cpp in Sources */,
 				00445B641826FE0D00174020 /* CAXException.cpp in Sources */,
 				00002EBB18ECCB3800243001 /* AMHTTPMusicServer.m in Sources */,
 				00326C8718EA08B300A28AAF /* PreferencesWindow.m in Sources */,
 				00445B631826FE0D00174020 /* CAStreamBasicDescription.cpp in Sources */,
 				00326C9618EA4DD300A28AAF /* AMLastFMCommunicationManager.m in Sources */,
+				00E34DA81C612ED700F873C7 /* upnpreplyparse.c in Sources */,
+				00E34D971C612ED700F873C7 /* miniupnpc.c in Sources */,
+				00E34D9C1C612ED700F873C7 /* portlistingparse.c in Sources */,
+				00E34DA71C612ED700F873C7 /* upnperrors.c in Sources */,
 				00E192E518BD2B1500B5A8D5 /* AMPersistentData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

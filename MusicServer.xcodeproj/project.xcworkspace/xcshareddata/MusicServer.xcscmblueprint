@@ -10,6 +10,7 @@
     "E6912EA9975573092E614A13CFA9EB8BB12D0437" : 0,
     "EE1B84854587F27BAF1355B9CEC308CB4D85C420" : 0,
     "E8429A23AC3FA27AAABFF7884C4FB6C8F2635BF2" : 0,
+    "A874B62302C0B93A6DAE5A77E896C2EFFD854F16" : 0,
     "68225A92D11DA9D0F59FCE60FC65447D62A96F22" : 0,
     "2DEF1752D0F784EB1A216183F996320D19697ECA" : 0
   },
@@ -21,6 +22,7 @@
     "E6912EA9975573092E614A13CFA9EB8BB12D0437" : "MusicServerMusicServer\/Frameworks\/CocoaHTTPServerFramework\/Frameworks\/CocoaAsyncSocket",
     "EE1B84854587F27BAF1355B9CEC308CB4D85C420" : "MusicServerMusicServer\/GUI",
     "E8429A23AC3FA27AAABFF7884C4FB6C8F2635BF2" : "MusicServer\/ResponsiveMusicServer\/",
+    "A874B62302C0B93A6DAE5A77E896C2EFFD854F16" : "MusicServer\/MusicServer\/Frameworks\/miniupnp\/",
     "68225A92D11DA9D0F59FCE60FC65447D62A96F22" : "MusicServerMusicServer\/Frameworks\/CocoaHTTPServerFramework\/Frameworks\/CocoaAsyncSocket\/Frameworks\/CocoaLumberjack",
     "2DEF1752D0F784EB1A216183F996320D19697ECA" : "MusicServerMusicServer\/Frameworks\/CocoaHTTPServerFramework"
   },
@@ -42,6 +44,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ase-lab\/CocoaLumberjackFramework.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "68225A92D11DA9D0F59FCE60FC65447D62A96F22"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/miniupnp\/miniupnp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A874B62302C0B93A6DAE5A77E896C2EFFD854F16"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git:\/\/github.com\/antm611\/LastFMAPI.git",

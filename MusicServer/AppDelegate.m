@@ -130,7 +130,7 @@
     NSString *token;
     NSString *authentication;
     [[self authHandler] getAuthentication:&authentication token:&token];
-    NSString *appURL = [NSString stringWithFormat:@"http://localhost:12345/#login/%@/%@", token, authentication];
+    NSString *appURL = [NSString stringWithFormat:@"http://localhost:12345/#/login/%@/%@", token, authentication];
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:appURL]];
 }
 

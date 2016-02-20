@@ -12,7 +12,7 @@
 #import "AMAPIHandlerITunes.h"
 #import "AMJSONResponder.h"
 
-NSString *const API_LFM_TOKEN_REQUEST_URL = @"http://www.last.fm/api/auth/";
+NSString *const API_LFM_TOKEN_REQUEST_URL = @"https://www.last.fm/api/auth/";
 
 @implementation PreferencesWindow
 @synthesize responder;

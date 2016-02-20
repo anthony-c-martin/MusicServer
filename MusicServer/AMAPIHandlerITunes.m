@@ -101,9 +101,9 @@
         NSString *applicationSupportDirectory = [paths firstObject];
         NSURL *cacheFolder = [[NSURL fileURLWithPath:applicationSupportDirectory] URLByAppendingPathComponent:@"AMMusicServer"];
         [[NSFileManager defaultManager] createDirectoryAtPath:[cacheFolder path] withIntermediateDirectories:NO attributes:nil error:nil];
-        [self setTracks:[[NSSet alloc] init]];
-        [self setArtists:[[NSSet alloc] init]];
-        [self setAlbums:[[NSSet alloc] init]];
+        [self setTracks:[[NSOrderedSet alloc] init]];
+        [self setArtists:[[NSOrderedSet alloc] init]];
+        [self setAlbums:[[NSOrderedSet alloc] init]];
         [self setActiveData:data];
         [self setValueUpdater:updater];
     }
@@ -114,16 +114,19 @@
 {
     NSError *error = nil;
     ITLibrary *library = [ITLibrary libraryWithAPIVersion:@"1.0" error:&error];
+    BOOL useAlbumArt = [[[self activeData] useAlbumArt] boolValue];
     
     if (!error && library)
     {
-        NSMutableSet *tracks = [[NSMutableSet alloc] init];
-        NSMutableSet *albums = [[NSMutableSet alloc] init];
-        NSMutableSet *artists = [[NSMutableSet alloc] init];
-        int albumID = 1;
-        int artistID = 1;
+        NSMutableOrderedSet *tracks = [[NSMutableOrderedSet alloc] init];
+        NSMutableOrderedSet *albums = [[NSMutableOrderedSet alloc] init];
+        NSMutableOrderedSet *artists = [[NSMutableOrderedSet alloc] init];
+        NSInteger albumID = 1;
+        NSInteger artistID = 1;
+        NSImage *currentArtwork = nil;
         
-        NSUInteger librarySize = [[library allMediaItems] count];
+        int librarySize = (int)[[library allMediaItems] count];
+        int singlePercent = librarySize / 100;
         int itemCount = 0;
         int percentComplete = 0;
         [[self valueUpdater] setProgress:[NSNumber numberWithInt:percentComplete]];
@@ -131,16 +134,16 @@
         for (ITLibMediaItem *mediaItem in [library allMediaItems])
         {
             itemCount++;
-            int percentCurrent = (int)(((float)itemCount / (float)librarySize) * 100);
-            if (percentCurrent > percentComplete) {
-                percentComplete = percentCurrent;
+            if ((itemCount % singlePercent) == 0)
+            {
+                percentComplete = itemCount / singlePercent;
                 [[self valueUpdater] setProgress:[NSNumber numberWithInt:percentComplete]];
             }
             
-            NSImage *artwork = nil;
-            if ([[[self activeData] useAlbumArt] boolValue] && [mediaItem hasArtworkAvailable])
+            currentArtwork = nil;
+            if (useAlbumArt && [mediaItem hasArtworkAvailable])
             {
-                artwork = [[mediaItem artwork] image];
+                currentArtwork = [[mediaItem artwork] image];
             }
 
             [self addMediaItem:mediaItem
@@ -149,12 +152,12 @@
                        albumID:&albumID
                      artistSet:artists
                       artistID:&artistID
-                       artwork:artwork];
+                       artwork:currentArtwork];
         }
         
-        [self setTracks:(NSSet *)tracks];
-        [self setAlbums:(NSSet *)albums];
-        [self setArtists:(NSSet *)artists];
+        [self setTracks:(NSOrderedSet *)tracks];
+        [self setAlbums:(NSOrderedSet *)albums];
+        [self setArtists:(NSOrderedSet *)artists];
         
         [[self valueUpdater] setProgress:nil];
         return YES;
@@ -189,35 +192,36 @@
 }
 
 -(void) addArtist:(AMAPIITArtist **)artist
-            toSet:(NSMutableSet *)artistSet
-        currentID:(int *)currentID
+            toSet:(NSMutableOrderedSet *)artistSet
+        currentID:(NSInteger *)currentID
 {
     if (![artistSet containsObject:*artist])
     {
-        [*artist setID:[NSNumber numberWithInt:(*currentID)++]];
+        [*artist setID:[NSNumber numberWithInteger:*currentID]];
+        (*currentID)++;
     }
     [self getPointer:artist fromSet:artistSet];
 }
 
 -(void) addAlbum:(AMAPIITAlbum **)album
-            toSet:(NSMutableSet *)albumSet
-        currentID:(int *)currentID
+           toSet:(NSMutableOrderedSet *)albumSet
+       currentID:(NSInteger *)currentID
          artwork:(NSImage *)artwork
 {
     if (![albumSet containsObject:*album])
     {
-        [*album setID:[NSNumber numberWithInt:(*currentID)++]];
-        [*album setArtwork:[artwork base64String]];
+        [*album setID:[NSNumber numberWithInteger:*currentID]];
+        (*currentID)++;
     }
     [self getPointer:album fromSet:albumSet];
 }
 
 -(void) addMediaItem:(ITLibMediaItem *)mediaItem
-            trackSet:(NSMutableSet *)trackSet
-            albumSet:(NSMutableSet *)albumSet
-             albumID:(int *)albumID
-           artistSet:(NSMutableSet *)artistSet
-            artistID:(int *)artistID
+            trackSet:(NSMutableOrderedSet *)trackSet
+            albumSet:(NSMutableOrderedSet *)albumSet
+             albumID:(NSInteger *)albumID
+           artistSet:(NSMutableOrderedSet *)artistSet
+            artistID:(NSInteger *)artistID
              artwork:(NSImage *)artwork
 {
     if ([mediaItem mediaKind] == ITLibMediaItemMediaKindSong)
@@ -276,7 +280,7 @@
 }
 
 -(void) getPointer:(id *)object
-           fromSet:(NSMutableSet *)set
+           fromSet:(NSMutableOrderedSet *)set
 {
     if (![set containsObject:*object])
     {
@@ -294,7 +298,7 @@
     }
 }
 
--(BOOL) matchObjectsInSet:(NSSet *)inputSet
+-(BOOL) matchObjectsInSet:(NSOrderedSet *)inputSet
                 withBlock:(void (^)(id object, BOOL *matched))matchBlock
                   matches:(NSArray **)matches
       sortedByDescriptors:(NSArray *)descriptors
@@ -331,7 +335,7 @@
     return YES;
 }
 
--(BOOL) getFirstObjectInSet:(NSSet *)inputSet
+-(BOOL) getFirstObjectInSet:(NSOrderedSet *)inputSet
                   withBlock:(void (^)(id object, BOOL *matched))matchBlock
               matchedObject:(id *)matchedObject
         sortedByDescriptors:(NSArray *)descriptors

@@ -14,9 +14,9 @@
 
 @interface AMAPIHandlerITunes : NSObject<AMAPIDataResponder>
 
-@property (nonatomic, retain) NSSet *Tracks;
-@property (nonatomic, retain) NSSet *Artists;
-@property (nonatomic, retain) NSSet *Albums;
+@property (nonatomic, retain) NSOrderedSet *Tracks;
+@property (nonatomic, retain) NSOrderedSet *Artists;
+@property (nonatomic, retain) NSOrderedSet *Albums;
 @property (nonatomic, retain) AMMusicServerActiveData *activeData;
 @property (nonatomic, retain) id <AMPercentageValueUpdater> valueUpdater;
 
